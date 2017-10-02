@@ -1,0 +1,46 @@
+group 'com.exam'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile 'log4j:log4j:+'
+    compile 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:+'
+    compile 'com.h2database:h2:+'
+    compile 'commons-codec:commons-codec:+'
+    compileOnly 'org.projectlombok:lombok:+'
+    testCompile 'org.projectlombok:lombok:+'
+
+    // https://mvnrepository.com/artifact/javax.servlet/jstl
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+
+    providedCompile 'org.apache.tomcat:tomcat-api:+'
+    providedCompile 'org.apache.tomcat:tomcat-jsp-api:+'
+    providedCompile 'org.apache.tomcat:tomcat-catalina:+'
+// https://mvnrepository.com/artifact/javax.el/javax.el-api
+    compile group: 'javax.el', name: 'javax.el-api', version: '3.0.0'
+
+    //Unit tests
+    testCompile 'junit:junit:+'
+    testCompile 'org.hamcrest:hamcrest-core:+'
+    testCompile 'org.hamcrest:hamcrest-library:+'
+    testCompile 'org.mockito:mockito-core:+'
+    // Jersey
+    compile 'org.glassfish.jersey.containers:jersey-container-servlet:+'
+    compile 'org.glassfish.jersey.media:jersey-media-moxy:+'
+
+    // Jackson
+    compile 'com.fasterxml.jackson.core:jackson-databind:+'
+    // https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.1'
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    compile group: 'commons-io', name: 'commons-io', version: '2.4'
+    // https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib
+    compile group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
+}
