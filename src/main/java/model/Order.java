@@ -84,4 +84,14 @@ public final class Order {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    @Override
+    public String toString() {
+        return "orderID: " + orderID + "\n" +
+                "userID: " + userID + "\n" +
+                "roomCapacity: " + roomCapacity + "\n" +
+                "roomType: " + roomType + "\n" +
+                "startDate: " + startDate + "\n" +
+                "endDate:" + endDate;
+    }
 }
