@@ -60,4 +60,12 @@ public class Room {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return roomId + "\n"+
+                "roomCapacity: " + roomCapacity + "\n"+
+                "roomType: " + roomType + "\n"+
+                "price: " + price;
+    }
 }
