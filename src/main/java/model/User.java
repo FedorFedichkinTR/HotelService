@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.Roles;
+
 /**
  * class for user representation
  */

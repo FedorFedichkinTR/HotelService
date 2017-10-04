@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.RoomType;
+
 import java.util.Date;
 
 /**
