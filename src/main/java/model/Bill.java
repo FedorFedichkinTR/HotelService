@@ -102,6 +102,6 @@ public class Bill {
                 "order ID:" + orderID + "\n" +
                 "room price: " + price + "\n" +
                 "room status: " + status + "\n" +
-                "room ID: " + roomID;
+                "room ID : " + roomID;
     }
 }
