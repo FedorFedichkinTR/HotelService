@@ -93,4 +93,15 @@ public class Bill {
     public void setRoomID(long roomID) {
         this.roomID = roomID;
     }
+
+    @Override
+    public String toString() {
+        return "bill ID: " + billID + "\n" +
+                "user ID: " + userID + "\n" +
+                "admin ID: " + adminID + "\n" +
+                "order ID:" + orderID + "\n" +
+                "room price: " + price + "\n" +
+                "room status: " + status + "\n" +
+                "room ID: " + roomID;
+    }
 }
