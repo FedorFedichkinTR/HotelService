@@ -37,6 +37,10 @@ public class ConnectionPool {
         }
     }
 
+    public static ConnectionPool getConnectionInstance() {
+        return connectionInstance;
+    }
+
     public static void create(String pathToParams) {
         connectionInstance = new ConnectionPool(pathToParams);
     }
@@ -65,9 +69,10 @@ public class ConnectionPool {
                 connectionQueue.add(pooledConnection);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ConnectionPoolException("SQLException in connection_pool", e);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new ConnectionPoolException(
+                    "Can't find database driver class", e);
         }
     }
 
