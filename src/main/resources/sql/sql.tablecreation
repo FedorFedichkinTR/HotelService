@@ -14,6 +14,7 @@ CREATE TABLE Orders (
     type            VARCHAR(15),
     start_date      TIMESTAMP                 NOT NULL,
     end_date        TIMESTAMP                 NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users (user_id)
 );
 
 CREATE TABLE Rooms (
@@ -31,11 +32,17 @@ CREATE TABLE Bills (
     order_id        BIGINT                    NOT NULL,
     price           INT                       NOT NULL,
     status          BIT,
+    FOREIGN KEY (user_id)   REFERENCES Users (user_id),
+    FOREIGN KEY (room_id)   REFERENCES Rooms (room_id),
+    FOREIGN KEY (admin_id)  REFERENCES Users (user_id),
+    FOREIGN KEY (order_id)  REFERENCES Orders(order_id)
 );
 
 CREATE TABLE BookedRooms (
     id              BIGINT AUTO_INCREMENT     PRIMARY KEY,
     rooom_id        BIGINT                    NOT NULL,
     order_id        BIGINT                    NOT NULL,
+    FOREIGN KEY (room_id)   REFERENCES Rooms (room_id),
+    FOREIGN KEY (oder_id)   REFERENCES Orders(order_id)
 );
 
