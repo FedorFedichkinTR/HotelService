@@ -3,10 +3,8 @@ package listeners;
 import connection_pool.ConnectionPool;
 import connection_pool.ConnectionPoolException;
 import dao.AbstractDaoFactory;
-import dao.RelationDao;
 import dao.UserDao;
 import dao.h2.H2DaoFactory;
-import dao.h2.RelationDaoImpl;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
