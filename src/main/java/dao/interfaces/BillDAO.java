@@ -19,5 +19,5 @@ public interface BillDAO {
 
     public List<Bill> getAllBills();
 
-    public Map<Bill, Long> getAllBillsByID();
+    public List<Bill> getAllBillsByUserID(long userId);
 }
