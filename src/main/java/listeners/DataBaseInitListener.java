@@ -12,6 +12,9 @@ import javax.servlet.ServletContextListener;
 
 import javax.servlet.annotation.WebListener;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 import static constants.Constants.*;
 
 @WebListener
