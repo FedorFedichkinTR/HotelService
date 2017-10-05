@@ -22,4 +22,9 @@ public class H2DAOFactory implements AbstractDAOFactory {
     public BillDAO createBillDAO() {
         return null;
     }
+
+    @Override
+    public void close() throws Exception {
+
+    }
 }

@@ -1,6 +1,6 @@
 package dao.interfaces;
 
-public interface AbstractDAOFactory {
+public interface AbstractDAOFactory extends AutoCloseable {
     UserDAO createUserDAO();
 
     OrderDAO createOrderDAO();

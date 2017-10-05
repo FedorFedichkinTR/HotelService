@@ -7,6 +7,8 @@ import java.util.List;
 public interface UserDAO {
     public User create();
 
+    public User create(User user);
+
     public User read(long reaUserID);
 
     public User read(String eMail);
@@ -18,5 +20,4 @@ public interface UserDAO {
     public void insert(User insertedUser);
 
     public List<User> getAllUsers();
-
 }
