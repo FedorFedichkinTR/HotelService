@@ -5,9 +5,9 @@ import model.User;
 import java.util.List;
 
 public interface UserDAO {
-    public User read(long reaUserID);
+    public User readByID(long reaUserID);
 
-    public User read(String eMail);
+    public User readByEmail(String eMail);
 
     public User update(User updatedUser);
 
