@@ -20,17 +20,13 @@ import static constants.Constants.*;
 public class DataBaseInitListener implements ServletContextListener {
 
     @Override
-    public void contextInitialized(ServletContextEvent servletContextEvent) {
+    public void contextInitialized(ServletContextEvent servletContextEvent) throws ConnectionPoolException{
         ServletContext servletContext = servletContextEvent.getServletContext();
         String pathToDbConfig = servletContext.getRealPath("/") + "WEB-INF/classes";
         ConnectionPool.create(pathToDbConfig + "db.properties");
         ConnectionPool connectionPool = ConnectionPool.getInstance();
-        try {
         connectionPool.initPoolData();
-        } catch (ConnectionPoolException e) {
-            e.printStackTrace();
-        }
-
+        
 //        connectionPool.executeScript(pathToDbConfig + "H2Init.sql");
 //        connectionPool.executeScript(pathToDbConfig + "usersH2Init.sql");
 
