@@ -33,7 +33,7 @@ public class ConnectionPool {
             this.password = dbProperties.getProperty("password");
             this.poolSize = Integer.parseInt(dbProperties.getProperty("poolSize"));
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace(); //TO DO: add logger message
         }
     }
 
@@ -97,17 +97,17 @@ public class ConnectionPool {
         return connection;
     }
 
-//    public int[] executeScript(String pathToScript) {
-//        try (Connection connection = takeConnection();
-//             Statement statement = connection.createStatement()) {
-//            Arrays.stream(
-//                    Files.lines(Paths.get(pathToScript))
-//                            .collect(Collectors.joining())
-//                            .split(";"))
-//                            .forEachOrdered(ExceptionalConsumer(statement::addBatch));
-//            return statement.executeBatch();
-//        }
-//    }
+    public int[] executeScript(String pathToScript) throws SQLException, IOException{
+        try (Connection connection = takeConnection();
+             Statement statement = connection.createStatement()) {
+            Arrays.stream(
+                    Files.lines(Paths.get(pathToScript))
+                            .collect(Collectors.joining())
+                            .split(";"))
+                            .forEachOrdered(ExceptionalConsumer.toUncheckedConsumer(statement::addBatch));
+            return statement.executeBatch();
+        }
+    }
 
     private void closeConnectionsQueue(BlockingQueue<Connection> queue)
             throws SQLException {
