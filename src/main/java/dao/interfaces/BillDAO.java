@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface BillDAO {
-    public Bill create();
-
     public Bill read(long billID);
 
     public void update(Bill bill);

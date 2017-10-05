@@ -6,10 +6,10 @@ import model.enums.RoomType;
  *
  */
 public class Room {
-    private long roomId;
-    private int roomCapacity;
+    private Long roomId;
+    private Integer roomCapacity;
     private RoomType roomType;
-    private int price;
+    private Integer price;
 
     /**
      *
@@ -17,33 +17,26 @@ public class Room {
     public Room() {
     }
 
-    /**
-     *
-     * @param roomId
-     * @param roomCapacity
-     * @param roomType
-     * @param price
-     */
-    public Room(long roomId, int roomCapacity, RoomType roomType, int price) {
+    public Room(Long roomId, Integer roomCapacity, RoomType roomType, Integer price) {
         this.roomId = roomId;
         this.roomCapacity = roomCapacity;
         this.roomType = roomType;
         this.price = price;
     }
 
-    public long getRoomId() {
+    public Long getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(long roomId) {
+    public void setRoomId(Long roomId) {
         this.roomId = roomId;
     }
 
-    public int getRoomCapacity() {
+    public Integer getRoomCapacity() {
         return roomCapacity;
     }
 
-    public void setRoomCapacity(int roomCapacity) {
+    public void setRoomCapacity(Integer roomCapacity) {
         this.roomCapacity = roomCapacity;
     }
 
@@ -55,11 +48,11 @@ public class Room {
         this.roomType = roomType;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

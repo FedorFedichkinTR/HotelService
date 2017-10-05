@@ -4,13 +4,13 @@ package model;
  *
  */
 public class Bill {
-    private long billID;
-    private long userID;
-    private long adminID;
-    private long orderID;
-    private int price;
+    private Long billID;
+    private Long userID;
+    private Long adminID;
+    private Long orderID;
+    private Integer price;
     private Boolean status;
-    private long roomID;
+    private Long roomID;
 
     /**
      *
@@ -18,17 +18,7 @@ public class Bill {
     public Bill() {
     }
 
-    /**
-     *
-     * @param billID
-     * @param userID
-     * @param adminID
-     * @param orderID
-     * @param price
-     * @param status
-     * @param roomID
-     */
-    public Bill(long billID, long userID, long adminID, long orderID, int price, Boolean status, long roomID) {
+    public Bill(Long billID, Long userID, Long adminID, Long orderID, Integer price, Boolean status, Long roomID) {
         this.billID = billID;
         this.userID = userID;
         this.adminID = adminID;
@@ -38,43 +28,43 @@ public class Bill {
         this.roomID = roomID;
     }
 
-    public long getBillID() {
+    public Long getBillID() {
         return billID;
     }
 
-    public void setBillID(long billID) {
+    public void setBillID(Long billID) {
         this.billID = billID;
     }
 
-    public long getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(long userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 
-    public long getAdminID() {
+    public Long getAdminID() {
         return adminID;
     }
 
-    public void setAdminID(long adminID) {
+    public void setAdminID(Long adminID) {
         this.adminID = adminID;
     }
 
-    public long getOrderID() {
+    public Long getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(long orderID) {
+    public void setOrderID(Long orderID) {
         this.orderID = orderID;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -86,11 +76,11 @@ public class Bill {
         this.status = status;
     }
 
-    public long getRoomID() {
+    public Long getRoomID() {
         return roomID;
     }
 
-    public void setRoomID(long roomID) {
+    public void setRoomID(Long roomID) {
         this.roomID = roomID;
     }
 

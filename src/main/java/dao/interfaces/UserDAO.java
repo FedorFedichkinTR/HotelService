@@ -5,10 +5,6 @@ import model.User;
 import java.util.List;
 
 public interface UserDAO {
-    public User create();
-
-    public User create(User user);
-
     public User read(long reaUserID);
 
     public User read(String eMail);
