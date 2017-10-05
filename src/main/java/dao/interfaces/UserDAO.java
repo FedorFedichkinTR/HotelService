@@ -7,6 +7,8 @@ public interface UserDAO {
 
     public User read(long reaUserID);
 
+    public User read(String eMail);
+
     public User update(User updatedUser);
 
     public void delete(User deletedUser);
