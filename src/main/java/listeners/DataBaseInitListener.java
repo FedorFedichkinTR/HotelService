@@ -9,9 +9,7 @@ import dao.h2.H2DaoFactory;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
 import javax.servlet.annotation.WebListener;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -21,13 +19,13 @@ import static constants.Constants.*;
 public class DataBaseInitListener implements ServletContextListener {
 
     @Override
-    public void contextInitialized(ServletContextEvent servletContextEvent) throws ConnectionPoolException{
+    public void contextInitialized(ServletContextEvent servletContextEvent) throws ConnectionPoolException {
         ServletContext servletContext = servletContextEvent.getServletContext();
         String pathToDbConfig = servletContext.getRealPath("/") + "WEB-INF/classes";
         ConnectionPool.create(pathToDbConfig + "db.properties");
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         connectionPool.initPoolData();
-        
+
         try {
             connectionPool.executeScript(pathToDbConfig + "H2Init.sql");
             connectionPool.executeScript(pathToDbConfig + "usersH2Init.sql");
@@ -36,7 +34,7 @@ public class DataBaseInitListener implements ServletContextListener {
         } catch (IOException e) {
 //            e.printStackTrace(); //TO DO: add logger message
         }
-
+        
         AbstractDaoFactory abstractDaoFactory = new H2DaoFactory();
 
         UserDao userDao = abstractDaoFactory.createUserDao(connectionPool);
