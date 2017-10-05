@@ -12,4 +12,5 @@ public interface BillDAO {
     public void delete(Bill bill);
 
     public void insert(Bill bill);
+
 }
