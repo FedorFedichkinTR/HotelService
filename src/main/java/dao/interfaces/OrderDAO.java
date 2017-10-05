@@ -16,4 +16,6 @@ public interface OrderDAO {
     public void insert(Order insertedOrder);
 
     public List<Order> getAllOrders();
+
+    public List<Order> getAllOrdersByID();
 }

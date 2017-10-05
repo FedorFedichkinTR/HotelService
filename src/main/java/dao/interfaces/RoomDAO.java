@@ -2,6 +2,8 @@ package dao.interfaces;
 
 import model.Room;
 
+import java.util.List;
+
 public interface RoomDAO {
     public Room create();
 
@@ -12,4 +14,6 @@ public interface RoomDAO {
     public void delete(Room deletedRoom);
 
     public void insert(Room insertedRoom);
+
+    public List<Room> getAllRooms();
 }
