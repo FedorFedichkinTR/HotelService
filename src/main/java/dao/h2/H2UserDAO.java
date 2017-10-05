@@ -3,10 +3,15 @@ package dao.h2;
 import connection_pool.ConnectionPool;
 import dao.interfaces.UserDAO;
 import model.User;
+import model.enums.Roles;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
-public class H2UserDAO implements UserDAO{
+public class H2UserDAO implements UserDAO {
     private final ConnectionPool connectionPool;
 
     private static final String SELECT_USER_BY_EMAIL_SQL =
@@ -18,14 +23,31 @@ public class H2UserDAO implements UserDAO{
         this.connectionPool = connectionPool;
     }
 
+
     @Override
-    public User read(long reaUserID) {
+    public User readByID(long reaUserID) {
         return null;
     }
 
     @Override
-    public User read(String eMail) {
-        return null;
+    public User readByEmail(String eMail) {
+        User user = new User();
+
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_EMAIL_SQL)) {
+            statement.setString(1, eMail);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                user.setUserID(resultSet.getLong("user_id"));
+                user.setPassword("password");
+                user.setFirstName("first_name");
+                user.setLastName("last_name");
+                user.setRole(Roles.valueOf(resultSet.getString("role")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
