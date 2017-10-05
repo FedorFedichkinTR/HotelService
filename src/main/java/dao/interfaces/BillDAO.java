@@ -1,6 +1,10 @@
 package dao.interfaces;
 
 import model.Bill;
+import model.User;
+
+import java.util.List;
+import java.util.Map;
 
 public interface BillDAO {
     public Bill create();
@@ -13,4 +17,7 @@ public interface BillDAO {
 
     public void insert(Bill bill);
 
+    public List<Bill> getAllBills();
+
+    public Map<Bill, Long> getAllBillsByID();
 }
