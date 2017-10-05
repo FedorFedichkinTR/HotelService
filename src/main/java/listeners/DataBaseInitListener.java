@@ -27,13 +27,18 @@ public class DataBaseInitListener implements ServletContextListener {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         connectionPool.initPoolData();
         
-//        connectionPool.executeScript(pathToDbConfig + "H2Init.sql");
-//        connectionPool.executeScript(pathToDbConfig + "usersH2Init.sql");
+        try {
+            connectionPool.executeScript(pathToDbConfig + "H2Init.sql");
+            connectionPool.executeScript(pathToDbConfig + "usersH2Init.sql");
+        } catch (SQLException e) {
+//            e.printStackTrace(); //TO DO: add logger message
+        } catch (IOException e) {
+//            e.printStackTrace(); //TO DO: add logger message
+        }
 
         AbstractDaoFactory abstractDaoFactory = new H2DaoFactory();
 
         UserDao userDao = abstractDaoFactory.createUserDao(connectionPool);
-        RelationDao relationDao = new RelationDaoImpl();
         servletContext.setAttribute(USER_DAO, userDao);
         servletContext.setAttribute(RELATION_DAO, userDao);
         servletContext.setAttribute(USER_SERVICE, userDao);
