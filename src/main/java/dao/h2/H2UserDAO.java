@@ -5,10 +5,7 @@ import dao.interfaces.UserDAO;
 import model.User;
 import model.enums.Roles;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class H2UserDAO implements UserDAO {
@@ -61,8 +58,25 @@ public class H2UserDAO implements UserDAO {
     }
 
     @Override
-    public void insert(User insertedUser) {
+    public Long insert(User insertedUser) {
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(CREATE_USER_SQL, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, insertedUser.geteMail());
+            statement.setString(2, insertedUser.getPassword());
+            statement.setString(3, insertedUser.getFirstName());
+            statement.setString(4, insertedUser.getLastName());
+            statement.setString(5, insertedUser.getRole().toString());
+            statement.executeUpdate();
 
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                if (resultSet.next()) {
+                    return resultSet.getLong(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0L;
     }
 
     @Override

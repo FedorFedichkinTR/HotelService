@@ -13,7 +13,7 @@ public interface UserDAO {
 
     public void delete(User deletedUser);
 
-    public void insert(User insertedUser);
+    public Long insert(User insertedUser);
 
     public List<User> getAllUsers();
 }
