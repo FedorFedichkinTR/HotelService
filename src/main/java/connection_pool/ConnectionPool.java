@@ -1,15 +1,22 @@
 package connection_pool;
 
 
+import util.ExceptionalConsumer;
+
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.stream.Collectors;
 
 public class ConnectionPool {
 
@@ -33,7 +40,7 @@ public class ConnectionPool {
             this.password = dbProperties.getProperty("password");
             this.poolSize = Integer.parseInt(dbProperties.getProperty("poolSize"));
         } catch (IOException e) {
-            // e.printStackTrace(); //TO DO: add logger message
+//            e.printStackTrace(); //TO DO: add logger message
         }
     }
 
