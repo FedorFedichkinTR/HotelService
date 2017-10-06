@@ -1,3 +1,7 @@
+CREATE DATABASE hotel CHARACTER SET utf8;
+
+USE hotel;
+
 CREATE TABLE Users (
     user_id         BIGINT AUTO_INCREMENT     PRIMARY KEY,
     email           VARCHAR(35)               NOT NULL UNIQUE,

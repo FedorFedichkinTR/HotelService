@@ -1,5 +1,6 @@
 package com.epam.model;
 
+
 import java.util.Date;
 
 public final class Order {

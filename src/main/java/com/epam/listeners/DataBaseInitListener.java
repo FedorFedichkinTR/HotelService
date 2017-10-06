@@ -2,8 +2,8 @@ package com.epam.listeners;
 
 import com.epam.connection_pool.ConnectionPool;
 import com.epam.connection_pool.ConnectionPoolException;
-import com.epam.dao.AbstractDaoFactory;
-import com.epam.dao.h2.H2DaoFactory;
+import com.epam.dao.interfaces.AbstractDaoFactory;
+import com.epam.dao.h2.H2DAOFactory;
 import lombok.extern.log4j.Log4j;
 
 import javax.servlet.ServletContext;
@@ -35,7 +35,7 @@ public class DataBaseInitListener implements ServletContextListener {
             log.error("Input/Output exception: " + e);
         }
 
-        AbstractDaoFactory abstractDaoFactory = new H2DaoFactory();
+        AbstractDaoFactory abstractDaoFactory = new H2DAOFactory(connectionPool);
 //        UserService userService = new UserService (abstractDaoFactory)
 
 //        put every service to ServletContext:

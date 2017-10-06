@@ -1,5 +1,6 @@
 package com.epam.model;
 
+
 public class User {
     private Long userID;
     private String eMail;

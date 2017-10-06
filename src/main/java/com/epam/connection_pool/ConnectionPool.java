@@ -96,7 +96,7 @@ public class ConnectionPool {
         }
     }
 
-    private Connection takeConnection() throws ConnectionPoolException {
+    public Connection takeConnection() throws ConnectionPoolException {
         Connection connection;
         try {
             connection = connectionQueue.take();
