@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.Roles;
+
 public class User {
     private Long userID;
     private String eMail;

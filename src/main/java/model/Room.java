@@ -1,6 +1,8 @@
 package model;
 
 
+import model.enums.RoomType;
+
 public class Room {
     private Long roomId;
     private Integer roomCapacity;
