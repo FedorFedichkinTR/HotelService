@@ -4,15 +4,7 @@ import model.Order;
 
 import java.util.List;
 
-public interface OrderDAO {
-    public Order read(long readOrderID);
-
-    public Order update(Order updatedOrder);
-
-    public void delete(Order deletedOrder);
-
-    public void insert(Order insertedOrder);
-
+public interface OrderDAO extends DAOCRUD<Order,Long> {
     public List<Order> getAllOrders();
 
     public List<Order> getAllOrdersByUserID(long userID);

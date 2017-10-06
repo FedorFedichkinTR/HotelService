@@ -4,16 +4,8 @@ import model.User;
 
 import java.util.List;
 
-public interface UserDAO {
-    public User readByID(long reaUserID);
-
+public interface UserDAO extends DAOCRUD<User,Long> {
     public User readByEmail(String eMail);
-
-    public User update(User updatedUser);
-
-    public void delete(User deletedUser);
-
-    public Long insert(User insertedUser);
 
     public List<User> getAllUsers();
 }
