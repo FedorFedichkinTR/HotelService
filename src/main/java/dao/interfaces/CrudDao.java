@@ -1,6 +1,6 @@
 package dao.interfaces;
 
-public interface DAOCRUD<E, K> {
+public interface CrudDao<E, K> {
     Long create(E entity);
 
     E read(K id);

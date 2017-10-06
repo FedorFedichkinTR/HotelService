@@ -1,36 +1,36 @@
 package dao.h2;
 
 import connection_pool.ConnectionPool;
-import dao.interfaces.OrderDAO;
+import dao.interfaces.OrderDao;
 import model.Order;
 
 import java.util.List;
 
-public class H2OrderDAO implements OrderDAO{
+public class H2OrderDao implements OrderDao {
     private final ConnectionPool connectionPool;
 
-    public H2OrderDAO(ConnectionPool connectionPool) {
+    public H2OrderDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
 
     @Override
-    public Order read(long readOrderID) {
+    public Long create(Order entity) {
         return null;
     }
 
     @Override
-    public Order update(Order updatedOrder) {
+    public Order read(Long id) {
         return null;
     }
 
     @Override
-    public void delete(Order deletedOrder) {
-
+    public Long update(Order entity) {
+        return null;
     }
 
     @Override
-    public void insert(Order insertedOrder) {
-
+    public Long delete(Long id) {
+        return null;
     }
 
     @Override

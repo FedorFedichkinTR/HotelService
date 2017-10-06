@@ -2,9 +2,7 @@ package listeners;
 
 import connection_pool.ConnectionPool;
 import connection_pool.ConnectionPoolException;
-import dao.AbstractDaoFactory;
-import dao.UserDao;
-import dao.h2.H2DaoFactory;
+import dao.h2.H2DAOFactory;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -35,7 +33,7 @@ public class DataBaseInitListener implements ServletContextListener {
 //            e.printStackTrace(); //TO DO: add logger message
         }
         
-        AbstractDaoFactory abstractDaoFactory = new H2DaoFactory();
+        AbstractDaoFactory abstractDaoFactory = new H2DAOFactory();
 
         UserDao userDao = abstractDaoFactory.createUserDao(connectionPool);
         servletContext.setAttribute(USER_DAO, userDao);

@@ -1,36 +1,36 @@
 package dao.h2;
 
 import connection_pool.ConnectionPool;
-import dao.interfaces.RoomDAO;
+import dao.interfaces.RoomDao;
 import model.Room;
 
 import java.util.List;
 
-public class H2RoomDAO implements RoomDAO{
+public class H2RoomDao implements RoomDao {
     private final ConnectionPool connectionPool;
 
-    public H2RoomDAO(ConnectionPool connectionPool) {
+    public H2RoomDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
 
     @Override
-    public Room read(long readRoomID) {
+    public Long create(Room entity) {
         return null;
     }
 
     @Override
-    public Room update(Room updateRoom) {
+    public Room read(Long id) {
         return null;
     }
 
     @Override
-    public void delete(Room deletedRoom) {
-
+    public Long update(Room entity) {
+        return null;
     }
 
     @Override
-    public void insert(Room insertedRoom) {
-
+    public Long delete(Long id) {
+        return null;
     }
 
     @Override

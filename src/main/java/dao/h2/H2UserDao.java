@@ -1,14 +1,14 @@
 package dao.h2;
 
 import connection_pool.ConnectionPool;
-import dao.interfaces.UserDAO;
+import dao.interfaces.UserDao;
 import model.User;
 import model.enums.Roles;
 
 import java.sql.*;
 import java.util.List;
 
-public class H2UserDAO implements UserDAO {
+public class H2UserDao implements UserDao {
     private final ConnectionPool connectionPool;
 
     private static final String SELECT_USER_BY_EMAIL_SQL =
@@ -16,14 +16,8 @@ public class H2UserDAO implements UserDAO {
     private static final String CREATE_USER_SQL =
             "INSERT INTO USERS VALUES(email, password, first_name, last_name, role) WHERE (?,?,?,?,?)";
 
-    public H2UserDAO(ConnectionPool connectionPool) {
+    public H2UserDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
-    }
-
-
-    @Override
-    public User readByID(long reaUserID) {
-        return null;
     }
 
     @Override
@@ -48,17 +42,7 @@ public class H2UserDAO implements UserDAO {
     }
 
     @Override
-    public User update(User updatedUser) {
-        return null;
-    }
-
-    @Override
-    public void delete(User deletedUser) {
-
-    }
-
-    @Override
-    public Long insert(User insertedUser) {
+    public Long create(User insertedUser) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_USER_SQL, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, insertedUser.geteMail());
@@ -81,6 +65,21 @@ public class H2UserDAO implements UserDAO {
 
     @Override
     public List<User> getAllUsers() {
+        return null;
+    }
+
+    @Override
+    public User read(Long id) {
+        return null;
+    }
+
+    @Override
+    public Long update(User entity) {
+        return null;
+    }
+
+    @Override
+    public Long delete(Long id) {
         return null;
     }
 }

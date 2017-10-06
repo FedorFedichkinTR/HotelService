@@ -4,6 +4,6 @@ import model.Room;
 
 import java.util.List;
 
-public interface RoomDAO extends DAOCRUD<Room,Long> {
+public interface RoomDao extends CrudDao<Room,Long> {
     public List<Room> getAllRooms();
 }
