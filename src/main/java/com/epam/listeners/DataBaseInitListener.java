@@ -27,8 +27,8 @@ public class DataBaseInitListener implements ServletContextListener {
         connectionPool.initPoolData();
 
         try {
-            connectionPool.executeScript(pathToDbConfig + "/sql/sql.tablecreation");
-            log.info("DataBase was created successfully!");
+            connectionPool.executeScript(pathToDbConfig + "/sql/tablecreation.sql");
+            log.info("DataBase tables were created successfully!");
         } catch (SQLException e) {
             log.error("SQL creation exception: " + e);
         } catch (IOException e) {
