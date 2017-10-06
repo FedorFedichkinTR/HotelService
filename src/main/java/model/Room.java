@@ -1,47 +1,35 @@
 package model;
 
-/**
- *
- */
-public class Room {
-    private long roomId;
-    private int roomCapacity;
-    private RoomType roomType;
-    private int price;
 
-    /**
-     *
-     */
+public class Room {
+    private Long roomId;
+    private Integer roomCapacity;
+    private RoomType roomType;
+    private Integer price;
+    
     public Room() {
     }
-
-    /**
-     *
-     * @param roomId
-     * @param roomCapacity
-     * @param roomType
-     * @param price
-     */
-    public Room(long roomId, int roomCapacity, RoomType roomType, int price) {
+    
+    public Room(Long roomId, Integer roomCapacity, RoomType roomType, Integer price) {
         this.roomId = roomId;
         this.roomCapacity = roomCapacity;
         this.roomType = roomType;
         this.price = price;
     }
 
-    public long getRoomId() {
+    public Long getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(long roomId) {
+    public void setRoomId(Long roomId) {
         this.roomId = roomId;
     }
 
-    public int getRoomCapacity() {
+    public Integer getRoomCapacity() {
         return roomCapacity;
     }
 
-    public void setRoomCapacity(int roomCapacity) {
+    public void setRoomCapacity(Integer roomCapacity) {
         this.roomCapacity = roomCapacity;
     }
 
@@ -53,11 +41,11 @@ public class Room {
         this.roomType = roomType;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -67,5 +55,27 @@ public class Room {
                 "roomCapacity: " + roomCapacity + "\n"+
                 "roomType: " + roomType + "\n"+
                 "price: " + price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Room room = (Room) o;
+
+        if (!roomId.equals(room.roomId)) return false;
+        if (!roomCapacity.equals(room.roomCapacity)) return false;
+        if (roomType != room.roomType) return false;
+        return price.equals(room.price);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = roomId.hashCode();
+        result = 31 * result + roomCapacity.hashCode();
+        result = 31 * result + roomType.hashCode();
+        result = 31 * result + price.hashCode();
+        return result;
     }
 }

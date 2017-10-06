@@ -89,4 +89,32 @@ public class Bill {
                 "room status: " + status + "\n" +
                 "room ID : " + roomID;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Bill bill = (Bill) o;
+
+        if (!billID.equals(bill.billID)) return false;
+        if (!userID.equals(bill.userID)) return false;
+        if (!adminID.equals(bill.adminID)) return false;
+        if (!orderID.equals(bill.orderID)) return false;
+        if (!price.equals(bill.price)) return false;
+        if (!status.equals(bill.status)) return false;
+        return roomID.equals(bill.roomID);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = billID.hashCode();
+        result = 31 * result + userID.hashCode();
+        result = 31 * result + adminID.hashCode();
+        result = 31 * result + orderID.hashCode();
+        result = 31 * result + price.hashCode();
+        result = 31 * result + status.hashCode();
+        result = 31 * result + roomID.hashCode();
+        return result;
+    }
 }
