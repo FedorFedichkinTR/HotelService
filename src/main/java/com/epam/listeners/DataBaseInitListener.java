@@ -1,10 +1,10 @@
-package listeners;
+package com.epam.listeners;
 
-import connection_pool.ConnectionPool;
-import connection_pool.ConnectionPoolException;
-import dao.AbstractDaoFactory;
-import dao.UserDao;
-import dao.h2.H2DaoFactory;
+import com.epam.connection_pool.ConnectionPool;
+import com.epam.connection_pool.ConnectionPoolException;
+import com.epam.dao.AbstractDaoFactory;
+import com.epam.dao.h2.H2DaoFactory;
+import lombok.extern.log4j.Log4j;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -13,33 +13,32 @@ import javax.servlet.annotation.WebListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import static constants.Constants.*;
-
+@Log4j
 @WebListener
 public class DataBaseInitListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) throws ConnectionPoolException {
         ServletContext servletContext = servletContextEvent.getServletContext();
-        String pathToDbConfig = servletContext.getRealPath("/") + "WEB-INF/classes";
+
+        String pathToDbConfig = servletContext.getRealPath("/") + "WEB-INF\\classes\\";
         ConnectionPool.create(pathToDbConfig + "db.properties");
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         connectionPool.initPoolData();
 
         try {
-            connectionPool.executeScript(pathToDbConfig + "H2Init.sql");
-            connectionPool.executeScript(pathToDbConfig + "usersH2Init.sql");
+            connectionPool.executeScript(pathToDbConfig + "/sql/sql.tablecreation");
+            log.info("DataBase was created successfully!");
         } catch (SQLException e) {
-//            e.printStackTrace(); //TO DO: add logger message
+            log.error("SQL creation exception: " + e);
         } catch (IOException e) {
-//            e.printStackTrace(); //TO DO: add logger message
+            log.error("Input/Output exception: " + e);
         }
-        
-        AbstractDaoFactory abstractDaoFactory = new H2DaoFactory();
 
-        UserDao userDao = abstractDaoFactory.createUserDao(connectionPool);
-        servletContext.setAttribute(USER_DAO, userDao);
-        servletContext.setAttribute(RELATION_DAO, userDao);
-        servletContext.setAttribute(USER_SERVICE, userDao);
+        AbstractDaoFactory abstractDaoFactory = new H2DaoFactory();
+//        UserService userService = new UserService (abstractDaoFactory)
+
+//        put every service to ServletContext:
+//        servletContext.setAttribute("keyForUserService", userService);
     }
 }

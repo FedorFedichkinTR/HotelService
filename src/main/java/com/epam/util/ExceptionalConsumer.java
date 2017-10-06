@@ -1,4 +1,4 @@
-package util;
+package com.epam.util;
 
 
 import java.util.function.Consumer;

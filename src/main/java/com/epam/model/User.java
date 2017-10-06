@@ -1,4 +1,4 @@
-package model;
+package com.epam.model;
 
 public class User {
     private Long userID;

@@ -28,7 +28,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0-beta): util.js
+ * Bootstrap (v4.0.0-beta): com.epam.util.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -1538,7 +1538,7 @@ var Dropdown = function ($) {
       this._popper = new Popper(element, this._menu, this._getPopperConfig());
 
       // if this is a touch-enabled device we add extra
-      // empty mouseover listeners to the body's immediate children;
+      // empty mouseover com.epam.listeners to the body's immediate children;
       // only needed because of broken event delegation on iOS
       // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
       if ('ontouchstart' in document.documentElement && !$(parent).closest(Selector.NAVBAR_NAV).length) {
@@ -1698,7 +1698,7 @@ var Dropdown = function ($) {
         }
 
         // if this is a touch-enabled device we remove the extra
-        // empty mouseover listeners we added for iOS support
+        // empty mouseover com.epam.listeners we added for iOS support
         if ('ontouchstart' in document.documentElement) {
           $('body').children().off('mouseover', null, $.noop);
         }
@@ -3228,7 +3228,7 @@ var Tooltip = function ($) {
         $(tip).addClass(ClassName.SHOW);
 
         // if this is a touch-enabled device we add extra
-        // empty mouseover listeners to the body's immediate children;
+        // empty mouseover com.epam.listeners to the body's immediate children;
         // only needed because of broken event delegation on iOS
         // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
         if ('ontouchstart' in document.documentElement) {
@@ -3288,7 +3288,7 @@ var Tooltip = function ($) {
       $(tip).removeClass(ClassName.SHOW);
 
       // if this is a touch-enabled device we remove the extra
-      // empty mouseover listeners we added for iOS support
+      // empty mouseover com.epam.listeners we added for iOS support
       if ('ontouchstart' in document.documentElement) {
         $('body').children().off('mouseover', null, $.noop);
       }

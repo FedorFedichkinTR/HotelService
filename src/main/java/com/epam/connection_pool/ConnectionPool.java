@@ -1,7 +1,7 @@
-package connection_pool;
+package com.epam.connection_pool;
 
 
-import util.ExceptionalConsumer;
+import com.epam.util.ExceptionalConsumer;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -17,7 +17,9 @@ import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.stream.Collectors;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 public class ConnectionPool {
 
     private static ConnectionPool connectionInstance;
@@ -39,8 +41,10 @@ public class ConnectionPool {
             this.user = dbProperties.getProperty("user");
             this.password = dbProperties.getProperty("password");
             this.poolSize = Integer.parseInt(dbProperties.getProperty("poolSize"));
+
         } catch (IOException e) {
-//            e.printStackTrace(); //TO DO: add logger message
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -76,7 +80,7 @@ public class ConnectionPool {
                 connectionQueue.add(pooledConnection);
             }
         } catch (SQLException e) {
-            throw new ConnectionPoolException("SQLException in connection_pool", e);
+            throw new ConnectionPoolException("SQLException in com.epam.connection_pool", e);
         } catch (ClassNotFoundException e) {
             throw new ConnectionPoolException(
                     "Can't find database driver class", e);
@@ -92,7 +96,7 @@ public class ConnectionPool {
         }
     }
 
-    public Connection takeConnection() throws ConnectionPoolException {
+    private Connection takeConnection() throws ConnectionPoolException {
         Connection connection;
         try {
             connection = connectionQueue.take();

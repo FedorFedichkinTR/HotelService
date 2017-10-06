@@ -40,9 +40,9 @@ CREATE TABLE Bills (
 
 CREATE TABLE BookedRooms (
     id              BIGINT AUTO_INCREMENT     PRIMARY KEY,
-    rooom_id        BIGINT                    NOT NULL,
+    room_id         BIGINT                    NOT NULL,
     order_id        BIGINT                    NOT NULL,
-    FOREIGN KEY (room_id)   REFERENCES Rooms (room_id),
-    FOREIGN KEY (oder_id)   REFERENCES Orders(order_id)
+    FOREIGN KEY (room_id)       REFERENCES Rooms (room_id),
+    FOREIGN KEY (order_id)      REFERENCES Orders(order_id)
 );
 

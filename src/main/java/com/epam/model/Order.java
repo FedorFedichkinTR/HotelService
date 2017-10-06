@@ -1,4 +1,4 @@
-package model;
+package com.epam.model;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package connection_pool;
+package com.epam.connection_pool;
 
 
 import java.sql.*;
