@@ -2,33 +2,19 @@ package model;
 
 import java.util.Date;
 
-/**
- *
- */
+
 public final class Order {
-    private long orderID;
-    private long userID;
-    private int roomCapacity;
+    private Long orderID;
+    private Long userID;
+    private Integer roomCapacity;
     private RoomType roomType;
     private Date startDate;
     private Date endDate;
-
-    /**
-     *
-     */
+    
     public Order() {
     }
-
-    /**
-     *
-     * @param orderID
-     * @param userID
-     * @param roomCapacity
-     * @param roomType
-     * @param startDate
-     * @param endDate
-     */
-    public Order(long orderID, long userID, int roomCapacity, RoomType roomType, Date startDate, Date endDate) {
+    
+    public Order(Long orderID, Long userID, Integer roomCapacity, RoomType roomType, Date startDate, Date endDate) {
         this.orderID = orderID;
         this.userID = userID;
         this.roomCapacity = roomCapacity;
@@ -37,27 +23,27 @@ public final class Order {
         this.endDate = endDate;
     }
 
-    public long getOrderID() {
+    public Long getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(long orderID) {
+    public void setOrderID(Long orderID) {
         this.orderID = orderID;
     }
 
-    public long getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(long userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 
-    public int getRoomCapacity() {
+    public Integer getRoomCapacity() {
         return roomCapacity;
     }
 
-    public void setRoomCapacity(int roomCapacity) {
+    public void setRoomCapacity(Integer roomCapacity) {
         this.roomCapacity = roomCapacity;
     }
 
