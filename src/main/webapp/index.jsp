@@ -17,8 +17,7 @@
 <body>
 
 <div class="container">
-
-    <form class="form-signin" action="${pageContext.request.contextPath}/login">
+    <form class="form-signin" action="${pageContext.request.contextPath}/login" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
@@ -34,7 +33,6 @@
     <form class="form-signin" action="${pageContext.request.contextPath}register.jsp">
         <button class="btn btn-lg btn-primary btn-block" type="submit"> Sign up</button>
     </form>
-
 </div> <!-- /container -->
 
 </body>

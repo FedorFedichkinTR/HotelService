@@ -1,0 +1,19 @@
+.jumbotron {
+    background-color: inherit;
+    width: 1000px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*input::-webkit-input-placeholder {*/
+    /*font-size: 14px;*/
+    /*line-height: 3;*/
+/*}*/
+
+input {
+    vertical-align: middle;
+    width: 200px;
+}
+
