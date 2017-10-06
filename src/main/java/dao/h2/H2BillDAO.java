@@ -29,7 +29,7 @@ public class H2BillDAO implements BillDAO{
     }
 
     @Override
-    public void insert(Bill bill) {
+    public void create(Bill bill) {
 
     }
 
