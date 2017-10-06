@@ -58,6 +58,7 @@ public class H2UserDao implements UserDao {
                 }
             }
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
         return 0L;
