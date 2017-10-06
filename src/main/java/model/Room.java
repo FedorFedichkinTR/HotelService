@@ -1,22 +1,15 @@
 package model;
 
-import model.enums.RoomType;
 
-/**
- *
- */
 public class Room {
     private Long roomId;
     private Integer roomCapacity;
     private RoomType roomType;
     private Integer price;
-
-    /**
-     *
-     */
+    
     public Room() {
     }
-
+    
     public Room(Long roomId, Integer roomCapacity, RoomType roomType, Integer price) {
         this.roomId = roomId;
         this.roomCapacity = roomCapacity;
@@ -62,5 +55,27 @@ public class Room {
                 "roomCapacity: " + roomCapacity + "\n"+
                 "roomType: " + roomType + "\n"+
                 "price: " + price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Room room = (Room) o;
+
+        if (!roomId.equals(room.roomId)) return false;
+        if (!roomCapacity.equals(room.roomCapacity)) return false;
+        if (roomType != room.roomType) return false;
+        return price.equals(room.price);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = roomId.hashCode();
+        result = 31 * result + roomCapacity.hashCode();
+        result = 31 * result + roomType.hashCode();
+        result = 31 * result + price.hashCode();
+        return result;
     }
 }

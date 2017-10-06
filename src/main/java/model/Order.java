@@ -1,12 +1,7 @@
 package model;
 
-import model.enums.RoomType;
-
 import java.util.Date;
 
-/**
- *
- */
 public final class Order {
     private Long orderID;
     private Long userID;
@@ -14,13 +9,10 @@ public final class Order {
     private RoomType roomType;
     private Date startDate;
     private Date endDate;
-
-    /**
-     *
-     */
+    
     public Order() {
     }
-
+    
     public Order(Long orderID, Long userID, Integer roomCapacity, RoomType roomType, Date startDate, Date endDate) {
         this.orderID = orderID;
         this.userID = userID;
@@ -86,5 +78,31 @@ public final class Order {
                 "roomType: " + roomType + "\n" +
                 "startDate: " + startDate + "\n" +
                 "endDate:" + endDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Order order = (Order) o;
+
+        if (!orderID.equals(order.orderID)) return false;
+        if (!userID.equals(order.userID)) return false;
+        if (!roomCapacity.equals(order.roomCapacity)) return false;
+        if (roomType != order.roomType) return false;
+        if (!startDate.equals(order.startDate)) return false;
+        return endDate.equals(order.endDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = orderID.hashCode();
+        result = 31 * result + userID.hashCode();
+        result = 31 * result + roomCapacity.hashCode();
+        result = 31 * result + roomType.hashCode();
+        result = 31 * result + startDate.hashCode();
+        result = 31 * result + endDate.hashCode();
+        return result;
     }
 }

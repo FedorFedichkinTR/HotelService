@@ -1,10 +1,5 @@
 package model;
 
-import model.enums.Roles;
-
-/**
- * class for user representation
- */
 public class User {
     private Long userID;
     private String eMail;
@@ -13,13 +8,9 @@ public class User {
     private String lastName;
     private Roles role;
 
-    /**
-     * No-args constructor for user initialization
-     */
     public User() {
-
     }
-
+    
     public User(Long userID, String eMail, String password, String firstName, String lastName, Roles role) {
         this.userID = userID;
         this.eMail = eMail;
@@ -75,6 +66,32 @@ public class User {
 
     public void setRole(Roles role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!userID.equals(user.userID)) return false;
+        if (!eMail.equals(user.eMail)) return false;
+        if (!password.equals(user.password)) return false;
+        if (!firstName.equals(user.firstName)) return false;
+        if (!lastName.equals(user.lastName)) return false;
+        return role == user.role;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userID.hashCode();
+        result = 31 * result + eMail.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + role.hashCode();
+        return result;
     }
 
     @Override
