@@ -19,6 +19,8 @@ public class H2UserDao implements UserDao {
             "SELECT email, password, first_name, last_name, role FROM Users WHERE user_id = ?";
     private static final String UPDATE_USER_SQL =
             "UPDATE Users SET email = ?, password = ?, first_name = ?, last_name = ?, role = ? WHERE user_id = ?";
+    private static final String DELETE_USER_SQL =
+            "DELETE FROM Users WHERE user_id = ?";
 
     public H2UserDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
@@ -117,6 +119,14 @@ public class H2UserDao implements UserDao {
 
     @Override
     public Long delete(Long id) {
-        return null;
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_USER_SQL)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+            return id;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0L;
     }
 }
