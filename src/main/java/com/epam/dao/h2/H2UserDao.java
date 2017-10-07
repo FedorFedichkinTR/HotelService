@@ -112,16 +112,8 @@ public class H2UserDao implements UserDao {
     }
 
     @Override
-    public Long delete(Long id) {
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_USER_SQL)) {
-            statement.setLong(1, id);
-            statement.executeUpdate();
-            return id;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0L;
+    public Long deleteById(Long id) {
+        return delete(id,connectionPool,DELETE_USER_SQL);
     }
 
     @Override

@@ -79,19 +79,9 @@ public class H2RoomDao implements RoomDao {
         return 0L;
     }
 
-    @SuppressWarnings("Duplicates")
-    //TODO WHAT TO DO?
     @Override
-    public Long delete(Long id) {
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_ROOM_SQL)) {
-            statement.setLong(1, id);
-            statement.executeUpdate();
-            return id;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0L;
+    public Long deleteById(Long id) {
+        return delete(id,connectionPool,DELETE_ROOM_SQL);
     }
 
     @Override

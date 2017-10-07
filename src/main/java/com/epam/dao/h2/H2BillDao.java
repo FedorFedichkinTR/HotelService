@@ -9,6 +9,15 @@ import java.util.List;
 public class H2BillDao implements BillDao {
     private final ConnectionPool connectionPool;
 
+    private static final String CREATE_BILL_SQL =
+            "INSERT INTO Bills (user_id, room_id, admin_id, order_id, price, status) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String READ_BILL_BY_ID =
+            "SELECT user_id, room_id, admin_id, order_id, price, status FROM Bills WHERE bill_id = ?";
+    private static final String UPDATE_BILL_SQL =
+            "UPDATE Bills SET user_id = ?, room_id = ?, admin_id = ?, order_id = ?, price = ?, status =? WHERE bill_id = ?";
+    private static final String DELETE_ROOM_SQL =
+            "DELETE FROM Bills WHERE bill_id = ?";
+
     public H2BillDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
@@ -29,7 +38,7 @@ public class H2BillDao implements BillDao {
     }
 
     @Override
-    public Long delete(Long id) {
+    public Long deleteById(Long id) {
         return null;
     }
 

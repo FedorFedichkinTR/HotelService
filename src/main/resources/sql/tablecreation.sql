@@ -14,11 +14,13 @@ CREATE TABLE Users (
 CREATE TABLE Orders (
     order_id        BIGINT AUTO_INCREMENT     PRIMARY KEY,
     user_id         BIGINT                    NOT NULL,
+    room_id         BIGINT                    NOT NULL,
     capacity        INT,
     type            VARCHAR(15),
     start_date      TIMESTAMP                 NOT NULL,
     end_date        TIMESTAMP                 NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users (user_id)
+    FOREIGN KEY (user_id) REFERENCES Users (user_id),
+    FOREIGN KEY (room_id) REFERENCES Rooms (room_id)
 );
 
 CREATE TABLE Rooms (

@@ -29,7 +29,7 @@ public class H2OrderDao implements OrderDao {
     }
 
     @Override
-    public Long delete(Long id) {
+    public Long deleteById(Long id) {
         return null;
     }
 
