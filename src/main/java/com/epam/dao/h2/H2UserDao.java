@@ -12,7 +12,7 @@ public class H2UserDao implements UserDao {
     private final ConnectionPool connectionPool;
 
     private static final String CREATE_USER_SQL =
-            "INSERT INTO USERS (email, password, first_name, last_name, role) VALUES (?,?,?,?,?)";
+            "INSERT INTO Users (email, password, first_name, last_name, role) VALUES (?,?,?,?,?)";
     private static final String SELECT_USER_BY_EMAIL_SQL =
             "SELECT user_id, password, first_name, last_name, role FROM Users WHERE email = ?";
     private static final String SELECT_USER_BY_ID_SQL =

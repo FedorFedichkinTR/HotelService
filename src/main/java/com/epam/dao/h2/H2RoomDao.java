@@ -3,6 +3,7 @@ package com.epam.dao.h2;
 import com.epam.connection_pool.ConnectionPool;
 import com.epam.dao.interfaces.RoomDao;
 import com.epam.model.Room;
+import com.epam.model.RoomType;
 
 import java.sql.*;
 import java.util.List;
@@ -15,7 +16,9 @@ public class H2RoomDao implements RoomDao {
     }
 
     private static final String CREATE_ROOM_SQL =
-            "INSERT INTO Rooms (capacity,type,price) VALUES (?, ?, ?)";
+            "INSERT INTO Rooms (capacity, type, price) VALUES (?, ?, ?)";
+    private static final String READ_ROOM_BY_ID =
+            "SELECT capacity, type, price FROM Rooms WHERE room_id = ?";
 
     @Override
     public Long create(Room room) {
@@ -26,8 +29,8 @@ public class H2RoomDao implements RoomDao {
             statement.setInt(3, room.getPrice());
             statement.executeUpdate();
 
-            try(ResultSet resultSet = statement.getGeneratedKeys()) {
-                if(resultSet.next()) {
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                if (resultSet.next()) {
                     return resultSet.getLong(1);
                 }
             }
@@ -39,7 +42,21 @@ public class H2RoomDao implements RoomDao {
 
     @Override
     public Room read(Long id) {
-        return null;
+        Room room = new Room();
+
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_ROOM_BY_ID)) {
+            statement.setLong(1, id);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                room.setRoomCapacity(resultSet.getInt("capacity"));
+                room.setRoomType(RoomType.valueOf(resultSet.getString("type")));
+                room.setRoomId(id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return room;
     }
 
     @Override
