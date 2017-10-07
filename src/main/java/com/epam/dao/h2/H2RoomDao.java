@@ -19,6 +19,8 @@ public class H2RoomDao implements RoomDao {
             "INSERT INTO Rooms (capacity, type, price) VALUES (?, ?, ?)";
     private static final String READ_ROOM_BY_ID =
             "SELECT capacity, type, price FROM Rooms WHERE room_id = ?";
+    private static final String UPDATE_ROOM_SQL =
+            "UPDATE Rooms SET capacity = ?, type = ?, price = ? WHERE room_id = ?";
 
     @Override
     public Long create(Room room) {
@@ -60,8 +62,19 @@ public class H2RoomDao implements RoomDao {
     }
 
     @Override
-    public Long update(Room entity) {
-        return null;
+    public Long update(Room room) {
+        try (Connection connection =  connectionPool.takeConnection();
+        PreparedStatement statement = connection.prepareStatement(UPDATE_ROOM_SQL)) {
+            statement.setInt(1,room.getRoomCapacity());
+            statement.setString(2,room.getRoomType().toString());
+            statement.setInt(3,room.getPrice());
+            statement.setLong(4,room.getRoomId());
+            statement.executeUpdate();
+            return room.getRoomId();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0L;
     }
 
     @Override
