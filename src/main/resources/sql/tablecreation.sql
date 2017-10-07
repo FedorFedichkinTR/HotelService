@@ -25,7 +25,7 @@ CREATE TABLE Rooms (
     room_id         BIGINT AUTO_INCREMENT     PRIMARY KEY,
     capacity        INT,
     type            VARCHAR(15),
-    price           INT                       NOT NULL,
+    price           INT                       NOT NULL
 );
 
 CREATE TABLE Bills (

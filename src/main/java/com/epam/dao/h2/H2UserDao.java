@@ -11,10 +11,10 @@ import java.util.List;
 public class H2UserDao implements UserDao {
     private final ConnectionPool connectionPool;
 
-    private static final String SELECT_USER_BY_EMAIL_SQL =
-            "SELECT user_id, password, first_name, last_name, role FROM Users WHERE email = ?";
     private static final String CREATE_USER_SQL =
             "INSERT INTO USERS (email, password, first_name, last_name, role) VALUES (?,?,?,?,?)";
+    private static final String SELECT_USER_BY_EMAIL_SQL =
+            "SELECT user_id, password, first_name, last_name, role FROM Users WHERE email = ?";
     private static final String SELECT_USER_BY_ID_SQL =
             "SELECT email, password, first_name, last_name, role FROM Users WHERE user_id = ?";
     private static final String UPDATE_USER_SQL =
@@ -92,7 +92,6 @@ public class H2UserDao implements UserDao {
                 user.setRole(Roles.valueOf(resultSet.getString("role")));
                 user.setUserID(id);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

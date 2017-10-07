@@ -41,6 +41,7 @@ public class H2DaoFactory implements AbstractDaoFactory {
     }
 
     @Override
+    //TODO implementation??
     public void close() throws Exception {
 
     }
