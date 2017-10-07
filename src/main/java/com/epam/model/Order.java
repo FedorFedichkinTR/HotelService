@@ -10,6 +10,8 @@ public final class Order {
     private RoomType roomType;
     private OffsetDateTime startDate;
     private OffsetDateTime endDate;
+    //private Long roomID;
+    //private String status;
     
     public Order() {
     }
