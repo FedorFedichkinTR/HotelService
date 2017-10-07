@@ -15,8 +15,10 @@ public class H2UserDao implements UserDao {
             "SELECT user_id, password, first_name, last_name, role FROM Users WHERE email = ?";
     private static final String CREATE_USER_SQL =
             "INSERT INTO USERS (email, password, first_name, last_name, role) VALUES (?,?,?,?,?)";
-    private static final String READ_USER_BY_ID =
+    private static final String SELECT_USER_BY_ID_SQL =
             "SELECT email, password, first_name, last_name, role FROM Users WHERE user_id = ?";
+    private static final String UPDATE_USER_SQL =
+            "UPDATE Users SET email = ?, password = ?, first_name = ?, last_name = ?, role = ? WHERE user_id = ?";
 
     public H2UserDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
@@ -76,18 +78,18 @@ public class H2UserDao implements UserDao {
     public User read(Long id) {
         User user = new User();
 
-        try(Connection connection = connectionPool.takeConnection();
-        PreparedStatement statement = connection.prepareStatement(READ_USER_BY_ID)) {
-            statement.setLong(1,id);
-           try (ResultSet resultSet = statement.executeQuery()) {
-               resultSet.next();
-               user.setPassword(resultSet.getString("password"));
-               user.seteMail(resultSet.getString("email"));
-               user.setFirstName(resultSet.getString("first_name"));
-               user.setLastName(resultSet.getString("last_name"));
-               user.setRole(Roles.valueOf(resultSet.getString("role")));
-               user.setUserID(id);
-           }
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_ID_SQL)) {
+            statement.setLong(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                user.setPassword(resultSet.getString("password"));
+                user.seteMail(resultSet.getString("email"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setRole(Roles.valueOf(resultSet.getString("role")));
+                user.setUserID(id);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,8 +98,21 @@ public class H2UserDao implements UserDao {
     }
 
     @Override
-    public Long update(User entity) {
-        return null;
+    public Long update(User user) {
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_USER_SQL)) {
+            statement.setString(1, user.geteMail());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getFirstName());
+            statement.setString(4, user.getLastName());
+            statement.setString(5, user.getRole().toString());
+            statement.setLong(6, user.getUserID());
+            statement.executeUpdate();
+            return user.getUserID();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0L;
     }
 
     @Override
