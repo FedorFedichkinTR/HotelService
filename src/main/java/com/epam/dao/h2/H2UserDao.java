@@ -12,9 +12,11 @@ public class H2UserDao implements UserDao {
     private final ConnectionPool connectionPool;
 
     private static final String SELECT_USER_BY_EMAIL_SQL =
-            "SELECT user_id, password, first_name, last_name, role from USERS WHERE email = ?";
+            "SELECT user_id, password, first_name, last_name, role FROM Users WHERE email = ?";
     private static final String CREATE_USER_SQL =
             "INSERT INTO USERS (email, password, first_name, last_name, role) VALUES (?,?,?,?,?)";
+    private static final String READ_USER_BY_ID =
+            "SELECT email, password, first_name, last_name, role FROM Users WHERE user_id = ?";
 
     public H2UserDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
@@ -30,10 +32,11 @@ public class H2UserDao implements UserDao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
                 user.setUserID(resultSet.getLong("user_id"));
-                user.setPassword("password");
-                user.setFirstName("first_name");
-                user.setLastName("last_name");
+                user.setPassword(resultSet.getString("password"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
                 user.setRole(Roles.valueOf(resultSet.getString("role")));
+                user.seteMail(eMail);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,7 +74,25 @@ public class H2UserDao implements UserDao {
 
     @Override
     public User read(Long id) {
-        return null;
+        User user = new User();
+
+        try(Connection connection = connectionPool.takeConnection();
+        PreparedStatement statement = connection.prepareStatement(READ_USER_BY_ID)) {
+            statement.setLong(1,id);
+           try (ResultSet resultSet = statement.executeQuery()) {
+               resultSet.next();
+               user.setPassword(resultSet.getString("password"));
+               user.seteMail(resultSet.getString("email"));
+               user.setFirstName(resultSet.getString("first_name"));
+               user.setLastName(resultSet.getString("last_name"));
+               user.setRole(Roles.valueOf(resultSet.getString("role")));
+               user.setUserID(id);
+           }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
