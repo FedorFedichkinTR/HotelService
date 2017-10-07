@@ -21,6 +21,8 @@ public class H2RoomDao implements RoomDao {
             "SELECT capacity, type, price FROM Rooms WHERE room_id = ?";
     private static final String UPDATE_ROOM_SQL =
             "UPDATE Rooms SET capacity = ?, type = ?, price = ? WHERE room_id = ?";
+    private static final String DELETE_ROOM_SQL =
+            "DELETE FROM Rooms WHERE room_id = ?";
 
     @Override
     public Long create(Room room) {
@@ -49,7 +51,7 @@ public class H2RoomDao implements RoomDao {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(READ_ROOM_BY_ID)) {
             statement.setLong(1, id);
-            try(ResultSet resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
                 room.setRoomCapacity(resultSet.getInt("capacity"));
                 room.setRoomType(RoomType.valueOf(resultSet.getString("type")));
@@ -63,12 +65,12 @@ public class H2RoomDao implements RoomDao {
 
     @Override
     public Long update(Room room) {
-        try (Connection connection =  connectionPool.takeConnection();
-        PreparedStatement statement = connection.prepareStatement(UPDATE_ROOM_SQL)) {
-            statement.setInt(1,room.getRoomCapacity());
-            statement.setString(2,room.getRoomType().toString());
-            statement.setInt(3,room.getPrice());
-            statement.setLong(4,room.getRoomId());
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_ROOM_SQL)) {
+            statement.setInt(1, room.getRoomCapacity());
+            statement.setString(2, room.getRoomType().toString());
+            statement.setInt(3, room.getPrice());
+            statement.setLong(4, room.getRoomId());
             statement.executeUpdate();
             return room.getRoomId();
         } catch (SQLException e) {
@@ -77,9 +79,19 @@ public class H2RoomDao implements RoomDao {
         return 0L;
     }
 
+    @SuppressWarnings("Duplicates")
+    //TODO WHAT TO DO?
     @Override
     public Long delete(Long id) {
-        return null;
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_ROOM_SQL)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+            return id;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0L;
     }
 
     @Override

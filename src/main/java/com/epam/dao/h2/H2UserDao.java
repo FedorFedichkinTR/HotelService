@@ -72,11 +72,6 @@ public class H2UserDao implements UserDao {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return null;
-    }
-
-    @Override
     public User read(Long id) {
         User user = new User();
 
@@ -128,4 +123,10 @@ public class H2UserDao implements UserDao {
         }
         return 0L;
     }
+
+    @Override
+    public List<User> getAllUsers() {
+        return null;
+    }
+
 }
