@@ -49,12 +49,12 @@ public class H2BillDao implements BillDao {
     }
 
     @Override
-    public Bill read(Long billID) {
+    public Bill read(Long billId) {
         Bill bill = new Bill();
 
         try(Connection connection = connectionPool.takeConnection();
         PreparedStatement statement = connection.prepareStatement(READ_BILL_BY_ID)) {
-            statement.setLong(1,billID);
+            statement.setLong(1,billId);
             try(ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
                 bill.setUserID(resultSet.getLong("user_id"));
@@ -63,7 +63,7 @@ public class H2BillDao implements BillDao {
                 bill.setOrderID(resultSet.getLong("order_id"));
                 bill.setPrice(resultSet.getInt("price"));
                 bill.setStatus(resultSet.getBoolean("status"));
-                bill.setBillID(billID);
+                bill.setBillID(billId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,8 +77,8 @@ public class H2BillDao implements BillDao {
     }
 
     @Override
-    public Long deleteById(Long id) {
-        return delete(id,connectionPool,DELETE_BILL_SQL);
+    public Long deleteById(Long billId) {
+        return delete(billId,connectionPool,DELETE_BILL_SQL);
     }
 
     @Override
