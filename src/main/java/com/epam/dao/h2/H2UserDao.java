@@ -6,6 +6,7 @@ import com.epam.model.User;
 import com.epam.model.Roles;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class H2UserDao implements UserDao {
@@ -21,6 +22,8 @@ public class H2UserDao implements UserDao {
             "UPDATE Users SET email = ?, password = ?, first_name = ?, last_name = ?, role = ? WHERE user_id = ?";
     private static final String DELETE_USER_SQL =
             "DELETE FROM Users WHERE user_id = ?";
+    private static final String GET_ALL_USERS_SQL =
+            "SELECT user_id, first_name, last_name FROM Users";
 
     public H2UserDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
@@ -113,12 +116,28 @@ public class H2UserDao implements UserDao {
 
     @Override
     public Long deleteById(Long id) {
-        return delete(id,connectionPool,DELETE_USER_SQL);
+        return delete(id, connectionPool, DELETE_USER_SQL);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        List<User> users = new ArrayList<>();
+
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ALL_USERS_SQL)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    User user = new User();
+                    user.setUserID(resultSet.getLong("user_id"));
+                    user.setFirstName(resultSet.getString("first_name"));
+                    user.setLastName(resultSet.getString("last_name"));
+                    users.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 
 }
