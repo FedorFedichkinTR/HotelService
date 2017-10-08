@@ -10,6 +10,7 @@ public final class Order {
     private RoomType roomType;
     private OffsetDateTime startDate;
     private OffsetDateTime endDate;
+    //TODO Approve!
     private Long roomID;
     private String status;
     

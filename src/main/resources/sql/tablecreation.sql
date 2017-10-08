@@ -45,11 +45,11 @@ CREATE TABLE Bills (
     FOREIGN KEY (order_id)  REFERENCES Orders(order_id)
 );
 
-CREATE TABLE BookedRooms (
-    id              BIGINT AUTO_INCREMENT     PRIMARY KEY,
-    room_id         BIGINT                    NOT NULL,
-    order_id        BIGINT                    NOT NULL,
-    FOREIGN KEY (room_id)       REFERENCES Rooms (room_id),
-    FOREIGN KEY (order_id)      REFERENCES Orders(order_id)
-);
+# CREATE TABLE BookedRooms (
+#     id              BIGINT AUTO_INCREMENT     PRIMARY KEY,
+#     room_id         BIGINT                    NOT NULL,
+#     order_id        BIGINT                    NOT NULL,
+#     FOREIGN KEY (room_id)       REFERENCES Rooms (room_id),
+#     FOREIGN KEY (order_id)      REFERENCES Orders(order_id)
+# );
 

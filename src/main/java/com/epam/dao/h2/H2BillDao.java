@@ -91,6 +91,7 @@ public class H2BillDao implements BillDao {
     }
 
     @Override
+    //TODO understand if this suitable
     public Long deleteById(Long billId) {
         return delete(billId, connectionPool, DELETE_BILL_SQL);
     }

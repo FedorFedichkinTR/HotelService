@@ -15,6 +15,7 @@ interface CrudDao<E,K> {
 
     Long deleteById(K id);
 
+   //TODO understand if this allowed to do?
     default Long delete(Long id, ConnectionPool connectionPool, String command) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(command)) {

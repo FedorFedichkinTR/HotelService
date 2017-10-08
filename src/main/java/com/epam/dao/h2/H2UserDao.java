@@ -33,7 +33,7 @@ public class H2UserDao implements UserDao {
     public Long create(User insertedUser) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_USER_SQL, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, insertedUser.geteMail());
+            statement.setString(1, insertedUser.getEmail());
             statement.setString(2, insertedUser.getPassword());
             statement.setString(3, insertedUser.getFirstName());
             statement.setString(4, insertedUser.getLastName());
@@ -66,7 +66,7 @@ public class H2UserDao implements UserDao {
                 user.setFirstName(resultSet.getString("first_name"));
                 user.setLastName(resultSet.getString("last_name"));
                 user.setRole(Roles.valueOf(resultSet.getString("role")));
-                user.seteMail(eMail);
+                user.setEmail(eMail);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,7 +84,7 @@ public class H2UserDao implements UserDao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
                 user.setPassword(resultSet.getString("password"));
-                user.seteMail(resultSet.getString("email"));
+                user.setEmail(resultSet.getString("email"));
                 user.setFirstName(resultSet.getString("first_name"));
                 user.setLastName(resultSet.getString("last_name"));
                 user.setRole(Roles.valueOf(resultSet.getString("role")));
@@ -100,7 +100,7 @@ public class H2UserDao implements UserDao {
     public Long update(User user) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_USER_SQL)) {
-            statement.setString(1, user.geteMail());
+            statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getFirstName());
             statement.setString(4, user.getLastName());
@@ -131,6 +131,7 @@ public class H2UserDao implements UserDao {
                     user.setUserID(resultSet.getLong("user_id"));
                     user.setFirstName(resultSet.getString("first_name"));
                     user.setLastName(resultSet.getString("last_name"));
+                    //TODO Understand how it works!! the reference is almost the same!
                     users.add(user);
                 }
             }
