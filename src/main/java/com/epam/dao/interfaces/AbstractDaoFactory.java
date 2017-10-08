@@ -1,6 +1,6 @@
 package com.epam.dao.interfaces;
 
-interface AbstractDaoFactory extends AutoCloseable {
+public interface AbstractDaoFactory extends AutoCloseable {
     UserDao createUserDAO();
 
     OrderDao createOrderDAO();

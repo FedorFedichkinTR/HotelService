@@ -28,16 +28,16 @@ public class H2BillDao implements BillDao {
 
     @Override
     public Long create(Bill bill) {
-        try(Connection connection = connectionPool.takeConnection();
-            PreparedStatement statement = connection.prepareStatement(CREATE_BILL_SQL,PreparedStatement.RETURN_GENERATED_KEYS)) {
-            statement.setLong(1,bill.getUserID());
-            statement.setLong(2,bill.getRoomID());
-            statement.setLong(3,bill.getAdminID());
-            statement.setLong(4,bill.getOrderID());
-            statement.setInt(5,bill.getPrice());
-            statement.setBoolean(6,bill.getStatus());
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(CREATE_BILL_SQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            statement.setLong(1, bill.getUserID());
+            statement.setLong(2, bill.getRoomID());
+            statement.setLong(3, bill.getAdminID());
+            statement.setLong(4, bill.getOrderID());
+            statement.setInt(5, bill.getPrice());
+            statement.setBoolean(6, bill.getStatus());
             statement.executeUpdate();
-            try(ResultSet resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     return resultSet.getLong(1);
                 }
@@ -52,10 +52,10 @@ public class H2BillDao implements BillDao {
     public Bill read(Long billId) {
         Bill bill = new Bill();
 
-        try(Connection connection = connectionPool.takeConnection();
-        PreparedStatement statement = connection.prepareStatement(READ_BILL_BY_ID)) {
-            statement.setLong(1,billId);
-            try(ResultSet resultSet = statement.executeQuery()) {
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_BILL_BY_ID)) {
+            statement.setLong(1, billId);
+            try (ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
                 bill.setUserID(resultSet.getLong("user_id"));
                 bill.setRoomID(resultSet.getLong("room_id"));
@@ -72,13 +72,27 @@ public class H2BillDao implements BillDao {
     }
 
     @Override
-    public Long update(Bill entity) {
-        return null;
+    public Long update(Bill bill) {
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_BILL_SQL)) {
+            statement.setLong(1, bill.getUserID());
+            statement.setLong(2, bill.getRoomID());
+            statement.setLong(3, bill.getAdminID());
+            statement.setLong(4, bill.getOrderID());
+            statement.setInt(5, bill.getPrice());
+            statement.setBoolean(6, bill.getStatus());
+            statement.setLong(7, bill.getBillID());
+            statement.executeUpdate();
+            return bill.getBillID();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0L;
     }
 
     @Override
     public Long deleteById(Long billId) {
-        return delete(billId,connectionPool,DELETE_BILL_SQL);
+        return delete(billId, connectionPool, DELETE_BILL_SQL);
     }
 
     @Override

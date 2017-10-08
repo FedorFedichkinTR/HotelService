@@ -4,7 +4,7 @@ import com.epam.model.Order;
 
 import java.util.List;
 
-interface OrderDao extends CrudDao<Order,Long> {
+public interface OrderDao extends CrudDao<Order,Long> {
     public List<Order> getAllOrders();
 
     public List<Order> getAllOrdersByUserID(long userID);

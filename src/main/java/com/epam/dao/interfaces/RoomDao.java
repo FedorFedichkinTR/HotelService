@@ -4,6 +4,6 @@ import com.epam.model.Room;
 
 import java.util.List;
 
-interface RoomDao extends CrudDao<Room,Long> {
+public interface RoomDao extends CrudDao<Room,Long> {
     public List<Room> getAllRooms();
 }
