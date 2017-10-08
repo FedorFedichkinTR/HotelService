@@ -17,6 +17,7 @@ CREATE TABLE Orders (
     room_id         BIGINT                    NOT NULL,
     capacity        INT,
     type            VARCHAR(15),
+    status          VARCHAR(15),
     start_date      TIMESTAMP                 NOT NULL,
     end_date        TIMESTAMP                 NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users (user_id),

@@ -9,6 +9,15 @@ import java.util.List;
 public class H2OrderDao implements OrderDao {
     private final ConnectionPool connectionPool;
 
+    private static final String CREATE_ORDER_SQL =
+            "INSERT INTO Orders (user_id, room_id, capacity, type, status, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String READ_ORDER_BY_ID =
+            "SELECT user_id, room_id, capacity, type, status, start_date, end_date FROM Orders WHERE order_id= ?";
+    private static final String UPDATE_ORDER_SQL =
+            "UPDATE Orders SET user_id = ?, room_id = ?, capacity = ?, type = ?, status = ?, start_date = ?, end_date = ? WHERE order_id = ?";
+    private static final String DELETE_ORDER_SQL =
+            "DELETE FROM Orders WHERE order_id = ?";
+
     public H2OrderDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
@@ -30,7 +39,7 @@ public class H2OrderDao implements OrderDao {
 
     @Override
     public Long deleteById(Long id) {
-        return null;
+        return delete(id,connectionPool,DELETE_ORDER_SQL);
     }
 
     @Override
