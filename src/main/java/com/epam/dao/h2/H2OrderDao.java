@@ -3,7 +3,13 @@ package com.epam.dao.h2;
 import com.epam.connection_pool.ConnectionPool;
 import com.epam.dao.interfaces.OrderDao;
 import com.epam.model.Order;
+import com.epam.model.RoomType;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public class H2OrderDao implements OrderDao {
@@ -23,13 +29,52 @@ public class H2OrderDao implements OrderDao {
     }
 
     @Override
-    public Long create(Order entity) {
-        return null;
+    public Long create(Order order) {
+        try(Connection connection =  connectionPool.takeConnection();
+            PreparedStatement statement = connection.prepareStatement(CREATE_ORDER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            statement.setLong(1,order.getUserID());
+            statement.setLong(2,order.getOrderID());
+            statement.setInt(3,order.getRoomCapacity());
+            statement.setString(4, order.getRoomType().toString());
+            statement.setString(5,order.getStatus());
+            statement.setString(6,order.getStartDate().toString());
+            statement.setString(7,order.getEndDate().toString());
+            statement.executeUpdate();
+
+            try(ResultSet resultSet = statement.getGeneratedKeys()) {
+                if (resultSet.next()) {
+                    return resultSet.getLong(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0L;
     }
 
     @Override
-    public Order read(Long id) {
-        return null;
+    public Order read(Long orderId) {
+        Order order = new Order();
+
+        try(Connection connection = connectionPool.takeConnection();
+        PreparedStatement statement = connection.prepareStatement(READ_ORDER_BY_ID)) {
+            statement.setLong(1,orderId);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                order.setUserID(resultSet.getLong("user_id"));
+                order.setRoomID(resultSet.getLong("room_id"));
+                order.setRoomCapacity(resultSet.getInt("capacity"));
+                order.setRoomType(RoomType.valueOf(resultSet.getString("type")));
+                order.setStatus(resultSet.getString("status"));
+                //TODO How to do it right??
+                //order.setStartDate(OffsetDateTime.of(resultSet.getDate("start_date"),);
+                //order.setEndDate(resultSet.getDate("end_date"));
+                order.setOrderID(orderId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return order;
     }
 
     @Override

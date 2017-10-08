@@ -37,7 +37,7 @@ public class H2BillDao implements BillDao {
             statement.setInt(5, bill.getPrice());
             statement.setBoolean(6, bill.getStatus());
             statement.executeUpdate();
-            try (ResultSet resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 if (resultSet.next()) {
                     return resultSet.getLong(1);
                 }
