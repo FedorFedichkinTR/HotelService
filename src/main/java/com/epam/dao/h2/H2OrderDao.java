@@ -30,18 +30,18 @@ public class H2OrderDao implements OrderDao {
 
     @Override
     public Long create(Order order) {
-        try(Connection connection =  connectionPool.takeConnection();
-            PreparedStatement statement = connection.prepareStatement(CREATE_ORDER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            statement.setLong(1,order.getUserID());
-            statement.setLong(2,order.getOrderID());
-            statement.setInt(3,order.getRoomCapacity());
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(CREATE_ORDER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            statement.setLong(1, order.getUserID());
+            statement.setLong(2, order.getOrderID());
+            statement.setInt(3, order.getRoomCapacity());
             statement.setString(4, order.getRoomType().toString());
-            statement.setString(5,order.getStatus());
-            statement.setString(6,order.getStartDate().toString());
-            statement.setString(7,order.getEndDate().toString());
+            statement.setString(5, order.getStatus());
+            statement.setString(6, order.getStartDate().toString());
+            statement.setString(7, order.getEndDate().toString());
             statement.executeUpdate();
 
-            try(ResultSet resultSet = statement.getGeneratedKeys()) {
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 if (resultSet.next()) {
                     return resultSet.getLong(1);
                 }
@@ -56,10 +56,10 @@ public class H2OrderDao implements OrderDao {
     public Order read(Long orderId) {
         Order order = new Order();
 
-        try(Connection connection = connectionPool.takeConnection();
-        PreparedStatement statement = connection.prepareStatement(READ_ORDER_BY_ID)) {
-            statement.setLong(1,orderId);
-            try(ResultSet resultSet = statement.executeQuery()) {
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_ORDER_BY_ID)) {
+            statement.setLong(1, orderId);
+            try (ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
                 order.setUserID(resultSet.getLong("user_id"));
                 order.setRoomID(resultSet.getLong("room_id"));
@@ -78,13 +78,29 @@ public class H2OrderDao implements OrderDao {
     }
 
     @Override
-    public Long update(Order entity) {
-        return null;
+    public Long update(Order order) {
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_ORDER_SQL)) {
+            statement.setLong(1, order.getUserID());
+            statement.setLong(2, order.getRoomID());
+            statement.setInt(3, order.getRoomCapacity());
+            statement.setString(4, order.getRoomType().toString());
+            statement.setString(5, order.getStatus());
+            //TODO what to do??
+//            statement.setDate(6,order.getStartDate());
+//            statement.setDate(7,order.getEndDate());
+            statement.setLong(8, order.getOrderID());
+            statement.executeUpdate();
+            return order.getOrderID();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0L;
     }
 
     @Override
     public Long deleteById(Long id) {
-        return delete(id,connectionPool,DELETE_ORDER_SQL);
+        return delete(id, connectionPool, DELETE_ORDER_SQL);
     }
 
     @Override
