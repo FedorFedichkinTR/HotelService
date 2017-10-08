@@ -4,6 +4,10 @@ import com.epam.connection_pool.ConnectionPool;
 import com.epam.dao.interfaces.*;
 import com.epam.model.Bill;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class H2BillDao implements BillDao {
@@ -15,7 +19,7 @@ public class H2BillDao implements BillDao {
             "SELECT user_id, room_id, admin_id, order_id, price, status FROM Bills WHERE bill_id = ?";
     private static final String UPDATE_BILL_SQL =
             "UPDATE Bills SET user_id = ?, room_id = ?, admin_id = ?, order_id = ?, price = ?, status =? WHERE bill_id = ?";
-    private static final String DELETE_ROOM_SQL =
+    private static final String DELETE_BILL_SQL =
             "DELETE FROM Bills WHERE bill_id = ?";
 
     public H2BillDao(ConnectionPool connectionPool) {
@@ -23,8 +27,25 @@ public class H2BillDao implements BillDao {
     }
 
     @Override
-    public Long create(Bill entity) {
-        return null;
+    public Long create(Bill bill) {
+        try(Connection connection = connectionPool.takeConnection();
+            PreparedStatement statement = connection.prepareStatement(CREATE_BILL_SQL,PreparedStatement.RETURN_GENERATED_KEYS)) {
+            statement.setLong(1,bill.getUserID());
+            statement.setLong(2,bill.getRoomID());
+            statement.setLong(3,bill.getAdminID());
+            statement.setLong(4,bill.getOrderID());
+            statement.setInt(5,bill.getPrice());
+            statement.setBoolean(6,bill.getStatus());
+            statement.executeUpdate();
+            try(ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getLong(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0L;
     }
 
     @Override
@@ -39,7 +60,7 @@ public class H2BillDao implements BillDao {
 
     @Override
     public Long deleteById(Long id) {
-        return null;
+        return delete(id,connectionPool,DELETE_BILL_SQL);
     }
 
     @Override
