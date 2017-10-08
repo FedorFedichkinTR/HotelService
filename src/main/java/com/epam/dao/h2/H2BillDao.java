@@ -96,11 +96,13 @@ public class H2BillDao implements BillDao {
     }
 
     @Override
+    //TODO
     public List<Bill> getAllBills() {
         return null;
     }
 
     @Override
+    //TODO
     public List<Bill> getAllBillsByUserID(long userId) {
         return null;
     }

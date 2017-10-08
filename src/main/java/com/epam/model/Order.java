@@ -10,19 +10,21 @@ public final class Order {
     private RoomType roomType;
     private OffsetDateTime startDate;
     private OffsetDateTime endDate;
-    //private Long roomID;
-    //private String status;
+    private Long roomID;
+    private String status;
     
     public Order() {
     }
-    
-    public Order(Long orderID, Long userID, Integer roomCapacity, RoomType roomType, OffsetDateTime startDate, OffsetDateTime endDate) {
+
+    public Order(Long orderID, Long userID, Integer roomCapacity, RoomType roomType, OffsetDateTime startDate, OffsetDateTime endDate, Long roomID, String status) {
         this.orderID = orderID;
         this.userID = userID;
         this.roomCapacity = roomCapacity;
         this.roomType = roomType;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.roomID = roomID;
+        this.status = status;
     }
 
     public Long getOrderID() {
@@ -73,6 +75,22 @@ public final class Order {
         this.endDate = endDate;
     }
 
+    public Long getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(Long roomID) {
+        this.roomID = roomID;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "orderID: " + orderID + "\n" +
@@ -108,4 +126,5 @@ public final class Order {
         result = 31 * result + endDate.hashCode();
         return result;
     }
+
 }
