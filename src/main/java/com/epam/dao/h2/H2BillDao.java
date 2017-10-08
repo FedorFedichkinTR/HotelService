@@ -49,8 +49,26 @@ public class H2BillDao implements BillDao {
     }
 
     @Override
-    public Bill read(Long id) {
-        return null;
+    public Bill read(Long billID) {
+        Bill bill = new Bill();
+
+        try(Connection connection = connectionPool.takeConnection();
+        PreparedStatement statement = connection.prepareStatement(READ_BILL_BY_ID)) {
+            statement.setLong(1,billID);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                bill.setUserID(resultSet.getLong("user_id"));
+                bill.setRoomID(resultSet.getLong("room_id"));
+                bill.setAdminID(resultSet.getLong("admin_id"));
+                bill.setOrderID(resultSet.getLong("order_id"));
+                bill.setPrice(resultSet.getInt("price"));
+                bill.setStatus(resultSet.getBoolean("status"));
+                bill.setBillID(billID);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bill;
     }
 
     @Override
