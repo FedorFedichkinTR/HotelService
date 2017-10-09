@@ -21,20 +21,23 @@
         <h2 class="form-signin-heading">Register</h2>
 
         <label for="inputFirstName" class="sr-only">First name</label>
-        <input type="text" id="inputFirstName" class="form-control" placeholder="First name" required autofocus>
+        <input type="text" id="inputFirstName" class="form-control" placeholder="First name" name="inputFirstName"
+               required autofocus>
 
         <label for="inputLastName" class="sr-only">Last name</label>
-        <input type="text" id="inputLastName" class="form-control" placeholder="Last name" required>
+        <input type="text" id="inputLastName" class="form-control" placeholder="Last name" name="inputLastName"
+               required>
 
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="inputEmail" required>
 
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="inputPassword"
+               required>
 
         <div class="checkbox">
             <label>
-                <input type="checkbox" value="remember-me"> Remember me
+                <input type="checkbox" value="remember-me" name="remember"> Remember me
             </label>
         </div>
 
