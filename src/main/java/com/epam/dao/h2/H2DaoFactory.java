@@ -2,8 +2,6 @@ package com.epam.dao.h2;
 
 import com.epam.connection_pool.ConnectionPool;
 import com.epam.dao.interfaces.*;
-import com.epam.dao.h2.H2UserDao;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 public class H2DaoFactory implements AbstractDaoFactory {
     private final UserDao userDao;
