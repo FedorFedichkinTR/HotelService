@@ -22,7 +22,7 @@ public class RegistrationService {
         User newUser = new User();
         UserDao userDao = daoFactory.createUserDAO();
         newUser.seteMail(userMail);
-        if (userDao.readByEmail(userMail) == null) {
+        if (userDao.readByEmail(userMail).getUserID() == null) {
             newUser.setPassword(userPassword);
             newUser.setFirstName(userFirstName);
             newUser.setLastName(userLastName);
