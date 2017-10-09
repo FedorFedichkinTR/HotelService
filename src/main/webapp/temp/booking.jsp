@@ -18,14 +18,19 @@
 <body>
 
 <jsp:include page="../static/common/navbar.jsp"/>
-
+<div class="alert alert-warning" role="alert"><strong>WAWDAWDFEIOHWEF!!!!@1111!!!!</strong></div>
 <div class="jumbotron">
     <form method="post">
-        <input type="text" name="typeOfRoom" id="typeOfRoom" placeholder="Type of room">
-        <input type="number" name="numberOfPeople" min="1" max="3" id="numberOfPeople" placeholder="Number of people">
-        <input type="text" class="datepicker" placeholder="Arrival">
-        <input type="text" class="datepicker" placeholder="Departure">
-        <button class="btn btn-primary " type="submit">Submit</button>
+        <div class="input-group">
+            <input type="text" name="typeOfRoom" id="typeOfRoom" placeholder="Type of room">
+            <input type="number" name="numberOfPeople" min="1" max="3" id="numberOfPeople"
+                   placeholder="Number of people" title="DANGER!!11!!1!">
+            <input type="text" class="datepicker" placeholder="Arrival" name="arrival">
+            <input type="text" class="datepicker" placeholder="Departure" name = "departure">
+            <button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
     </form>
 </div>
 
