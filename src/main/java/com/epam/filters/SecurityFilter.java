@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Log4j
-@WebFilter("/*")
+//@WebFilter("/*")
 public class SecurityFilter extends HttpFilter {
     private final static String CURRENT_USER = "currentUser";
     private Pattern notAuthPattern = Pattern.compile("^((\\/static\\/.*)|(\\/j_security_check$)|(^\\/not_auth\\/.*))");
