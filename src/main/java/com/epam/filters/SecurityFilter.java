@@ -4,6 +4,8 @@ import lombok.extern.log4j.Log4j;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,25 +17,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Log4j
-//@WebFilter("/*")
+@WebFilter("/*jsp")
 public class SecurityFilter extends HttpFilter {
     private final static String CURRENT_USER = "currentUser";
     private Pattern notAuthPattern = Pattern.compile("^((\\/static\\/.*)|(\\/j_security_check$)|(^\\/not_auth\\/.*))");
 
-    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        String path = Optional.ofNullable(request.getRequestURI()).orElse("");
-        Matcher newMatcher = notAuthPattern.matcher(path);
-        if (!newMatcher.find()) {
-            HttpSession session = request.getSession(true);
-            if (session.getAttribute(CURRENT_USER) != null) {
-                chain.doFilter(request, response);
-            } else {
-//                request.getRequestDispatcher("/WEB-INF/jsp/not_auth/login.jsp").forward(request, response);
-                request.getRequestDispatcher("index.jsp").forward(request, response); //TODO add error.jsp
-            }
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpSession session = httpServletRequest.getSession(true);
+        if (session.getAttribute(CURRENT_USER) != null) {
+            request.getRequestDispatcher("/webapp/temp/booking.jsp").forward(httpServletRequest, response);
         } else {
-            chain.doFilter(request, response);
+            if (!httpServletRequest.getRequestURI().contains("register")) {
+                request.getRequestDispatcher("index.jsp").forward(httpServletRequest, response);
+            }
         }
+        chain.doFilter(httpServletRequest, response);
     }
 }

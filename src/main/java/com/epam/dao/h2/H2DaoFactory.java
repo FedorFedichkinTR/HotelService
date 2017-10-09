@@ -12,7 +12,7 @@ public class H2DaoFactory implements AbstractDaoFactory {
 
     public H2DaoFactory(ConnectionPool connectionPool) {
         this.userDao = new H2UserDao(connectionPool);
-        this.orderDao =new H2OrderDao(connectionPool);
+        this.orderDao = new H2OrderDao(connectionPool);
         this.roomDao = new H2RoomDao(connectionPool);
         this.billDao = new H2BillDao(connectionPool);
         this.connectionPool = connectionPool;
