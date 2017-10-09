@@ -26,6 +26,7 @@
 <body>
 
 <jsp:include page="../static/common/navbar.jsp"/>
+
 <div class="jumbotron">
     <form method="post">
         <div class="input-group">
