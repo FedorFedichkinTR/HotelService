@@ -2,6 +2,7 @@ package com.epam.dao.h2;
 
 import com.epam.connection_pool.ConnectionPool;
 import com.epam.dao.interfaces.UserDao;
+import com.epam.mappers.UserMapper;
 import com.epam.model.User;
 import com.epam.model.Roles;
 
@@ -25,6 +26,8 @@ public class H2UserDao implements UserDao {
     private static final String GET_ALL_USERS_SQL =
             "SELECT user_id, first_name, last_name FROM Users";
 
+    private final UserMapper userMapper = new UserMapper();
+
     public H2UserDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
@@ -46,32 +49,25 @@ public class H2UserDao implements UserDao {
                 }
             }
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
-        return 0L;
+        return null;
     }
 
     @Override
     public User readByEmail(String eMail) {
-        User user = new User();
-
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_EMAIL_SQL)) {
             statement.setString(1, eMail);
+
             try (ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
-                user.setUserID(resultSet.getLong("user_id"));
-                user.setPassword(resultSet.getString("password"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                user.setRole(Roles.valueOf(resultSet.getString("role")));
-                user.setEmail(eMail);
+                return userMapper.map(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return null;
     }
 
     @Override
@@ -89,6 +85,7 @@ public class H2UserDao implements UserDao {
                 user.setLastName(resultSet.getString("last_name"));
                 user.setRole(Roles.valueOf(resultSet.getString("role")));
                 user.setUserID(id);
+                //todo
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,7 +94,7 @@ public class H2UserDao implements UserDao {
     }
 
     @Override
-    public Long update(User user) {
+    public Boolean update(User user) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_USER_SQL)) {
             statement.setString(1, user.getEmail());
@@ -107,11 +104,11 @@ public class H2UserDao implements UserDao {
             statement.setString(5, user.getRole().toString());
             statement.setLong(6, user.getUserID());
             statement.executeUpdate();
-            return user.getUserID();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0L;
+        return false;
     }
 
     @Override
@@ -127,11 +124,10 @@ public class H2UserDao implements UserDao {
              PreparedStatement statement = connection.prepareStatement(GET_ALL_USERS_SQL)) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    User user = new User();
+                    final User user = new User();
                     user.setUserID(resultSet.getLong("user_id"));
                     user.setFirstName(resultSet.getString("first_name"));
                     user.setLastName(resultSet.getString("last_name"));
-                    //TODO Understand how it works!! the reference is almost the same!
                     users.add(user);
                 }
             }

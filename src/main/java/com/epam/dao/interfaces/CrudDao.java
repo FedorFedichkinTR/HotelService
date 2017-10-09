@@ -11,14 +11,15 @@ interface CrudDao<E,K> {
 
     E read(K id);
 
-    Long update(E entity);
+    Boolean update(E entity);
 
     Long deleteById(K id);
 
-   //TODO understand if this allowed to do?
-    default Long delete(Long id, ConnectionPool connectionPool, String command) {
+
+   //
+    default Long delete(Long id, ConnectionPool connectionPool, String sqlDeleteQuery) {
         try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(command)) {
+             PreparedStatement statement = connection.prepareStatement(sqlDeleteQuery)) {
             statement.setLong(1, id);
             statement.executeUpdate();
             return id;

@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 public class H2OrderDao implements OrderDao {
@@ -77,7 +76,7 @@ public class H2OrderDao implements OrderDao {
     }
 
     @Override
-    public Long update(Order order) {
+    public Boolean update(Order order) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ORDER_SQL)) {
             statement.setLong(1, order.getUserID());
@@ -89,11 +88,11 @@ public class H2OrderDao implements OrderDao {
             statement.setDate(7, java.sql.Date.valueOf(order.getEndDate()));
             statement.setLong(8, order.getOrderID());
             statement.executeUpdate();
-            return order.getOrderID();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0L;
+        return false;
     }
 
     @Override

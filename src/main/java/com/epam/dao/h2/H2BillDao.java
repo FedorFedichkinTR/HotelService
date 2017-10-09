@@ -72,7 +72,7 @@ public class H2BillDao implements BillDao {
     }
 
     @Override
-    public Long update(Bill bill) {
+    public Boolean update(Bill bill) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_BILL_SQL)) {
             statement.setLong(1, bill.getUserID());
@@ -83,15 +83,14 @@ public class H2BillDao implements BillDao {
             statement.setBoolean(6, bill.getStatus());
             statement.setLong(7, bill.getBillID());
             statement.executeUpdate();
-            return bill.getBillID();
+            return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace();//todo add to LOG
         }
-        return 0L;
+        return false;
     }
 
     @Override
-    //TODO understand if this suitable
     public Long deleteById(Long billId) {
         return delete(billId, connectionPool, DELETE_BILL_SQL);
     }

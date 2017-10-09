@@ -64,7 +64,7 @@ public class H2RoomDao implements RoomDao {
     }
 
     @Override
-    public Long update(Room room) {
+    public Boolean update(Room room) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ROOM_SQL)) {
             statement.setInt(1, room.getRoomCapacity());
@@ -72,11 +72,11 @@ public class H2RoomDao implements RoomDao {
             statement.setInt(3, room.getPrice());
             statement.setLong(4, room.getRoomId());
             statement.executeUpdate();
-            return room.getRoomId();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0L;
+        return false;
     }
 
     @Override
