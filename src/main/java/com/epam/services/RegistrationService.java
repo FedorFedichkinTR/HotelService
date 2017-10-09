@@ -21,7 +21,7 @@ public class RegistrationService {
         //otherwise - error - user with this mail is already registered
         User newUser = new User();
         UserDao userDao = daoFactory.createUserDAO();
-        newUser.seteMail(userMail);
+        newUser.setEmail(userMail);
         if (userDao.readByEmail(userMail).getUserID() == null) {
             newUser.setPassword(userPassword);
             newUser.setFirstName(userFirstName);
