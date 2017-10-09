@@ -17,10 +17,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Log4j
-@WebFilter("/*jsp")
+@WebFilter("*.jsp")
 public class SecurityFilter extends HttpFilter {
     private final static String CURRENT_USER = "currentUser";
-    private Pattern notAuthPattern = Pattern.compile("^((\\/static\\/.*)|(\\/j_security_check$)|(^\\/not_auth\\/.*))");
+//    private Pattern notAuthPattern = Pattern.compile("^((\\/static\\/.*)|(\\/j_security_check$)|(^\\/not_auth\\/.*))");
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -30,8 +30,12 @@ public class SecurityFilter extends HttpFilter {
         if (session.getAttribute(CURRENT_USER) != null) {
             request.getRequestDispatcher("/webapp/temp/booking.jsp").forward(httpServletRequest, response);
         } else {
-            if (!httpServletRequest.getRequestURI().contains("register")) {
-                request.getRequestDispatcher("index.jsp").forward(httpServletRequest, response);
+            if (!httpServletRequest.getRequestURI().contains("register")
+                    || httpServletRequest.getRequestURI().contains("/temp/booking.jsp")
+                    || httpServletRequest.getRequestURI().contains("/temp/myorders.jsp")
+                    || httpServletRequest.getRequestURI().contains("/temp/adminpage.jsp")
+                    || httpServletRequest.getRequestURI().contains("/temp/test.jsp")) {
+                request.getRequestDispatcher("/index.jsp").forward(httpServletRequest, response);
             }
         }
         chain.doFilter(httpServletRequest, response);
