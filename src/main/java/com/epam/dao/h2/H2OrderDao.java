@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class H2OrderDao implements OrderDao {
@@ -66,9 +66,8 @@ public class H2OrderDao implements OrderDao {
                 order.setRoomCapacity(resultSet.getInt("capacity"));
                 order.setRoomType(RoomType.valueOf(resultSet.getString("type")));
                 order.setStatus(resultSet.getString("status"));
-                //TODO How to do it right??
-                //order.setStartDate(OffsetDateTime.of(resultSet.getDate("start_date"),);
-                //order.setEndDate(resultSet.getDate("end_date"));
+                order.setStartDate(resultSet.getDate("start_date").toLocalDate());
+                order.setEndDate(resultSet.getDate("end_date").toLocalDate());
                 order.setOrderID(orderId);
             }
         } catch (SQLException e) {
@@ -86,9 +85,8 @@ public class H2OrderDao implements OrderDao {
             statement.setInt(3, order.getRoomCapacity());
             statement.setString(4, order.getRoomType().toString());
             statement.setString(5, order.getStatus());
-            //TODO what to do??
-//            statement.setDate(6,order.getStartDate());
-//            statement.setDate(7,order.getEndDate());
+            statement.setDate(6,java.sql.Date.valueOf(order.getStartDate()));
+            statement.setDate(7, java.sql.Date.valueOf(order.getEndDate()));
             statement.setLong(8, order.getOrderID());
             statement.executeUpdate();
             return order.getOrderID();

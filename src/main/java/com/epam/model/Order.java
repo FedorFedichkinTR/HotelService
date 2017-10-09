@@ -1,15 +1,15 @@
 package com.epam.model;
 
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 
 public final class Order {
     private Long orderID;
     private Long userID;
     private Integer roomCapacity;
     private RoomType roomType;
-    private OffsetDateTime startDate;
-    private OffsetDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     //TODO Approve!
     private Long roomID;
     private String status;
@@ -17,7 +17,7 @@ public final class Order {
     public Order() {
     }
 
-    public Order(Long orderID, Long userID, Integer roomCapacity, RoomType roomType, OffsetDateTime startDate, OffsetDateTime endDate, Long roomID, String status) {
+    public Order(Long orderID, Long userID, Integer roomCapacity, RoomType roomType, LocalDate startDate, LocalDate endDate, Long roomID, String status) {
         this.orderID = orderID;
         this.userID = userID;
         this.roomCapacity = roomCapacity;
@@ -60,19 +60,19 @@ public final class Order {
         this.roomType = roomType;
     }
 
-    public OffsetDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(OffsetDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public OffsetDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(OffsetDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
