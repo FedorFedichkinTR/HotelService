@@ -19,19 +19,19 @@
 
     <form class="form-signin" action="${pageContext.request.contextPath}/register">
         <h2 class="form-signin-heading">Register</h2>
-    
+
         <label for="inputFirstName" class="sr-only">First name</label>
         <input type="text" id="inputFirstName" class="form-control" placeholder="First name" required autofocus>
-    
+
         <label for="inputLastName" class="sr-only">Last name</label>
         <input type="text" id="inputLastName" class="form-control" placeholder="Last name" required>
-    
+
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-    
+
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    
+
         <div class="checkbox">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
@@ -44,4 +44,4 @@
 </div> <!-- /container -->
 
 </body>
-</html> 
+</html>
