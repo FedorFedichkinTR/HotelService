@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class H2OrderDao implements OrderDao {
@@ -22,6 +23,8 @@ public class H2OrderDao implements OrderDao {
             "UPDATE Orders SET user_id = ?, room_id = ?, capacity = ?, type = ?, status = ?, start_date = ?, end_date = ? WHERE order_id = ?";
     private static final String DELETE_ORDER_SQL =
             "DELETE FROM Orders WHERE order_id = ?";
+    private static final String GET_ALL_ORDERS_SQL =
+            "SELECT order_id, user_id, room_id, capacity, type, status, start_date, end_date FROM Users";
 
     public H2OrderDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
@@ -84,7 +87,7 @@ public class H2OrderDao implements OrderDao {
             statement.setInt(3, order.getRoomCapacity());
             statement.setString(4, order.getRoomType().toString());
             statement.setString(5, order.getStatus());
-            statement.setDate(6,java.sql.Date.valueOf(order.getStartDate()));
+            statement.setDate(6, java.sql.Date.valueOf(order.getStartDate()));
             statement.setDate(7, java.sql.Date.valueOf(order.getEndDate()));
             statement.setLong(8, order.getOrderID());
             statement.executeUpdate();
@@ -102,7 +105,27 @@ public class H2OrderDao implements OrderDao {
 
     @Override
     public List<Order> getAllOrders() {
-        return null;
+        List<Order> orders = new ArrayList<>();
+
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ALL_ORDERS_SQL)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    final Order order = new Order();
+                    order.setOrderID(resultSet.getLong("order_id"));
+                    order.setUserID(resultSet.getLong("user_id"));
+                    order.setRoomID(resultSet.getLong("room_id"));
+                    order.setRoomType(RoomType.valueOf(resultSet.getString("type")));
+                    order.setStatus(resultSet.getString("status"));
+                    order.setStartDate(resultSet.getDate("start_date").toLocalDate());
+                    order.setEndDate(resultSet.getDate("end_date").toLocalDate());
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orders;
     }
 
     @Override
