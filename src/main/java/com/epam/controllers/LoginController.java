@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
                 if (resultUser.getRole() == Roles.USER) {
                     request.getRequestDispatcher("/temp/booking.jsp").forward(request, response);
                 } else {
-
+                    request.getRequestDispatcher("/temp/adminpage.jsp").forward(request, response);
                 }
             }
         }
