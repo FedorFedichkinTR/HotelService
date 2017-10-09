@@ -9,8 +9,6 @@ import com.epam.services.AuthorisationService;
 import com.epam.services.RegistrationService;
 import lombok.extern.log4j.Log4j;
 
-import javax.activation.DataSource;
-import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -49,7 +47,5 @@ public class DataBaseInitListener implements ServletContextListener {
 
         servletContext.setAttribute(Constants.AUTHORISATION_SERVICE, authorisation);
         servletContext.setAttribute(Constants.REGISTRATION_SERVICE, registration);
-
-
     }
 }
