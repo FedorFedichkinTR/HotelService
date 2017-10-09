@@ -30,7 +30,7 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
     </form>
-    <form class="form-signin" action="${pageContext.request.contextPath}register.jsp">
+    <form class="form-signin" action="${pageContext.request.contextPath}/register.jsp">
         <button class="btn btn-lg btn-primary btn-block" type="submit"> Sign up</button>
     </form>
 </div> <!-- /container -->

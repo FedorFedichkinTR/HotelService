@@ -11,14 +11,17 @@ th, td {
 
 tr:hover{background-color:#f5f5f5}
 
-button.pay:visited{
+button.pay:visited {
     visibility: hidden;
 }
 
-.hiddenBlock .pay{
-    position: absolute;
+p{
+    display: none;
 }
 
-.hiddenBlock{
-    z-index: -1;
+
+button.pay:visited p{
+    display: flex;
 }
+
+

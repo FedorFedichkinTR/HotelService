@@ -20,7 +20,7 @@ public class SecurityFilter extends HttpFilter {
     private final static String CURRENT_USER = "currentUser";
     private Pattern notAuthPattern = Pattern.compile("^((\\/static\\/.*)|(\\/j_security_check$)|(^\\/not_auth\\/.*))");
 
-    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+   /* public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         String path = Optional.ofNullable(request.getRequestURI()).orElse("");
         Matcher newMatcher = notAuthPattern.matcher(path);
@@ -35,5 +35,5 @@ public class SecurityFilter extends HttpFilter {
         } else {
             chain.doFilter(request, response);
         }
-    }
+    }*/
 }
