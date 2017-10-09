@@ -1,5 +1,5 @@
 package com.epam.model;
 
 public enum RoomType {
-    SUITE, JUNIORSUITE, STANDARD
+    SUITE, JUNIOR_SUITE, STANDARD
 }
