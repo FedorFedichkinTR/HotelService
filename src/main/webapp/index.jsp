@@ -35,6 +35,11 @@
     <form class="form-signin" action="${pageContext.request.contextPath}/register.jsp">
         <button class="btn btn-lg btn-primary btn-block" type="submit"> Sign up</button>
     </form>
+    <%
+        if (request.getAttribute("error") != null) {
+            out.print(request.getAttribute("error"));
+        }
+    %>
 </div> <!-- /container -->
 
 </body>
