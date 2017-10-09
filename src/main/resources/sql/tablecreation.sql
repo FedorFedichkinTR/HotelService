@@ -1,7 +1,3 @@
-CREATE DATABASE hotel CHARACTER SET utf8;
-
-USE hotel;
-
 CREATE TABLE Users (
     user_id         BIGINT AUTO_INCREMENT     PRIMARY KEY,
     email           VARCHAR(35)               NOT NULL UNIQUE,
@@ -49,4 +45,13 @@ CREATE TABLE BookedRooms (
     FOREIGN KEY (room_id)       REFERENCES Rooms (room_id),
     FOREIGN KEY (order_id)      REFERENCES Orders(order_id)
 );
+
+INSERT INTO Users (email, password, first_name, last_name, role)
+VALUES ('ff@epam.com', '1234', 'first_name', 'last_name', 'user') ;
+INSERT INTO Users (email, password, first_name, last_name, role)
+VALUES ('gg@epam.com', '12345', 'first_name1', 'last_name1', 'admin') ;
+INSERT INTO Users (email, password, first_name, last_name, role)
+VALUES ('rr@epam.com', '123456', 'first_name2', 'last_name2', 'user') ;
+INSERT INTO Users (email, password, first_name, last_name, role)
+VALUES ('tt@epam.com', '1234567', 'first_name3', 'last_name3', 'user') ;
 
