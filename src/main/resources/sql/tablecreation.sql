@@ -50,11 +50,14 @@ CREATE TABLE BookedRooms (
  );
 
 INSERT INTO Users (email, password, first_name, last_name, role)
-VALUES ('ff@epam.com', '1234', 'first_name', 'last_name', 'user') ;
+VALUES ('ff@epam.com', '1234', 'first_name', 'last_name', 'USER') ;
 INSERT INTO Users (email, password, first_name, last_name, role)
-VALUES ('gg@epam.com', '12345', 'first_name1', 'last_name1', 'admin') ;
+VALUES ('gg@epam.com', '12345', 'first_name1', 'last_name1', 'ADMINISTRATOR');
 INSERT INTO Users (email, password, first_name, last_name, role)
-VALUES ('rr@epam.com', '123456', 'first_name2', 'last_name2', 'user') ;
+VALUES ('rr@epam.com', '123456', 'first_name2', 'last_name2', 'USER') ;
 INSERT INTO Users (email, password, first_name, last_name, role)
-VALUES ('tt@epam.com', '1234567', 'first_name3', 'last_name3', 'user') ;
+VALUES ('tt@epam.com', '1234567', 'first_name3', 'last_name3', 'USER') ;
+
+INSERT INTO Rooms(capacity, type, price)
+VALUES (3, 'STANDARD', 200) ;
 

@@ -2,6 +2,7 @@ package com.epam.controllers;
 
 import com.epam.constants.Constants;
 import com.epam.services.RegistrationService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,10 +19,10 @@ public class RegisterController extends HttpServlet {
         String userFirstName = request.getParameter("inputFirstName");
         String userLastName = request.getParameter("inputLastName");
         RegistrationService register = (RegistrationService) request.getServletContext().getAttribute(Constants.REGISTRATION_SERVICE);
-        if(register.signUp(userMail, userPassword, userFirstName, userLastName)){
+        if (register.signUp(userMail, userPassword, userFirstName, userLastName)) {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
-            request.setAttribute("error","This user is already registered");
+            request.setAttribute("error", "This user is already registered");
             request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
     }

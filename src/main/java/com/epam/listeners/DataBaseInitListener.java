@@ -41,6 +41,9 @@ public class DataBaseInitListener implements ServletContextListener {
         }
 
         AbstractDaoFactory abstractDaoFactory = new H2DaoFactory(connectionPool);
+
+//        UserService userService = new UserService (abstractDaoFactory)
+
         AuthorisationService authorisation = new AuthorisationService (abstractDaoFactory);
         RegistrationService registration = new RegistrationService (abstractDaoFactory);
 //        put every service to ServletContext:

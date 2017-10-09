@@ -56,18 +56,26 @@ public class H2UserDao implements UserDao {
 
     @Override
     public User readByEmail(String eMail) {
+        User user = null;
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_EMAIL_SQL)) {
             statement.setString(1, eMail);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
-                return userMapper.map(resultSet);
+                user = new User();
+
+                user.setUserID(resultSet.getLong("user_id"));
+                user.setPassword(resultSet.getString("password"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setRole(Roles.valueOf(resultSet.getString("role")));
+                user.setEmail(eMail);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return user;
     }
 
     @Override
