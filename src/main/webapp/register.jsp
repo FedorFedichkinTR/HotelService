@@ -17,7 +17,7 @@
 
 <div class="container">
 
-    <form class="form-signin" action="${pageContext.request.contextPath}/register">
+    <form method="post" class="form-signin" action="${pageContext.request.contextPath}/register">
         <h2 class="form-signin-heading">Register</h2>
 
         <label for="inputFirstName" class="sr-only">First name</label>

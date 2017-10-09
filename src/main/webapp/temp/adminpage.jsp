@@ -4,9 +4,19 @@
 <html>
 <head>
     <title>Admin page</title>
-    <link rel="stylesheet" href="../static/css/tables.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <%--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--%>
+    <%----%>
+    <script src="../static/js/jquery-3.2.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/navbar-top-fixed.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/tables.css">
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap/bootstrap.min.js"></script>
+
 </head>
 <body>
 

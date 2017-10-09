@@ -6,7 +6,18 @@
     <title>My orders</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap core CSS -->
+    <script src="../static/js/jquery-3.2.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/navbar-top-fixed.css" rel="stylesheet">
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="../static/css/tables.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -47,7 +58,7 @@ ${requestScope.get("orders")}
         <th>Room capacity</th>
         <th>Status</th>
         <th>Price</th>
-        <th> </th>
+        <th></th>
     </tr>
     <%--<c:forEach items="${orders}" var="order" varStatus="status">--%>
     <tr>
@@ -57,9 +68,14 @@ ${requestScope.get("orders")}
         <td>2</td>
         <td>Accepted</td>
         <td>150$</td>
-        <td><form method="post"><button name="Pay" class="btn btn-primary pay" type = "button"
-                                        onclick="this.style.visibility='hidden';">Pay up</button></form>
-            <p class="hiddenBlock">Bill was paid</p></td>
+        <td>
+            <form method="post">
+                <button name="Pay" class="btn btn-primary pay " type="button"
+                        onclick="this.style.visibility='hidden';"><i class="fa fa-credit-card" aria-hidden="true"></i>
+                    Pay up
+                </button>
+            </form>
+        </td>
     </tr>
     <tr>
         <td>05/12/2017</td>
@@ -68,8 +84,14 @@ ${requestScope.get("orders")}
         <td>1</td>
         <td>Accepted</td>
         <td>200$</td>
-        <td><form method="post"><button name = "Pay" class="btn btn-primary pay " type="button"
-                                        onclick="this.style.visibility='hidden';">Pay up</button></form></td>
+        <td>
+            <form method="post">
+                <button name="Pay" class="btn btn-primary pay " type="button"
+                        onclick="this.style.visibility='hidden';"><i class="fa fa-credit-card" aria-hidden="true"></i>
+                    Pay up
+                </button>
+            </form>
+        </td>
     </tr>
 
     <%--</c:forEach>--%>

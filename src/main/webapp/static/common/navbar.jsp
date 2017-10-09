@@ -1,17 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="utf-8">
-    <!-- Bootstrap core CSS -->
-    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <%--<!-- Bootstrap core CSS -->--%>
+    <%--<link href="../../static/css/bootstrap.min.css" rel="stylesheet">--%>
 
-    <!-- Custom styles for this template -->
-    <link href="../../static/css/navbar-top-fixed.css" rel="stylesheet">
+    <%--<!-- Custom styles for this template -->--%>
+    <%--<link href="../../static/css/navbar-top-fixed.css" rel="stylesheet">--%>
 
-    <script src="../js/jquery-3.2.1.js"
+   <%-- <script src="../js/jquery-3.2.1.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="../../static/js/popper.min.js"></script>
-    <script src="../../static/js/bootstrap/bootstrap.min.js"></script>
+            crossorigin="anonymous"></script>--%>
+    <%--<script src = "../js/jquery-3.2.1.js"></script>--%>
+    <%--<script src="../../static/js/popper.min.js"></script>--%>
+    <%--<script src="../../static/js/bootstrap/bootstrap.min.js"></script>--%>
 </head>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <%--<a class="navbar-brand" href="#">Fixed navbar</a>--%>
