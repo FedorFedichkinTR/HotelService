@@ -2,8 +2,11 @@ package com.epam.listeners;
 
 import com.epam.connection_pool.ConnectionPool;
 import com.epam.connection_pool.ConnectionPoolException;
+import com.epam.constants.Constants;
 import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.dao.h2.H2DaoFactory;
+import com.epam.services.AuthorisationService;
+import com.epam.services.RegistrationService;
 import lombok.extern.log4j.Log4j;
 
 import javax.servlet.ServletContext;
@@ -37,9 +40,10 @@ public class DataBaseInitListener implements ServletContextListener {
         }
 
         AbstractDaoFactory abstractDaoFactory = new H2DaoFactory(connectionPool);
-//        UserService userService = new UserService (abstractDaoFactory)
-
+        AuthorisationService authorisation = new AuthorisationService (abstractDaoFactory);
+        RegistrationService registration = new RegistrationService (abstractDaoFactory);
 //        put every service to ServletContext:
-//        servletContext.setAttribute("keyForUserService", userService);
+        servletContext.setAttribute(Constants.AUTHORISATION_SERVICE, authorisation);
+        servletContext.setAttribute(Constants.REGISTRATION_SERVICE, registration);
     }
 }
