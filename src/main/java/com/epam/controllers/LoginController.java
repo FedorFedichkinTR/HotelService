@@ -22,7 +22,7 @@ public class LoginController extends HttpServlet {
         AuthorisationService authorise = (AuthorisationService) request.getServletContext().getAttribute(Constants.AUTHORISATION_SERVICE);
         User resultUser = authorise.getUser(userMail);
         //if there are no user with such name, if resultUser=null
-        if (resultUser == null) {
+        if (resultUser.getUserID() == null) {
             request.setAttribute("error", "This user is not registered");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
