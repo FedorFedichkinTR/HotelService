@@ -21,6 +21,8 @@ public class H2BillDao implements BillDao {
             "UPDATE Bills SET user_id = ?, room_id = ?, admin_id = ?, order_id = ?, price = ?, status =? WHERE bill_id = ?";
     private static final String DELETE_BILL_SQL =
             "DELETE FROM Bills WHERE bill_id = ?";
+    private static final String GET_ALL_ORDERS_SQL =
+            "SELECT order_id, user_id, room_id, capacity, type, status, start_date, end_date FROM Users";
 
     public H2BillDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
@@ -98,6 +100,11 @@ public class H2BillDao implements BillDao {
     @Override
     //TODO
     public List<Bill> getAllBills() {
+//        try(Connection connection = connectionPool.takeConnection();
+//       // PreparedStatement statement = connection.prepareStatement()) {
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         return null;
     }
 

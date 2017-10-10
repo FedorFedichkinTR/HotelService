@@ -16,7 +16,7 @@ public class H2OrderDao implements OrderDao {
     private final ConnectionPool connectionPool;
 
     private static final String CREATE_ORDER_SQL =
-            "INSERT INTO Orders (user_id, room_id, capacity, type, status, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO Orders (user_id, capacity, type, status, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String READ_ORDER_BY_ID =
             "SELECT user_id, room_id, capacity, type, status, start_date, end_date FROM Orders WHERE order_id= ?";
     private static final String UPDATE_ORDER_SQL =
@@ -35,12 +35,11 @@ public class H2OrderDao implements OrderDao {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_ORDER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setLong(1, order.getUserID());
-            statement.setLong(2, order.getOrderID());
-            statement.setInt(3, order.getRoomCapacity());
-            statement.setString(4, order.getRoomType().toString());
-            statement.setString(5, order.getStatus());
-            statement.setString(6, order.getStartDate().toString());
-            statement.setString(7, order.getEndDate().toString());
+            statement.setInt(2, order.getRoomCapacity());
+            statement.setString(3, order.getRoomType().toString());
+            statement.setString(4, order.getStatus());
+            statement.setString(5, order.getStartDate().toString());
+            statement.setString(6, order.getEndDate().toString());
             statement.executeUpdate();
 
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
