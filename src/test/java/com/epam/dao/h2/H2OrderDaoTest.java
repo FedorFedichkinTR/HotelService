@@ -72,18 +72,12 @@ public class H2OrderDaoTest {
     @Test
     public void getAllOrders() throws Exception {
 
-
-
     }
 
     @Test
     public void getAllOrdersByUserID() throws Exception {
 
-
-
         List<Order> orders = orderDAO.getAllOrdersByUserID(2L);
         Order order = orders.get(0);
-
-
     }
 }
