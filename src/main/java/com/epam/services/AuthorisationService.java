@@ -2,6 +2,7 @@ package com.epam.services;
 
 import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.model.User;
+import com.epam.util.Encoder;
 
 public class AuthorisationService {
     private AbstractDaoFactory daoFactory;
@@ -19,7 +20,8 @@ public class AuthorisationService {
         return user;
     }
 
-    public boolean checkPassword(String passwordfromRequest, User user) {
-        return user.getPassword().equals(passwordfromRequest);
+    public boolean checkPassword(String passwordFromRequest, User user) {
+        String encodedPasswordFromRequest = Encoder.encode(passwordFromRequest);
+        return encodedPasswordFromRequest.equals(user.getPassword());
     }
 }

@@ -34,11 +34,9 @@ public class LoginController extends HttpServlet {
                 request.getSession().setAttribute(Constants.USER_SESSION, resultUser);
                 //if it's all right, go to page, based on role of the user.
                 if (resultUser.getRole() == Roles.USER) {
-                    request.getSession().setAttribute("currentSessionRole", Roles.USER);
                     request.getRequestDispatcher("/temp/booking.jsp").forward(request, response);
                 } else {
-                    request.getSession().setAttribute("currentSessionRole", Roles.ADMINISTRATOR);
-                    request.getRequestDispatcher("/admin").forward(request, response);
+                    request.getRequestDispatcher("/temp/admin.jsp").forward(request, response);
                 }
             }
         }

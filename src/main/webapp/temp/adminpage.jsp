@@ -4,18 +4,14 @@
 <html>
 <head>
     <title>Admin page</title>
-    <%--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--%>
-    <%----%>
-    <script src="../static/js/jquery-3.2.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- Bootstrap core CSS -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="../static/css/navbar-top-fixed.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/tables.css">
-    <script src="../static/js/popper.min.js"></script>
-    <script src="../static/js/bootstrap/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/jquery-ui.js"></script>
+    <link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/css/navbar-top-fixed.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/tables.css">
+    <script src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/bootstrap/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -23,30 +19,6 @@
 <jsp:include page="../static/common/navbar.jsp"/>
 
 <h2>All orders</h2>
-<%--<table>
-    <tr>
-        <th>User</th>
-        <th>Arrival</th>
-        <th>Departure</th>
-        <th>Type of room</th>
-        <th>Room capacity</th>
-        <th>Status</th>
-        <th>Price</th>
-    </tr>
-    <c:forEach items="${users}" var="user" varStatus="status">
-        <c:forEach items="${orders}" var="order" varStatus="status">
-            <tr>
-                <td>${user.firstName} + " " + ${user.lastName}</td>
-                <td>${order.startDate}</td>
-                <td>${order.endDate}</td>
-                <td>${order.roomType}</td>
-                <td>${order.roomCapacity}</td>
-                <td>${order.status}</td>
-                <td>${order.price}</td>
-            </tr>
-        </c:forEach>
-    </c:forEach>
-</table>--%>
 
 <table>
     <tr>
@@ -60,7 +32,7 @@
         <th>Price</th>
         <th></th>
     </tr>
-    <%--<c:forEach items="${orders}" var="order" varStatus="status">--%>
+    <c:forEach items="${sessionScope.get(user)}" var="order" varStatus="status">
     <tr>
         <td>John Smith</td>
         <td>10/10/2017</td>

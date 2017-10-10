@@ -41,5 +41,14 @@ INSERT INTO Users (email, password, first_name, last_name, role)
 VALUES ('tt@epam.com', '1234567', 'first_name3', 'last_name3', 'USER') ;
 
 INSERT INTO Rooms(capacity, type, price)
-VALUES (3, 'STANDARD', 200) ;
+VALUES (3, 'STANDARD', 2000) ;
+INSERT INTO Rooms(capacity, type, price)
+VALUES (2, 'STANDARD', 1200) ;
+INSERT INTO Rooms(capacity, type, price)
+VALUES (1, 'STANDARD', 2200) ;
+INSERT INTO Rooms(capacity, type, price)
+VALUES (4, 'STANDARD', 4200) ;
+
+INSERT INTO Orders (user_id, capacity, type, start_date, end_date)
+VALUES (2, 2, 'STANDARD',12-02-12, 13-03-14);
 
