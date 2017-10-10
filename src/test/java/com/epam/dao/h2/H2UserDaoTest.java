@@ -49,8 +49,4 @@ public class H2UserDaoTest {
     @Test
     public void getAllUsers() throws Exception {
     }
-
-    @Test
-    public void builder() throws Exception {
-    }
 }

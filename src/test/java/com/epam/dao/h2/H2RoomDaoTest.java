@@ -43,8 +43,4 @@ public class H2RoomDaoTest {
     @Test
     public void getAllRooms() throws Exception {
     }
-
-    @Test
-    public void builder() throws Exception {
-    }
 }
