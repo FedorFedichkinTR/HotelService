@@ -16,6 +16,6 @@ public class GetAllOrdersController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ViewAllOrdersService viewOrders = (ViewAllOrdersService) request.getServletContext().getAttribute(Constants.VIEW_ALL_ORDERS_SERVICE);
         request.setAttribute(Constants.LIST_OF_ALL_ORDERS, viewOrders.getAllOrders());
-        request.getRequestDispatcher("temp/adminpage.jsp").forward(request,response);
+        request.getRequestDispatcher("/temp/adminpage.jsp").forward(request,response);
     }
 }
