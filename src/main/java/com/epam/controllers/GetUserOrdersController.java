@@ -22,4 +22,9 @@ public class GetUserOrdersController extends HttpServlet {
         request.setAttribute(Constants.LIST_OF_USER_ORDERS, listOfOrders);
         request.getRequestDispatcher("temp/myorders.jsp").forward(request, response);
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.doPost(request,response);
+    }
 }
