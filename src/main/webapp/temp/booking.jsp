@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/navbar-top-fixed.css">
     <link rel="stylesheet" href="../static/css/jquery-ui.css">
-    <link rel="stylesheet" href="../static/css/booking.css">
     <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/booking.css">
 
     <script>
         $(function () {
@@ -28,9 +28,14 @@
 <jsp:include page="../static/common/navbar.jsp"/>
 
 <div class="jumbotron">
-    <form method="post">
+    <form method="post" action="${pageContext.request.contextPath}/order">
         <div class="input-group">
-            <input type="text" name="typeOfRoom" id="typeOfRoom" placeholder="Type of room">
+            <select class="form-control" id="sel1" title="roomType" name="roomType">
+                <option>Choose room type...</option>
+                <option>Suite</option>
+                <option>Junior suite</option>
+                <option>Standard</option>
+            </select>
             <input type="number" name="numberOfPeople" min="1" max="3" id="numberOfPeople"
                    placeholder="Number of people" oninvalid="this.setCustomValidity('')"
                    oninput="setCustomValidity('')">
