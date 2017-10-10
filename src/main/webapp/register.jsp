@@ -43,6 +43,9 @@
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
     </form>
+    <form class="form-signin" action="${pageContext.request.contextPath}/index.jsp">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+    </form>
 
 </div> <!-- /container -->
 
