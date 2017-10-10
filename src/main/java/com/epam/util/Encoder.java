@@ -1,9 +1,25 @@
 package com.epam.util;
 
-import org.apache.commons.codec.digest.DigestUtils;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class Encoder {
-    public static String encode(String password) {
-        return DigestUtils.md2Hex(password);
+    private final static String ENCODING_ALGORITHM = "MD5";
+    private static MessageDigest messageDigest;
+
+    public Encoder() throws NoSuchAlgorithmException {
+        messageDigest = MessageDigest.getInstance(ENCODING_ALGORITHM);
+    }
+
+    public String encode(String password) {
+        messageDigest.reset();
+        try {
+            byte[] result = messageDigest.digest(password.getBytes("UTF-8"));
+            return new String(result);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

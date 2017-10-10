@@ -6,6 +6,8 @@ import com.epam.model.Roles;
 import com.epam.model.User;
 import com.epam.util.Encoder;
 
+import java.security.NoSuchAlgorithmException;
+
 import static com.epam.util.Encoder.*;
 
 
@@ -26,16 +28,22 @@ public class RegistrationService {
         UserDao userDao = daoFactory.createUserDAO();
         newUser.setEmail(userMail);
         User existingUser = userDao.readByEmail(userMail);
-        if (existingUser == null) {
-            String encodedPassword = Encoder.encode(userPassword);
-            newUser.setPassword(encodedPassword);
-            newUser.setFirstName(userFirstName);
-            newUser.setLastName(userLastName);
-            newUser.setRole(Roles.USER);
-            userDao.create(newUser);
-            return true;
-        } else {
-            return false;
+        try {
+            final Encoder encoder = new Encoder();
+            if (existingUser == null) {
+                String encodedPassword = encoder.encode(userPassword);
+                newUser.setPassword(encodedPassword);
+                newUser.setFirstName(userFirstName);
+                newUser.setLastName(userLastName);
+                newUser.setRole(Roles.USER);
+                userDao.create(newUser);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 }
