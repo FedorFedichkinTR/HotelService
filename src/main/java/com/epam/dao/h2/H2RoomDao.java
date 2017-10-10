@@ -89,7 +89,6 @@ public class H2RoomDao implements RoomDao {
     }
 
     @Override
-    //todo Fedua
     public List<Room> getAllRooms() {
         List<Room> rooms = new ArrayList<>();
 
