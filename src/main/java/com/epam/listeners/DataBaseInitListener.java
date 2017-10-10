@@ -5,10 +5,7 @@ import com.epam.connection_pool.ConnectionPoolException;
 import com.epam.constants.Constants;
 import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.dao.h2.H2DaoFactory;
-import com.epam.services.AuthorisationService;
-import com.epam.services.BookingService;
-import com.epam.services.RegistrationService;
-import com.epam.services.ViewUserOrdersService;
+import com.epam.services.*;
 import lombok.extern.log4j.Log4j;
 
 import javax.servlet.ServletContext;
@@ -48,10 +45,12 @@ public class DataBaseInitListener implements ServletContextListener {
         RegistrationService registration = new RegistrationService(abstractDaoFactory);
         BookingService booking = new BookingService(abstractDaoFactory);
         ViewUserOrdersService viewUserOrders = new ViewUserOrdersService(abstractDaoFactory);
+        ViewAllOrdersService viewAllOrders = new ViewAllOrdersService(abstractDaoFactory);
 
         servletContext.setAttribute(Constants.AUTHORISATION_SERVICE, authorisation);
         servletContext.setAttribute(Constants.REGISTRATION_SERVICE, registration);
         servletContext.setAttribute(Constants.BOOKING_SERVICE, booking);
         servletContext.setAttribute(Constants.VIEW_USER_ORDERS_SERVICE, viewUserOrders);
+        servletContext.setAttribute(Constants.VIEW_ALL_ORDERS_SERVICE, viewAllOrders);
     }
 }
