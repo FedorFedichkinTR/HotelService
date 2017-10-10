@@ -4,6 +4,9 @@ import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.dao.interfaces.UserDao;
 import com.epam.model.Roles;
 import com.epam.model.User;
+import com.epam.util.Encoder;
+
+import static com.epam.util.Encoder.*;
 
 
 public class RegistrationService {
@@ -24,7 +27,8 @@ public class RegistrationService {
         newUser.setEmail(userMail);
         User existingUser = userDao.readByEmail(userMail);
         if (existingUser == null) {
-            newUser.setPassword(userPassword);
+            String encodedPassword = Encoder.encode(userPassword);
+            newUser.setPassword(encodedPassword);
             newUser.setFirstName(userFirstName);
             newUser.setLastName(userLastName);
             newUser.setRole(Roles.USER);
