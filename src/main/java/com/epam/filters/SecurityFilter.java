@@ -1,8 +1,11 @@
 package com.epam.filters;
 
+import com.epam.constants.Constants;
 import com.epam.model.Roles;
+import com.epam.model.User;
 import lombok.extern.log4j.Log4j;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -26,7 +29,13 @@ public class SecurityFilter extends HttpFilter {
             throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpSession session = httpServletRequest.getSession(true);
-        final Roles currentUserRole = (Roles) session.getAttribute("currentSessionRole");
+        final User currentUser = ((User)session.getAttribute(Constants.USER_SESSION));
+        final Roles currentUserRole;
+        if (currentUser != null) {
+            currentUserRole = currentUser.getRole();
+        } else {
+            currentUserRole = null;
+        }
         String path = Optional.ofNullable(httpServletRequest.getRequestURI()).orElse("");
         Matcher newMatcher = notAuthPattern.matcher(path);
         if (!newMatcher.find()) {
