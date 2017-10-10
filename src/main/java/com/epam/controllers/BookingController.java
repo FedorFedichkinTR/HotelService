@@ -31,6 +31,8 @@ public class BookingController extends HttpServlet {
         BookingService bookingService = (BookingService) request.getServletContext().getAttribute(Constants.BOOKING_SERVICE);
         if(bookingService.bookRoom(order)!=null){
             request.getRequestDispatcher("/userOrders").forward(request,response);
-        };
+        } else {
+            request.getRequestDispatcher("temp/booking.jsp").forward(request,response);
+        }
     }
 }
