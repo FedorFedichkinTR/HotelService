@@ -11,7 +11,7 @@ public class BookingService {
         this.daoFactory = daoFactory;
     }
 
-    public Long bookRoom(Order newOrder){
+    public Long bookRoom(Order newOrder) {
         OrderDao orderDao = daoFactory.createOrderDAO();
         Long newOrderId = orderDao.create(newOrder);
         return newOrderId;
