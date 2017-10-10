@@ -14,6 +14,7 @@ public class ViewUserOrdersService {
     }
 
     public List<Order> getOrdersOfUser(User user){
-        return daoFactory.createOrderDAO().getAllOrdersByUserID(user.getUserID());
+        //return daoFactory.createOrderDAO().getAllOrdersByUserID(user.getUserID());
+        return daoFactory.createOrderDAO().getAllOrders();
     }
 }
