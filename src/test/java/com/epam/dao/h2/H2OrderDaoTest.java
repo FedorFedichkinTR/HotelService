@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.notNullValue;
@@ -77,5 +78,12 @@ public class H2OrderDaoTest {
 
     @Test
     public void getAllOrdersByUserID() throws Exception {
+
+
+
+        List<Order> orders = orderDAO.getAllOrdersByUserID(2L);
+        Order order = orders.get(0);
+
+
     }
 }

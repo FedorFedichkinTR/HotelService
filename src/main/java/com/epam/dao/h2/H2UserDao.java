@@ -5,11 +5,13 @@ import com.epam.dao.interfaces.UserDao;
 import com.epam.mappers.UserMapper;
 import com.epam.model.User;
 import com.epam.model.Roles;
+import lombok.Builder;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 public class H2UserDao implements UserDao {
     private final ConnectionPool connectionPool;
 
