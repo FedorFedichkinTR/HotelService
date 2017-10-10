@@ -21,7 +21,8 @@
             <li class="nav-item" id="language">
                 <div class="dropdown show">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                       style="background-color: #343a40; border: none">
                         Language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -32,7 +33,7 @@
             </li>
             <li class="nav-item active">
                 <form method="post" action="${pageContext.request.contextPath}/logout">
-                    <label> Sign out <input style="display: none;" type="submit"> </label>
+                    <button class="btn" style="background-color: #343a40; color: white; border: transparent">Sign out</button>
                 </form>
             </li>
         </ul>

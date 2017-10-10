@@ -17,7 +17,7 @@ CREATE TABLE Rooms (
 CREATE TABLE Orders (
     order_id        BIGINT AUTO_INCREMENT     PRIMARY KEY,
     user_id         BIGINT                    NOT NULL,
-    room_id         BIGINT                    NOT NULL,
+    room_id         BIGINT,
     capacity        INT,
     type            VARCHAR(15),
     status          VARCHAR(15),
