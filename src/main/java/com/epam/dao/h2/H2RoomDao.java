@@ -5,11 +5,13 @@ import com.epam.dao.interfaces.RoomDao;
 import com.epam.model.Room;
 import com.epam.model.RoomType;
 import com.epam.model.User;
+import lombok.Builder;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 public class H2RoomDao implements RoomDao {
     private final ConnectionPool connectionPool;
 
