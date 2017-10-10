@@ -1,5 +1,9 @@
 package com.epam.controllers;
 
+import com.epam.constants.Constants;
+import com.epam.model.User;
+import com.epam.services.ViewUserOrdersService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +14,9 @@ import java.io.IOException;
 @WebServlet("/userOrders")
 public class GetUserOrdersController extends HttpServlet{
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ViewUserOrdersService viewOrders = (ViewUserOrdersService) request.getServletContext().getAttribute(Constants.VIEW_USER_ORDERS_SERVICE);
+        request.setAttribute(Constants.LIST_OF_USER_ORDERS, viewOrders.getOrdersOfUser((User) request.getSession().getAttribute(Constants.USER_SESSION)));
+        request.getRequestDispatcher("temp/myorders.jsp").forward(request,response);
     }
 }
