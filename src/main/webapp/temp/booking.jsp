@@ -1,3 +1,5 @@
+<%@ page import="com.epam.constants.Constants" %>
+<%@ page import="com.epam.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -26,6 +28,13 @@
 <body>
 
 <jsp:include page="../static/common/navbar.jsp"/>
+
+<div>
+    <h2>Hello, <%out.print(((User) session.getAttribute("user")).getFirstName());%>.
+        <p> Please make your order:</p>
+    </h2>
+</div>
+
 
 <div class="jumbotron">
     <form method="post" action="${pageContext.request.contextPath}/order">
