@@ -8,6 +8,7 @@ import com.epam.dao.h2.H2DaoFactory;
 import com.epam.services.AuthorisationService;
 import com.epam.services.BookingService;
 import com.epam.services.RegistrationService;
+import com.epam.services.ViewUserOrdersService;
 import lombok.extern.log4j.Log4j;
 
 import javax.servlet.ServletContext;
@@ -46,9 +47,11 @@ public class DataBaseInitListener implements ServletContextListener {
         AuthorisationService authorisation = new AuthorisationService(abstractDaoFactory);
         RegistrationService registration = new RegistrationService(abstractDaoFactory);
         BookingService booking = new BookingService(abstractDaoFactory);
+        ViewUserOrdersService viewUserOrders = new ViewUserOrdersService(abstractDaoFactory);
 
         servletContext.setAttribute(Constants.AUTHORISATION_SERVICE, authorisation);
         servletContext.setAttribute(Constants.REGISTRATION_SERVICE, registration);
         servletContext.setAttribute(Constants.BOOKING_SERVICE, booking);
+        servletContext.setAttribute(Constants.VIEW_USER_ORDERS_SERVICE, viewUserOrders);
     }
 }
