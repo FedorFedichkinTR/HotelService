@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
                     request.getRequestDispatcher("/temp/booking.jsp").forward(request, response);
                 } else {
                     request.getSession().setAttribute("currentSessionRole", Roles.ADMINISTRATOR);
-                    request.getRequestDispatcher("/temp/adminpage.jsp").forward(request, response);
+                    request.getRequestDispatcher("/admin").forward(request, response);
                 }
             }
         }
