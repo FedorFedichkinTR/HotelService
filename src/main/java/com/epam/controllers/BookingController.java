@@ -23,9 +23,7 @@ public class BookingController extends HttpServlet {
         Order order = new Order();
         order.setUserID(((User) request.getSession().getAttribute(Constants.USER_SESSION)).getUserID());
         order.setRoomCapacity(Integer.parseInt(request.getParameter("numberOfPeople")));
-        String typeOfRoom = request.getParameter("roomType");
-        order.setRoomType(RoomType.valueOf(typeOfRoom.toUpperCase()));
-        System.out.println(order.getRoomType());
+        order.setRoomType(RoomType.valueOf((request.getParameter("roomType")).toUpperCase()));
         order.setStartDate(LocalDate.parse(request.getParameter("arrival"), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         order.setEndDate(LocalDate.parse(request.getParameter("departure"), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         BookingService bookingService = (BookingService) request.getServletContext().getAttribute(Constants.BOOKING_SERVICE);
