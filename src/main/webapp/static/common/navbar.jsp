@@ -9,10 +9,10 @@
     <div class="collapse navbar-collapse mt-2 mt-md-0" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#"> Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/temp/booking.jsp"> Booking </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/temp/myorders.jsp">
+                <a class="nav-link" href="${pageContext.request.contextPath}/userOrders">
                     Orders
                 </a>
             </li>
@@ -33,7 +33,8 @@
             </li>
             <li class="nav-item active">
                 <form method="post" action="${pageContext.request.contextPath}/logout">
-                    <button class="btn" style="background-color: #343a40; color: white; border: transparent">Sign out</button>
+                    <button class="btn" style="background-color: #343a40; color: white; border: transparent">Sign out
+                    </button>
                 </form>
             </li>
         </ul>

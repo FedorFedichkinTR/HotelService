@@ -8,10 +8,7 @@
 
     <title>Sign in</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/static/css/signin.css" rel="stylesheet">
 </head>
 
