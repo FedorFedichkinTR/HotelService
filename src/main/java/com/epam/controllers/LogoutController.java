@@ -1,5 +1,7 @@
 package com.epam.controllers;
 
+import com.epam.constants.Constants;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +13,7 @@ import java.io.IOException;
 public class LogoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Object user = request.getSession().getAttribute("user");
+        Object user = request.getSession().getAttribute(Constants.USER_SESSION);
         if (user != null) {
             request.getSession().removeAttribute("user");
         }
