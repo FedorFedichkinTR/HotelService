@@ -152,7 +152,8 @@ public class H2OrderDao implements OrderDao {
                     final Order order = new Order();
 
                     order.setUserID(userID);
-                    order.setRoomID(resultSet.getLong("room_id"));
+                    Long roomID = resultSet.getLong("room_id") == 0 ? null : resultSet.getLong("room_id");
+                    order.setRoomID(roomID);
                     order.setOrderID(resultSet.getLong("order_id"));
                     order.setAdminID(resultSet.getLong("admin_id"));
                     order.setRoomCapacity(resultSet.getInt("capacity"));

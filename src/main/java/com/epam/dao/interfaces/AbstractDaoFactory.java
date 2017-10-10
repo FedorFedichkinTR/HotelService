@@ -6,6 +6,4 @@ public interface AbstractDaoFactory extends AutoCloseable {
     OrderDao createOrderDAO();
 
     RoomDao createRoomDAO();
-
-    BillDao createBillDAO();
 }
