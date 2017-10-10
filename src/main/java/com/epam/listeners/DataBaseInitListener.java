@@ -6,6 +6,7 @@ import com.epam.constants.Constants;
 import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.dao.h2.H2DaoFactory;
 import com.epam.services.AuthorisationService;
+import com.epam.services.BookingService;
 import com.epam.services.RegistrationService;
 import lombok.extern.log4j.Log4j;
 
@@ -42,10 +43,12 @@ public class DataBaseInitListener implements ServletContextListener {
 
         AbstractDaoFactory abstractDaoFactory = new H2DaoFactory(connectionPool);
 
-        AuthorisationService authorisation = new AuthorisationService (abstractDaoFactory);
-        RegistrationService registration = new RegistrationService (abstractDaoFactory);
+        AuthorisationService authorisation = new AuthorisationService(abstractDaoFactory);
+        RegistrationService registration = new RegistrationService(abstractDaoFactory);
+        BookingService booking = new BookingService(abstractDaoFactory);
 
         servletContext.setAttribute(Constants.AUTHORISATION_SERVICE, authorisation);
         servletContext.setAttribute(Constants.REGISTRATION_SERVICE, registration);
+        servletContext.setAttribute(Constants.BOOKING_SERVICE, booking);
     }
 }
