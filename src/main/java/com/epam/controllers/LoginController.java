@@ -19,10 +19,13 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userMail = request.getParameter("inputEmail");
         String password = request.getParameter("inputPassword");
+        // TODO: 11.10.2017 сервис используется многократно, каждый раз его достовать из контекста не надо.
+        // Нужно вынести переменую в поле класса и проинициализировать один раз
         AuthorisationService authorise = (AuthorisationService) request.getServletContext().getAttribute(Constants.AUTHORISATION_SERVICE);
         User resultUser = authorise.getUser(userMail);
+        // TODO: 11.10.2017 слишком много логики в контроллере, это нужно её как-то перенести в сервис
         //if there are no user with such name, if resultUser=null
-        if (resultUser == null || resultUser.getUserID() == null) {
+        if (resultUser == null || resultUser.getUserID() == null) { // TODO: 11.10.2017 у нас разве может быть user в сессии без ID? Зачем проверять на null?
             request.setAttribute("error", "This user is not registered");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {

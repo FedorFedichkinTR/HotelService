@@ -41,6 +41,7 @@ public class H2OrderDao implements OrderDao {
             statement.setString(3, order.getRoomType().toString());
             statement.setBoolean(4,false );
             statement.setString(5, order.getStartDate().toString());
+            // TODO: 11.10.2017 можно переписать в более удобном виде: statement.setObject(5, order.getStartDate());
             statement.setString(6, order.getEndDate().toString());
             statement.executeUpdate();
 

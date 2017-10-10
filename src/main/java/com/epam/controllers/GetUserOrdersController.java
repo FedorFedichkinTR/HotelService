@@ -13,10 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/userOrders")
+@WebServlet("/userOrders") // TODO: 11.10.2017 для URL тоже надо использовать snake case
 public class GetUserOrdersController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO: 11.10.2017 нужно вынести сервис в поле класса, ну и название сменить
         ViewUserOrdersService viewOrders = (ViewUserOrdersService) request.getServletContext().getAttribute(Constants.VIEW_USER_ORDERS_SERVICE);
         List<Order> listOfOrders = viewOrders.getOrdersOfUser((User) request.getSession().getAttribute(Constants.USER_SESSION));
         request.setAttribute(Constants.LIST_OF_USER_ORDERS, listOfOrders);

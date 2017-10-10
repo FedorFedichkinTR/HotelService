@@ -18,6 +18,8 @@ public class RegisterController extends HttpServlet {
         String userPassword = request.getParameter("inputPassword");
         String userFirstName = request.getParameter("inputFirstName");
         String userLastName = request.getParameter("inputLastName");
+        // TODO: 11.10.2017 сервис лучше вынести в поле класса и инициализировать в специальном методе init(),
+        // TODO: 11.10.2017 и название тоже лучше использовать registrationService
         RegistrationService register = (RegistrationService) request.getServletContext().getAttribute(Constants.REGISTRATION_SERVICE);
         if (register.signUp(userMail, userPassword, userFirstName, userLastName)) {
             request.getRequestDispatcher("/login").forward(request, response);
