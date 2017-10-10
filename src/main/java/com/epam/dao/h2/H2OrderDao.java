@@ -18,15 +18,15 @@ public class H2OrderDao implements OrderDao {
     private static final String CREATE_ORDER_SQL =
             "INSERT INTO Orders (user_id, capacity, type, status, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String READ_ORDER_BY_ID =
-            "SELECT user_id, room_id, capacity, type, status, start_date, end_date FROM Orders WHERE order_id= ?";
+            "SELECT user_id, room_id, capacity, type, status, start_date, end_date, admin_id, price FROM Orders WHERE order_id= ?";
     private static final String UPDATE_ORDER_SQL =
-            "UPDATE Orders SET user_id = ?, room_id = ?, capacity = ?, type = ?, status = ?, start_date = ?, end_date = ? WHERE order_id = ?";
+            "UPDATE Orders SET user_id = ?, room_id = ?, capacity = ?, type = ?, status = ?, start_date = ?, end_date = ?, admin_id = ?, price = ? WHERE order_id = ?";
     private static final String DELETE_ORDER_SQL =
             "DELETE FROM Orders WHERE order_id = ?";
     private static final String GET_ALL_ORDERS_SQL =
-            "SELECT order_id, user_id, room_id, capacity, type, status, start_date, end_date FROM Orders";
+            "SELECT order_id, user_id, room_id, capacity, type, status, start_date, end_date, admin_id, price FROM Orders";
     private static final String GET_ALL_ORDERS_BY_USER_ID_SQL =
-            "SELECT order_id, room_id, capacity, type, status, start_date, end_date FROM  WHERE user_id = ?";
+            "SELECT order_id, room_id, capacity, type, status, start_date, end_date, admin_id, price FROM  WHERE user_id = ?";
 
     public H2OrderDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
@@ -39,7 +39,7 @@ public class H2OrderDao implements OrderDao {
             statement.setLong(1, order.getUserID());
             statement.setInt(2, order.getRoomCapacity());
             statement.setString(3, order.getRoomType().toString());
-            statement.setString(4, order.getStatus());
+            statement.setBoolean(4,false );
             statement.setString(5, order.getStartDate().toString());
             statement.setString(6, order.getEndDate().toString());
             statement.executeUpdate();
@@ -68,10 +68,12 @@ public class H2OrderDao implements OrderDao {
                 order.setRoomID(resultSet.getLong("room_id"));
                 order.setRoomCapacity(resultSet.getInt("capacity"));
                 order.setRoomType(RoomType.valueOf(resultSet.getString("type")));
-                order.setStatus(resultSet.getString("status"));
+                order.setStatus(resultSet.getBoolean("status"));
                 order.setStartDate(resultSet.getDate("start_date").toLocalDate());
                 order.setEndDate(resultSet.getDate("end_date").toLocalDate());
                 order.setOrderID(orderId);
+                order.setAdminID(resultSet.getLong("admin_id"));
+                order.setPrice(resultSet.getInt("price"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,10 +89,12 @@ public class H2OrderDao implements OrderDao {
             statement.setLong(2, order.getRoomID());
             statement.setInt(3, order.getRoomCapacity());
             statement.setString(4, order.getRoomType().toString());
-            statement.setString(5, order.getStatus());
+            statement.setBoolean(5, order.getStatus());
             statement.setDate(6, java.sql.Date.valueOf(order.getStartDate()));
             statement.setDate(7, java.sql.Date.valueOf(order.getEndDate()));
-            statement.setLong(8, order.getOrderID());
+            statement.setLong(8,order.getAdminID());
+            statement.setInt(9,order.getPrice());
+            statement.setLong(10, order.getOrderID());
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -114,13 +118,16 @@ public class H2OrderDao implements OrderDao {
                 while (resultSet.next()) {
                     final Order order = new Order();
 
-                    order.setOrderID(resultSet.getLong("order_id"));
                     order.setUserID(resultSet.getLong("user_id"));
                     order.setRoomID(resultSet.getLong("room_id"));
+                    order.setOrderID(resultSet.getLong("order_id"));
+                    order.setAdminID(resultSet.getLong("admin_id"));
+                    order.setRoomCapacity(resultSet.getInt("capacity"));
                     order.setRoomType(RoomType.valueOf(resultSet.getString("type")));
-                    order.setStatus(resultSet.getString("status"));
+                    order.setStatus(resultSet.getBoolean("status"));
                     order.setStartDate(resultSet.getDate("start_date").toLocalDate());
                     order.setEndDate(resultSet.getDate("end_date").toLocalDate());
+                    order.setPrice(resultSet.getInt("price"));
 
                     orders.add(order);
                 }
@@ -144,13 +151,16 @@ public class H2OrderDao implements OrderDao {
                 while(resultSet.next()) {
                     final Order order = new Order();
 
-                    order.setOrderID(resultSet.getLong("order_id"));
                     order.setUserID(userID);
                     order.setRoomID(resultSet.getLong("room_id"));
+                    order.setOrderID(resultSet.getLong("order_id"));
+                    order.setAdminID(resultSet.getLong("admin_id"));
+                    order.setRoomCapacity(resultSet.getInt("capacity"));
                     order.setRoomType(RoomType.valueOf(resultSet.getString("type")));
-                    order.setStatus(resultSet.getString("status"));
+                    order.setStatus(resultSet.getBoolean("status"));
                     order.setStartDate(resultSet.getDate("start_date").toLocalDate());
                     order.setEndDate(resultSet.getDate("end_date").toLocalDate());
+                    order.setPrice(resultSet.getInt("price"));
 
                     ordersById.add(order);
                 }
