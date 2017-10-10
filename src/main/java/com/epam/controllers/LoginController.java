@@ -31,7 +31,7 @@ public class LoginController extends HttpServlet {
                 request.setAttribute("error", "Invalid password");
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             } else {
-                request.getSession().setAttribute("user", resultUser);
+                request.getSession().setAttribute(Constants.USER_SESSION, resultUser);
                 //if it's all right, go to page, based on role of the user.
                 if (resultUser.getRole() == Roles.USER) {
                     request.getSession().setAttribute("currentSessionRole", Roles.USER);
