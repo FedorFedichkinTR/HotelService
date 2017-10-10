@@ -11,7 +11,7 @@
     <script src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/jquery-ui.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/bootstrap/bootstrap.min.js"></script>
+    <%--<script src="${pageContext.request.contextPath}/static/js/bootstrap/bootstrap.min.js"></script>--%>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/navbar-top-fixed.css">
