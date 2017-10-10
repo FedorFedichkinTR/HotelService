@@ -20,6 +20,13 @@
 <div class="container">
     <form class="form-signin" action="${pageContext.request.contextPath}/login" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
+        <span style="color: red;">
+            <%
+                if (request.getAttribute("error") != null) {
+                    out.print(request.getAttribute("error"));
+                }
+            %>
+        </span>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="inputEmail" required
                autofocus>
@@ -36,11 +43,7 @@
     <form class="form-signin" action="${pageContext.request.contextPath}/register.jsp">
         <button class="btn btn-lg btn-primary btn-block" type="submit"> Sign up</button>
     </form>
-    <%
-        if (request.getAttribute("error") != null) {
-            out.print(request.getAttribute("error"));
-        }
-    %>
+
 </div> <!-- /container -->
 
 </body>
