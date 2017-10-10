@@ -20,7 +20,8 @@ public class RegisterController extends HttpServlet {
         String userLastName = request.getParameter("inputLastName");
         RegistrationService register = (RegistrationService) request.getServletContext().getAttribute(Constants.REGISTRATION_SERVICE);
         if (register.signUp(userMail, userPassword, userFirstName, userLastName)) {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/login").forward(request, response);
+            //request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "This user is already registered");
             request.getRequestDispatcher("/register.jsp").forward(request, response);

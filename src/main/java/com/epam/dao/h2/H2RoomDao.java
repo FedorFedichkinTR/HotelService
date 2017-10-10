@@ -4,8 +4,10 @@ import com.epam.connection_pool.ConnectionPool;
 import com.epam.dao.interfaces.RoomDao;
 import com.epam.model.Room;
 import com.epam.model.RoomType;
+import com.epam.model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class H2RoomDao implements RoomDao {
@@ -23,6 +25,8 @@ public class H2RoomDao implements RoomDao {
             "UPDATE Rooms SET capacity = ?, type = ?, price = ? WHERE room_id = ?";
     private static final String DELETE_ROOM_SQL =
             "DELETE FROM Rooms WHERE room_id = ?";
+    private static final String GET_ALL_ROOMS_SQL =
+            "SELECT room_id, capacity, type, price FROM Rooms";
 
     @Override
     public Long create(Room room) {
@@ -87,6 +91,23 @@ public class H2RoomDao implements RoomDao {
     @Override
     //todo Fedua
     public List<Room> getAllRooms() {
-        return null;
+        List<Room> rooms = new ArrayList<>();
+
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_ROOMS_SQL)) {
+            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    final Room room = new Room();
+                    room.setRoomId(resultSet.getLong("room_id"));
+                    room.setRoomCapacity(resultSet.getInt("capacity"));
+                    room.setRoomType(RoomType.valueOf(resultSet.getString("type")));
+                    room.setPrice(resultSet.getInt("price"));
+                    rooms.add(room);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rooms;
     }
 }
