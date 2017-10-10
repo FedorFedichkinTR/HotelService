@@ -94,7 +94,6 @@ public class H2UserDao implements UserDao {
                 user.setLastName(resultSet.getString("last_name"));
                 user.setRole(Roles.valueOf(resultSet.getString("role")));
                 user.setUserID(id);
-                //todo
             }
         } catch (SQLException e) {
             e.printStackTrace();
