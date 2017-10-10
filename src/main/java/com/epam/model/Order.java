@@ -6,25 +6,29 @@ import java.time.LocalDate;
 public final class Order {
     private Long orderID;
     private Long userID;
+    private Long AdminID;
+    private Long roomID;
     private Integer roomCapacity;
+    private Integer price;
     private RoomType roomType;
     private LocalDate startDate;
     private LocalDate endDate;
-    //TODO Approve!
-    private Long roomID;
-    private String status;
-    
+    private Boolean status;
+
     public Order() {
     }
 
-    public Order(Long orderID, Long userID, Integer roomCapacity, RoomType roomType, LocalDate startDate, LocalDate endDate, Long roomID, String status) {
+    public Order(Long orderID, Long userID, Long adminID, Long roomID, Integer roomCapacity, Integer price,
+                 RoomType roomType, LocalDate startDate, LocalDate endDate, Boolean status) {
         this.orderID = orderID;
         this.userID = userID;
+        AdminID = adminID;
+        this.roomID = roomID;
         this.roomCapacity = roomCapacity;
+        this.price = price;
         this.roomType = roomType;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.roomID = roomID;
         this.status = status;
     }
 
@@ -84,12 +88,28 @@ public final class Order {
         this.roomID = roomID;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public Long getAdminID() {
+        return AdminID;
+    }
+
+    public void setAdminID(Long adminID) {
+        AdminID = adminID;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     @Override

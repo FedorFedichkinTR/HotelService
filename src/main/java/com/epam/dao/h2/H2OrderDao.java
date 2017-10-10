@@ -26,7 +26,7 @@ public class H2OrderDao implements OrderDao {
     private static final String GET_ALL_ORDERS_SQL =
             "SELECT order_id, user_id, room_id, capacity, type, status, start_date, end_date FROM Orders";
     private static final String GET_ALL_ORDERS_BY_USER_ID_SQL =
-            "SELECT order_id, room_id, capacity, type, status, start_date, end_date FROM Users WHERE user_id = ?";
+            "SELECT order_id, room_id, capacity, type, status, start_date, end_date FROM  WHERE user_id = ?";
 
     public H2OrderDao(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
