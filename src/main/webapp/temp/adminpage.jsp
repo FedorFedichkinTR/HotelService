@@ -32,7 +32,7 @@
         <th>Price</th>
         <th></th>
     </tr>
-    <c:forEach items="${sessionScope.get(user)}" var="order" varStatus="status">
+    <%--<c:forEach items="${sessionScope.get(user)}" var="order" varStatus="status">--%>
     <tr>
         <td>John Smith</td>
         <td>10/10/2017</td>
