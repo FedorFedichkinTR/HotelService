@@ -4,7 +4,7 @@ import com.epam.connection_pool.ConnectionPool;
 import com.epam.dao.interfaces.UserDao;
 import com.epam.mappers.UserMapper;
 import com.epam.model.User;
-import com.epam.model.Roles;
+import com.epam.model.Role;
 import lombok.Builder;
 
 import java.sql.*;
@@ -71,7 +71,7 @@ public class H2UserDao implements UserDao {
                     user.setPassword(resultSet.getString("password"));
                     user.setFirstName(resultSet.getString("first_name"));
                     user.setLastName(resultSet.getString("last_name"));
-                    user.setRole(Roles.valueOf(resultSet.getString("role")));
+                    user.setRole(Role.valueOf(resultSet.getString("role")));
                     user.setEmail(eMail);
                 }
             }
@@ -94,7 +94,7 @@ public class H2UserDao implements UserDao {
                 user.setEmail(resultSet.getString("email"));
                 user.setFirstName(resultSet.getString("first_name"));
                 user.setLastName(resultSet.getString("last_name"));
-                user.setRole(Roles.valueOf(resultSet.getString("role")));
+                user.setRole(Role.valueOf(resultSet.getString("role")));
                 user.setUserID(id);
             }
         } catch (SQLException e) {

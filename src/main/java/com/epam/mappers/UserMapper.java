@@ -1,6 +1,6 @@
 package com.epam.mappers;
 
-import com.epam.model.Roles;
+import com.epam.model.Role;
 import com.epam.model.User;
 
 import java.sql.ResultSet;
@@ -15,7 +15,7 @@ public class UserMapper implements AbstractMapper<User> {
         user.setPassword(resultSet.getString("password"));
         user.setFirstName(resultSet.getString("first_name"));
         user.setLastName(resultSet.getString("last_name"));
-        user.setRole(Roles.valueOf(resultSet.getString("role")));
+        user.setRole(Role.valueOf(resultSet.getString("role")));
         user.setEmail(resultSet.getString("email"));
 
         return user;

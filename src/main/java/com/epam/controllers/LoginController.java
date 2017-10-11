@@ -1,7 +1,7 @@
 package com.epam.controllers;
 
 import com.epam.constants.Constants;
-import com.epam.model.Roles;
+import com.epam.model.Role;
 import com.epam.model.User;
 import com.epam.services.AuthorisationService;
 import com.epam.exceptions.*;
@@ -30,8 +30,8 @@ public class LoginController extends HttpServlet {
         try{
             User resultUser = authorise.authorize(userMail,password);
             request.getSession().setAttribute(Constants.USER_SESSION, resultUser);
-            if (resultUser.getRole() == Roles.USER) {
-                request.getRequestDispatcher("/WEB-INF/booking.jsp").forward(request, response);
+            if (resultUser.getRole() == Role.USER) {
+                request.getRequestDispatcher("/temp/booking.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("/admin").forward(request, response);
             }

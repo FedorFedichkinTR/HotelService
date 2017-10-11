@@ -4,7 +4,7 @@ import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.dao.interfaces.UserDao;
 import com.epam.exceptions.UnmatchedPassword;
 import com.epam.exceptions.UserDoesNotExist;
-import com.epam.model.Roles;
+import com.epam.model.Role;
 import com.epam.model.User;
 import com.epam.util.Encoder;
 
@@ -22,7 +22,7 @@ public class AuthorisationService {
     }
 
     private boolean checkPassword(String passwordFromRequest, User user) {
-        if (user.getRole() == Roles.ADMINISTRATOR) {
+        if (user.getRole() == Role.ADMINISTRATOR) {
             return passwordFromRequest.equals(user.getPassword());
         } else {
             try {

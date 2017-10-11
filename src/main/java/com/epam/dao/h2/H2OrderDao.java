@@ -33,6 +33,7 @@ public class H2OrderDao implements OrderDao {
     }
 
     @Override
+    //todo following refactoring (future)
     public Long create(Order order) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_ORDER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -40,9 +41,8 @@ public class H2OrderDao implements OrderDao {
             statement.setInt(2, order.getRoomCapacity());
             statement.setString(3, order.getRoomType().toString());
             statement.setBoolean(4,false );
-            statement.setString(5, order.getStartDate().toString());
-            // TODO: 11.10.2017 можно переписать в более удобном виде: statement.setObject(5, order.getStartDate());
-            statement.setString(6, order.getEndDate().toString());
+            statement.setObject(5, order.getStartDate());
+            statement.setObject(6, order.getEndDate());
             statement.executeUpdate();
 
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
@@ -57,6 +57,7 @@ public class H2OrderDao implements OrderDao {
     }
 
     @Override
+    //todo following refactoring (future)
     public Order read(Long orderId) {
         Order order = new Order();
 
@@ -83,6 +84,7 @@ public class H2OrderDao implements OrderDao {
     }
 
     @Override
+    //todo following refactoring (future)
     public Boolean update(Order order) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ORDER_SQL)) {
@@ -110,6 +112,7 @@ public class H2OrderDao implements OrderDao {
     }
 
     @Override
+    //todo following refactoring (future)
     public List<Order> getAllOrders() {
         List<Order> orders = new ArrayList<>();
 
@@ -141,6 +144,7 @@ public class H2OrderDao implements OrderDao {
     }
 
     @Override
+    //todo following refactoring (future)
     public List<Order> getAllOrdersByUserID(Long userID) {
         List<Order> ordersById = new ArrayList<>();
 
