@@ -30,7 +30,7 @@ public class BookingController extends HttpServlet {
         if (bookingService.bookRoom(order) != null) {
             request.getRequestDispatcher("/user_orders").forward(request, response);
         } else {
-            request.getRequestDispatcher("temp/booking.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/booking.jsp").forward(request, response);
         }
     }
 }
