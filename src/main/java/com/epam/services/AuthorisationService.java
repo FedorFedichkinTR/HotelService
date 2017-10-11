@@ -7,9 +7,13 @@ import com.epam.exceptions.UserDoesNotExist;
 import com.epam.model.Role;
 import com.epam.model.User;
 import com.epam.util.Encoder;
+import lombok.extern.log4j.Log4j;
 
 import java.security.NoSuchAlgorithmException;
 
+import static com.epam.util.Encoder.encode;
+
+@Log4j
 public class AuthorisationService {
     //private AbstractDaoFactory daoFactory;
     private UserDao userDao;
@@ -22,18 +26,8 @@ public class AuthorisationService {
     }
 
     private boolean checkPassword(String passwordFromRequest, User user) {
-        if (user.getRole() == Role.ADMINISTRATOR) {
-            return passwordFromRequest.equals(user.getPassword());
-        } else {
-            try {
-                final Encoder encoder = new Encoder();
-                String encodedPasswordFromRequest = encoder.encode(passwordFromRequest);
-                return encodedPasswordFromRequest.equals(user.getPassword());
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
+        String encodedPasswordFromRequest = encode(passwordFromRequest);
+        return encodedPasswordFromRequest.equals(user.getPassword());
     }
 
     public User authorize(String userMail, String userPassword) throws UserDoesNotExist, UnmatchedPassword {
