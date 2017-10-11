@@ -21,10 +21,10 @@ public class RegisterController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userMail = request.getParameter("inputEmail");
-        String userPassword = request.getParameter("inputPassword");
-        String userFirstName = request.getParameter("inputFirstName");
-        String userLastName = request.getParameter("inputLastName");
+        String userMail = request.getParameter("input-email");
+        String userPassword = request.getParameter("input-password");
+        String userFirstName = request.getParameter("input-first-name");
+        String userLastName = request.getParameter("input-last-name");
         if (registrationService.signUp(userMail, userPassword, userFirstName, userLastName)) {
             request.getRequestDispatcher("/login").forward(request, response);
             //request.getRequestDispatcher("/index.jsp").forward(request, response);

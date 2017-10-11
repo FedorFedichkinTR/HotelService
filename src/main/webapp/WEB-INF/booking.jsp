@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.epam.constants.Constants" %>
 <%@ page import="com.epam.model.User" %>
-<%@ page import="com.epam.model.Roles" %>
+<%@ page import="com.epam.model.Role" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <script src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.min.js"></script>
-
     <script src="${pageContext.request.contextPath}/static/js/jquery-ui.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/bootstrap/bootstrap.min.js"></script>
@@ -31,7 +30,7 @@
 <body>
 
 <c:choose>
-    <c:when test="${(sessionScope.get(Constants.USER_SESSION)).role == Roles.ADMINISTRATOR}">
+    <c:when test="${(sessionScope.get(Constants.USER_SESSION)).role == Role.ADMINISTRATOR}">
         <jsp:include page="../static/common/adminNavbar.jsp"/>
     </c:when>
 
@@ -50,14 +49,15 @@
 <div class="jumbotron">
     <form method="post" action="${pageContext.request.contextPath}/order">
         <div class="input-group">
-            <select class="form-control" id="sel1" title="roomType" name="roomType">
+            <select class="form-control" id="sel1" title="room-type" name="room-type">
                 <option>Choose room type...</option>
                 <option>Suite</option>
                 <option>Junior</option>
                 <option>Standard</option>
             </select>
-            <input type="number" name="numberOfPeople" min="1" max="3" id="numberOfPeople"
-                   placeholder="Number of people" oninvalid="this.setCustomValidity('')"
+            <input type="number" name="number-of-people" min="1" max="3" id="number-of-people"
+                   placeholder="Number of people"
+                   oninvalid="this.setCustomValidity('Number of people must be between 1 and 3')"
                    oninput="setCustomValidity('')">
             <input type="text" class="datePicker" placeholder="Arrival" name="arrival">
             <input type="text" class="datePicker" placeholder="Departure" name="departure">

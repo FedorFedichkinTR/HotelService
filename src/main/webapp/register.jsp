@@ -17,19 +17,19 @@
     <form method="post" class="form-signin" action="${pageContext.request.contextPath}/register">
         <h2 class="form-signin-heading">Register</h2>
 
-        <label for="inputFirstName" class="sr-only">First name</label>
-        <input type="text" id="inputFirstName" class="form-control" placeholder="First name" name="inputFirstName"
+        <label for="input-first-name" class="sr-only">First name</label>
+        <input type="text" id="input-first-name" class="form-control" placeholder="First name" name="input-first-name"
                required autofocus>
 
-        <label for="inputLastName" class="sr-only">Last name</label>
-        <input type="text" id="inputLastName" class="form-control" placeholder="Last name" name="inputLastName"
+        <label for="input-last-name" class="sr-only">Last name</label>
+        <input type="text" id="input-last-name" class="form-control" placeholder="Last name" name="input-last-name"
                required>
 
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="inputEmail" required>
+        <label for="input-email" class="sr-only">Email address</label>
+        <input type="email" id="input-email" class="form-control" placeholder="Email address" name="input-email" required>
 
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="inputPassword"
+        <label for="input-password" class="sr-only">Password</label>
+        <input type="password" id="input-password" class="form-control" placeholder="Password" name="input-password"
                required>
 
         <div class="checkbox">

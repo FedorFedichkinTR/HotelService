@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
-
     <script src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/bootstrap/bootstrap.min.js"></script>
 </head>
