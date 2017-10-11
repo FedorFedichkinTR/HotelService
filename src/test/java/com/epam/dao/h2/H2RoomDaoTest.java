@@ -25,6 +25,11 @@ public class H2RoomDaoTest {
     }
 
     @Test
+    public void getRoomsWithProperties() throws Exception {
+
+    }
+
+    @Test
     public void create() throws Exception {
     }
 
