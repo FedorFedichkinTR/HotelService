@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.epam.constants.Constants" %>
 <%@ page import="com.epam.model.User" %>
+<%@ page import="com.epam.model.Roles" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -11,7 +13,7 @@
     <script src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/jquery-ui.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
-    <%--<script src="${pageContext.request.contextPath}/static/js/bootstrap/bootstrap.min.js"></script>--%>
+    <script src="${pageContext.request.contextPath}/static/js/bootstrap/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/navbar-top-fixed.css">
@@ -27,7 +29,15 @@
 </head>
 <body>
 
-<jsp:include page="../static/common/navbar.jsp"/>
+<c:choose>
+    <c:when test="${(sessionScope.get(Constants.USER_SESSION)).role == Roles.ADMINISTRATOR}">
+        <jsp:include page="../static/common/adminNavbar.jsp"/>
+    </c:when>
+
+    <c:otherwise>
+        <jsp:include page="../static/common/navbar.jsp"/>
+    </c:otherwise>
+</c:choose>
 
 <div>
     <h2>Hello, <%out.print(((User) session.getAttribute("user")).getFirstName());%>.

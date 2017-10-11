@@ -8,10 +8,7 @@
     <div class="collapse navbar-collapse mt-2 mt-md-0" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/temp/booking.jsp"> Booking </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/user_orders">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin">
                     Orders
                 </a>
             </li>

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ page import="com.epam.constants.Constants" %>
 <html>
 <head>
     <title>Admin page</title>
@@ -16,13 +16,13 @@
 </head>
 <body>
 
-<jsp:include page="../static/common/navbar.jsp"/>
+<jsp:include page="../static/common/adminNavbar.jsp"/>
 
 <h2>All orders</h2>
 
 <table>
     <tr>
-        <th>User</th>
+        <th>User ID</th>
         <th>Arrival</th>
         <th>Departure</th>
         <th>Type of room</th>
@@ -32,13 +32,13 @@
         <th>Price</th>
         <th></th>
     </tr>
-    <c:forEach items="${sessionScope.get(user)}" var="order" varStatus="status">
+    <c:forEach items="${requestScope.get(Constants.LIST_OF_ALL_ORDERS)}" var="order" varStatus="status">
     <tr>
-        <td>John Smith</td>
-        <td>10/10/2017</td>
-        <td>02/11/2017</td>
-        <td>Suit</td>
-        <td>2</td>
+        <td><c:out value="${order.userID}"/></td>
+        <td><c:out value="${order.startDate}"/></td>
+        <td><c:out value="${order.endDate}"/></td>
+        <td><c:out value="${order.roomType}"/></td>
+        <td><c:out value="${order.roomCapacity}"/></td>
         <td>
             <div class="dropdown show">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -59,38 +59,7 @@
             </form>
             <p class="hiddenBlock">Approved</p></td>
         <td>150$</td>
-
-    </tr>
-    <tr>
-        <td>Jane Smith</td>
-        <td>05/12/2017</td>
-        <td>25/12/2017</td>
-        <td>Economic</td>
-        <td>1</td>
-        <td>
-            <div class="dropdown show">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Choose a room
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">Room #1</a>
-                    <a class="dropdown-item" href="#">Room #2</a>
-                </div>
-            </div>
-        </td>
-        <td>
-            <form method="post">
-                <button name="Pay" class="btn btn-primary pay" type="button"
-                        onclick="this.style.visibility='hidden';">Approve
-                </button>
-            </form>
-            <p class="hiddenBlock">Approved</p></td>
-        <td>200$</td>
-
-    </tr>
-
-    <%--</c:forEach>--%>
+        </c:forEach>
 </table>
 </body>
 </html>
