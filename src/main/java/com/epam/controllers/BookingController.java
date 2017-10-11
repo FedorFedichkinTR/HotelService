@@ -28,7 +28,7 @@ public class BookingController extends HttpServlet {
         order.setEndDate(LocalDate.parse(request.getParameter("departure"), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         BookingService bookingService = (BookingService) request.getServletContext().getAttribute(Constants.BOOKING_SERVICE);
         if (bookingService.bookRoom(order) != null) {
-            request.getRequestDispatcher("/userOrders").forward(request, response);
+            request.getRequestDispatcher("/user_orders").forward(request, response);
         } else {
             request.getRequestDispatcher("temp/booking.jsp").forward(request, response);
         }

@@ -21,7 +21,7 @@ button {
     border: 1px solid rgba(0, 0, 0, .15);
 }
 
-h2{
+h2 {
     position: absolute;
     left: 32%;
     top: 31%;
@@ -29,6 +29,6 @@ h2{
     font-size: 40px;
 }
 
-p{
+p {
     position: relative;
 }

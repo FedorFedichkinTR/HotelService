@@ -17,6 +17,6 @@ public class LogoutController extends HttpServlet {
         if (user != null) {
             request.getSession().removeAttribute("user");
         }
-        response.sendRedirect("/index.jsp"); // TODO: 10.10.2017 можно отправлять просто на адрес "/"
+        response.sendRedirect("/");
     }
 }

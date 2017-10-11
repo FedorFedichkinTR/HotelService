@@ -9,6 +9,6 @@ public class Constants {
     public static final String AUTHORISATION_SERVICE = "authorisationService";
     public static final String REGISTRATION_SERVICE = "registrationService";
     public static final String BOOKING_SERVICE = "bookingService";
-    public static final String VIEW_USER_ORDERS_SERVICE = "viewUserOrdersService";
+    public static final String USER_ORDERS_SERVICE = "userOrdersService";
     public static final String VIEW_ALL_ORDERS_SERVICE = "viewAllOrdersService";
 }

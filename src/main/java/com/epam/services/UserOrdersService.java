@@ -6,10 +6,10 @@ import com.epam.model.User;
 
 import java.util.List;
 
-public class ViewUserOrdersService {
+public class UserOrdersService {
     private AbstractDaoFactory daoFactory;
 
-    public ViewUserOrdersService(AbstractDaoFactory daoFactory) {
+    public UserOrdersService(AbstractDaoFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
 
