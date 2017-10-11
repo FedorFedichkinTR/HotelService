@@ -5,11 +5,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Encoder {
-    private final static String ENCODING_ALGORITHM = "MD5";
+    private final static String ENCRYPTION_ALGORITHM = "MD5";
     private static MessageDigest messageDigest;
 
     public Encoder() throws NoSuchAlgorithmException {
-        messageDigest = MessageDigest.getInstance(ENCODING_ALGORITHM);
+        messageDigest = MessageDigest.getInstance(ENCRYPTION_ALGORITHM);
     }
 
     public String encode(String password) {
