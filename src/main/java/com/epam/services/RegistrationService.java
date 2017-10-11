@@ -2,13 +2,11 @@ package com.epam.services;
 
 import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.dao.interfaces.UserDao;
-import com.epam.model.Roles;
+import com.epam.model.Role;
 import com.epam.model.User;
 import com.epam.util.Encoder;
 
 import java.security.NoSuchAlgorithmException;
-
-import static com.epam.util.Encoder.*;
 
 
 public class RegistrationService {
@@ -35,7 +33,7 @@ public class RegistrationService {
                 newUser.setPassword(encodedPassword);
                 newUser.setFirstName(userFirstName);
                 newUser.setLastName(userLastName);
-                newUser.setRole(Roles.USER);
+                newUser.setRole(Role.USER);
                 userDao.create(newUser);
                 return true;
             } else {

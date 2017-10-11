@@ -1,7 +1,7 @@
 package com.epam.controllers;
 
 import com.epam.constants.Constants;
-import com.epam.model.Roles;
+import com.epam.model.Role;
 import com.epam.model.User;
 import com.epam.services.AuthorisationService;
 
@@ -36,7 +36,7 @@ public class LoginController extends HttpServlet {
             } else {
                 request.getSession().setAttribute(Constants.USER_SESSION, resultUser);
                 //if it's all right, go to page, based on role of the user.
-                if (resultUser.getRole() == Roles.USER) {
+                if (resultUser.getRole() == Role.USER) {
                     request.getRequestDispatcher("/temp/booking.jsp").forward(request, response);
                 } else {
                     request.getRequestDispatcher("/admin").forward(request, response);
