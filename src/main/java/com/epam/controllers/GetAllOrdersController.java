@@ -19,7 +19,7 @@ public class GetAllOrdersController extends HttpServlet {
         ViewAllOrdersService viewOrders = (ViewAllOrdersService) request.getServletContext().getAttribute(Constants.VIEW_ALL_ORDERS_SERVICE);
         List<Order> orders = viewOrders.getAllOrders();
         request.setAttribute(Constants.LIST_OF_ALL_ORDERS, orders);
-        request.getRequestDispatcher("/temp/adminpage.jsp").forward(request,response);
+        request.getRequestDispatcher("/WEB-INF/adminpage.jsp").forward(request,response);
     }
 
     @Override

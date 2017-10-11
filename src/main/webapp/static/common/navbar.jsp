@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse mt-2 mt-md-0" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/temp/booking.jsp"> Booking </a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/WEB-INF/booking.jsp"> Booking </a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/user_orders">
@@ -19,12 +19,12 @@
         <ul class="navbar-nav navbar-right">
             <li class="nav-item" id="language">
                 <div class="dropdown show">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdown-menu-link"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                        style="background-color: #343a40; border: none">
                         Language
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-menu" aria-labelledby="dropdown-menu-link">
                         <a class="dropdown-item" href="#">English</a>
                         <a class="dropdown-item" href="#">Русский</a>
                     </div>

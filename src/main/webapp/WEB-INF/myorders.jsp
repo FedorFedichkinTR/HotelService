@@ -34,6 +34,7 @@
         <th>Status</th>
         <th>Price</th>
         <th></th>
+        <th></th>
     </tr>
     <c:forEach items="${requestScope.get(Constants.LIST_OF_USER_ORDERS)}" var="order">
     <tr>
@@ -45,9 +46,17 @@
         <td></td>
         <td>
             <form method="post">
-                <button name="Pay" class="btn btn-primary pay " type="button"
+                <button name="pay" class="btn btn-primary pay " type="button"
                         onclick="this.style.visibility='hidden';"><i class="fa fa-credit-card" aria-hidden="true"></i>
                     Pay up
+                </button>
+            </form>
+        </td>
+        <td>
+            <form method="post">
+                <button name="delete" class="btn btn-primary pay " type="button">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Delete order
                 </button>
             </form>
         </td>

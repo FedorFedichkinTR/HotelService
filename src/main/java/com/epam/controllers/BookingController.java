@@ -22,15 +22,15 @@ public class BookingController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Order order = new Order();
         order.setUserID(((User) request.getSession().getAttribute(Constants.USER_SESSION)).getUserID());
-        order.setRoomCapacity(Integer.parseInt(request.getParameter("numberOfPeople")));
-        order.setRoomType(RoomType.valueOf((request.getParameter("roomType")).toUpperCase()));
+        order.setRoomCapacity(Integer.parseInt(request.getParameter("number-of-people")));
+        order.setRoomType(RoomType.valueOf((request.getParameter("room-type")).toUpperCase()));
         order.setStartDate(LocalDate.parse(request.getParameter("arrival"), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         order.setEndDate(LocalDate.parse(request.getParameter("departure"), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         BookingService bookingService = (BookingService) request.getServletContext().getAttribute(Constants.BOOKING_SERVICE);
         if (bookingService.bookRoom(order) != null) {
             request.getRequestDispatcher("/user_orders").forward(request, response);
         } else {
-            request.getRequestDispatcher("temp/booking.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/booking.jsp").forward(request, response);
         }
     }
 }

@@ -24,11 +24,11 @@
                 }
             %>
         </span>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="inputEmail" required
+        <label for="input-email" class="sr-only">Email address</label>
+        <input type="email" id="input-email" class="form-control" placeholder="Email address" name="input-email" required
                autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="inputPassword"
+        <label for="input-password" class="sr-only">Password</label>
+        <input type="password" id="input-password" class="form-control" placeholder="Password" name="input-password"
                required>
         <div class="checkbox">
             <label>

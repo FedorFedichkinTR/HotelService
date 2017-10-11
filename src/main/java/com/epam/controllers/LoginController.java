@@ -25,13 +25,13 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userMail = request.getParameter("inputEmail");
-        String password = request.getParameter("inputPassword");
+        String userMail = request.getParameter("input-email");
+        String password = request.getParameter("input-password");
         try{
             User resultUser = authorise.authorize(userMail,password);
             request.getSession().setAttribute(Constants.USER_SESSION, resultUser);
             if (resultUser.getRole() == Role.USER) {
-                request.getRequestDispatcher("/temp/booking.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/booking.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("/admin").forward(request, response);
             }

@@ -27,7 +27,7 @@ public class GetUserOrdersController extends HttpServlet {
         // TODO: 11.10.2017 нужно вынести сервис в поле класса, ну и название сменить
         List<Order> listOfOrders =userOrdersService.getOrdersOfUser((User) request.getSession().getAttribute(Constants.USER_SESSION));
         request.setAttribute(Constants.LIST_OF_USER_ORDERS, listOfOrders);
-        request.getRequestDispatcher("temp/myorders.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/myorders.jsp").forward(request, response);
     }
 
     @Override
