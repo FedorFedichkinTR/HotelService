@@ -14,8 +14,6 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Logger;
 
 @Log4j
 @WebListener
@@ -44,13 +42,13 @@ public class DataBaseInitListener implements ServletContextListener {
         AuthorisationService authorisation = new AuthorisationService(abstractDaoFactory);
         RegistrationService registration = new RegistrationService(abstractDaoFactory);
         BookingService booking = new BookingService(abstractDaoFactory);
-        ViewUserOrdersService viewUserOrders = new ViewUserOrdersService(abstractDaoFactory);
+        UserOrdersService viewUserOrders = new UserOrdersService(abstractDaoFactory);
         ViewAllOrdersService viewAllOrders = new ViewAllOrdersService(abstractDaoFactory);
 
         servletContext.setAttribute(Constants.AUTHORISATION_SERVICE, authorisation);
         servletContext.setAttribute(Constants.REGISTRATION_SERVICE, registration);
         servletContext.setAttribute(Constants.BOOKING_SERVICE, booking);
-        servletContext.setAttribute(Constants.VIEW_USER_ORDERS_SERVICE, viewUserOrders);
+        servletContext.setAttribute(Constants.USER_ORDERS_SERVICE, viewUserOrders);
         servletContext.setAttribute(Constants.VIEW_ALL_ORDERS_SERVICE, viewAllOrders);
     }
 }
