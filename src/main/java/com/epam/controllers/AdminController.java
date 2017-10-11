@@ -22,10 +22,10 @@ public class AdminController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long orderId = Long.parseLong(request.getAttribute("order_id").toString());
-        Long roomId = Long.parseLong(request.getAttribute("room_id").toString());
+        Long orderId = Long.parseLong(request.getParameter("order_id"));
+        Long roomId = Long.parseLong(request.getParameter("room_id"));
         Room room = new Room();
         room.setRoomId(adminService.getARoom(roomId,orderId));
-        request.setAttribute("roomId",room.getRoomId());
+        response.getWriter().append(roomId.toString());
     }
 }
