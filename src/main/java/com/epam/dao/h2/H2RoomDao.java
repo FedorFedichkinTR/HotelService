@@ -8,8 +8,11 @@ import com.epam.model.User;
 import lombok.Builder;
 
 import java.sql.*;
+import java.time.Duration;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Builder
 public class H2RoomDao implements RoomDao {
@@ -148,6 +151,15 @@ public class H2RoomDao implements RoomDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return rooms;
+    }
+
+    public List<Period> getBookedPeriodsByRoomID(Long roomID) {
+        return null;
+    }
+
+    public Map<Long,List<Period>> getBookedPeriodsOfRooms(Integer roomCapacity, RoomType roomType) {
+        return null;
     }
 }

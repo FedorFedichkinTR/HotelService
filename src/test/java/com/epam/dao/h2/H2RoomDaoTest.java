@@ -32,7 +32,6 @@ public class H2RoomDaoTest {
 
     @Test
     public void getRoomsWithProperties() throws Exception {
-
     }
 
     @Test
@@ -47,6 +46,12 @@ public class H2RoomDaoTest {
 
     @Test
     public void read() throws Exception {
+        Room room = Room.builder().roomCapacity(1).roomType(RoomType.STANDARD).price(200).build();
+        Long roomId = roomDao.create(room);
+
+        Room room1 = roomDao.read(roomId);
+
+        assertEquals(room.getRoomType().toString(), room1.getRoomType().toString());
     }
 
     @Test
