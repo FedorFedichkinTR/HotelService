@@ -1,6 +1,8 @@
 package com.epam.model;
 
+import lombok.Builder;
 
+@Builder
 public class Room {
     private Long roomId;
     private Integer roomCapacity;

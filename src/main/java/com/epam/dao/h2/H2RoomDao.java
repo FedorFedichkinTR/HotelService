@@ -8,8 +8,11 @@ import com.epam.model.User;
 import lombok.Builder;
 
 import java.sql.*;
+import java.time.Duration;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Builder
 public class H2RoomDao implements RoomDao {
@@ -29,8 +32,11 @@ public class H2RoomDao implements RoomDao {
             "DELETE FROM Rooms WHERE room_id = ?";
     private static final String GET_ALL_ROOMS_SQL =
             "SELECT room_id, capacity, type, price FROM Rooms";
+    private static final String GET_ROOMS_WITH_PROPERTIES =
+            "SELECT room_id,price FROM Rooms WHERE capacity = ? AND type = ?";
 
     @Override
+    //todo refactoring
     public Long create(Room room) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_ROOM_SQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -47,10 +53,12 @@ public class H2RoomDao implements RoomDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return 0L;
     }
 
     @Override
+    //todo refactoring
     public Room read(Long id) {
         Room room = new Room();
 
@@ -66,10 +74,12 @@ public class H2RoomDao implements RoomDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return room;
     }
 
     @Override
+    //todo refactoring
     public Boolean update(Room room) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ROOM_SQL)) {
@@ -82,6 +92,7 @@ public class H2RoomDao implements RoomDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return false;
     }
 
@@ -91,6 +102,7 @@ public class H2RoomDao implements RoomDao {
     }
 
     @Override
+    //todo refactoring
     public List<Room> getAllRooms() {
         List<Room> rooms = new ArrayList<>();
 
@@ -99,6 +111,7 @@ public class H2RoomDao implements RoomDao {
             try(ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     final Room room = new Room();
+
                     room.setRoomId(resultSet.getLong("room_id"));
                     room.setRoomCapacity(resultSet.getInt("capacity"));
                     room.setRoomType(RoomType.valueOf(resultSet.getString("type")));
@@ -109,8 +122,44 @@ public class H2RoomDao implements RoomDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return rooms;
     }
 
+    @Override
+    //todo refactoring
+    public List<Room> getRoomsWithProperties(Integer roomCapacity, RoomType roomType) {
+        List<Room> rooms = new ArrayList<>();
 
+        try(Connection connection = connectionPool.takeConnection();
+        PreparedStatement statement = connection.prepareStatement(GET_ROOMS_WITH_PROPERTIES)) {
+            statement.setInt(1,roomCapacity);
+            statement.setString(2,roomType.toString());
+
+            try(ResultSet resultSet = statement.executeQuery()) {
+                while(resultSet.next()) {
+                  final Room room = new Room();
+
+                    room.setRoomId(resultSet.getLong("room_id"));
+                    room.setRoomCapacity(roomCapacity);
+                    room.setRoomType(roomType);
+                    room.setPrice(resultSet.getInt("price"));
+
+                    rooms.add(room);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rooms;
+    }
+
+    public List<Period> getBookedPeriodsByRoomID(Long roomID) {
+        return null;
+    }
+
+    public Map<Long,List<Period>> getBookedPeriodsOfRooms(Integer roomCapacity, RoomType roomType) {
+        return null;
+    }
 }

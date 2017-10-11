@@ -48,7 +48,13 @@ INSERT INTO Rooms(capacity, type, price)
 VALUES (1, 'STANDARD', 2200) ;
 INSERT INTO Rooms(capacity, type, price)
 VALUES (4, 'STANDARD', 4200) ;
+INSERT INTO Rooms(capacity, type, price)
+VALUES (2, 'STANDARD', 2000) ;
 
 INSERT INTO Orders (user_id, capacity, type, start_date, end_date)
-VALUES (2, 2, 'STANDARD',12-02-12, 13-03-14);
+VALUES (2, 4, 'STANDARD',12-02-16, 13-03-16);
+INSERT INTO Orders (user_id, capacity, type, start_date, end_date)
+VALUES (2, 1, 'STANDARD',12-02-15, 13-03-15);
+INSERT INTO Orders (user_id, capacity, type, start_date, end_date)
+VALUES (2, 3, 'STANDARD',12-02-11, 13-03-11);
 
