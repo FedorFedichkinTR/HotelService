@@ -73,8 +73,8 @@ public class H2OrderDaoTest {
     @Test
     public void getAllOrdersByUserID() throws Exception {
 
-        List<Order> orders = orderDAO.getAllOrdersByUserID(3L);
+        List<Order> orders = orderDAO.getAllOrdersByUserID(1L);
 
-        assertEquals(2, orders.size());
+        assertEquals(3, orders.size());
     }
 }
