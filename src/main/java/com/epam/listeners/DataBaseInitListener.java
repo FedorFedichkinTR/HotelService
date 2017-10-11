@@ -44,11 +44,13 @@ public class DataBaseInitListener implements ServletContextListener {
         BookingService booking = new BookingService(abstractDaoFactory);
         UserOrdersService viewUserOrders = new UserOrdersService(abstractDaoFactory);
         ViewAllOrdersService viewAllOrders = new ViewAllOrdersService(abstractDaoFactory);
+        AdminService adminService = new AdminService(abstractDaoFactory);
 
         servletContext.setAttribute(Constants.AUTHORISATION_SERVICE, authorisation);
         servletContext.setAttribute(Constants.REGISTRATION_SERVICE, registration);
         servletContext.setAttribute(Constants.BOOKING_SERVICE, booking);
         servletContext.setAttribute(Constants.USER_ORDERS_SERVICE, viewUserOrders);
         servletContext.setAttribute(Constants.VIEW_ALL_ORDERS_SERVICE, viewAllOrders);
+        servletContext.setAttribute(Constants.ADMIN_SERVICE, adminService);
     }
 }
