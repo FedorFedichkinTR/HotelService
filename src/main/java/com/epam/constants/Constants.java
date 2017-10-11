@@ -11,4 +11,5 @@ public class Constants {
     public static final String BOOKING_SERVICE = "bookingService";
     public static final String USER_ORDERS_SERVICE = "userOrdersService";
     public static final String VIEW_ALL_ORDERS_SERVICE = "viewAllOrdersService";
+    public static final String ADMIN_SERVICE = "adminService";
 }
