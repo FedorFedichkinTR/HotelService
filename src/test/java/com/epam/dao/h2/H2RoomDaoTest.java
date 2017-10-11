@@ -4,17 +4,23 @@ package com.epam.dao.h2;
 import com.epam.connection_pool.ConnectionPool;
 import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.dao.interfaces.RoomDao;
+import com.epam.model.Room;
+import com.epam.model.RoomType;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.*;
 
 public class H2RoomDaoTest {
     private static RoomDao roomDao;
 
+    @BeforeClass
     public static void setup() throws IOException, SQLException {
         ConnectionPool.create("src/main/resources/db.properties");
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -31,6 +37,12 @@ public class H2RoomDaoTest {
 
     @Test
     public void create() throws Exception {
+        Room room = Room.builder().roomCapacity(1).roomType(RoomType.STANDARD).price(200).build();
+
+        Long roomID = roomDao.create(room);
+        Room roomFromDB = roomDao.read(roomID);
+
+        assertEquals(roomID,roomFromDB.getRoomId());
     }
 
     @Test

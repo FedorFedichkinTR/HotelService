@@ -33,6 +33,7 @@ public class H2RoomDao implements RoomDao {
             "SELECT room_id,price FROM Rooms WHERE capacity = ? AND type = ?";
 
     @Override
+    //todo refactoring
     public Long create(Room room) {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_ROOM_SQL, Statement.RETURN_GENERATED_KEYS)) {
