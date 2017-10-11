@@ -60,10 +60,12 @@ public class H2RoomDaoTest {
     }
 
     @Test
+    //todo
     public void update() throws Exception {
     }
 
     @Test
+    //todo
     public void deleteById() throws Exception {
     }
 
