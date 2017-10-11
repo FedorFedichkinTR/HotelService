@@ -21,35 +21,36 @@ import static org.junit.Assert.*;
 public class H2OrderDaoTest {
     private static OrderDao orderDAO;
 
-//    @BeforeClass
-//    public static void setup() throws IOException, SQLException {
-//        ConnectionPool.create("src/main/resources/db.properties");
-//        ConnectionPool pool = ConnectionPool.getInstance();
-//        pool.initPoolData();
-//        pool.executeScript("src/main/resources/sql/tablecreation.sql");
-//        AbstractDaoFactory daoFactory = new H2DaoFactory(pool);
-//        orderDAO = daoFactory.createOrderDAO();
-//    }
+    @BeforeClass
+    //todo refactoring
+    public static void setup() throws IOException, SQLException {
+        ConnectionPool.create("src/test/resources/db.properties");
+        ConnectionPool pool = ConnectionPool.getInstance();
+        pool.initPoolData();
+        pool.executeScript("src/test/resources/sql/tablecreation.sql");
+        AbstractDaoFactory daoFactory = new H2DaoFactory(pool);
+        orderDAO = daoFactory.createOrderDAO();
+    }
 
     @Test
     public void create() throws Exception {
         Order order = Order.builder()
-                .AdminID(2L)
                 .endDate(LocalDate.now().plusDays(1))
-                .price(1234)
                 .roomCapacity(2)
                 .roomType(RoomType.STANDARD)
                 .startDate(LocalDate.now())
-                .userID(1L)
+                .userID(3L)
+                .roomID(0L)
+                .adminID(0L)
+                .price(0)
+                .status(false)
                 .build();
 
         Long aLong = orderDAO.create(order);
-        assertThat(aLong, is(notNullValue()));
         Order orderFromDB = orderDAO.read(aLong);
         order.setOrderID(aLong);
 
-        assertThat(orderFromDB.getUserID(), is(order.getUserID()));
-        assertThat(orderFromDB.getRoomID(), is(order.getRoomID()));
+        assertEquals(order, orderFromDB);
     }
 
     @Test
@@ -69,10 +70,11 @@ public class H2OrderDaoTest {
 
     }
 
-//    @Test
-//    public void getAllOrdersByUserID() throws Exception {
-//
-//        List<Order> orders = orderDAO.getAllOrdersByUserID(2L);
-//        Order order = orders.get(0);
-//    }
+    @Test
+    public void getAllOrdersByUserID() throws Exception {
+
+        List<Order> orders = orderDAO.getAllOrdersByUserID(3L);
+
+        assertEquals(2, orders.size());
+    }
 }

@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
@@ -21,17 +22,21 @@ public class H2RoomDaoTest {
     private static RoomDao roomDao;
 
     @BeforeClass
+    //todo refactoring
     public static void setup() throws IOException, SQLException {
-        ConnectionPool.create("src/main/resources/db.properties");
+        ConnectionPool.create("src/test/resources/db.properties");
         ConnectionPool pool = ConnectionPool.getInstance();
         pool.initPoolData();
-        pool.executeScript("src/main/resources/sql/tablecreation.sql");
+        pool.executeScript("src/test/resources/sql/tablecreation.sql");
         AbstractDaoFactory daoFactory = new H2DaoFactory(pool);
         roomDao = daoFactory.createRoomDAO();
     }
 
     @Test
     public void getRoomsWithProperties() throws Exception {
+        List<Room> roomList = roomDao.getRoomsWithProperties(2,RoomType.STANDARD);
+
+        assertEquals(2,roomList.size());
     }
 
     @Test
@@ -64,5 +69,8 @@ public class H2RoomDaoTest {
 
     @Test
     public void getAllRooms() throws Exception {
+        List<Room> rooms = roomDao.getAllRooms();
+
+        assertEquals(5,rooms.size());
     }
 }

@@ -2,8 +2,6 @@ package com.epam.model;
 
 
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import java.time.LocalDate;
 
@@ -11,7 +9,7 @@ import java.time.LocalDate;
 public final class Order {
     private Long orderID;
     private Long userID;
-    private Long AdminID;
+    private Long adminID;
     private Long roomID;
     private Integer roomCapacity;
     private Integer price;
@@ -27,7 +25,7 @@ public final class Order {
                  RoomType roomType, LocalDate startDate, LocalDate endDate, Boolean status) {
         this.orderID = orderID;
         this.userID = userID;
-        AdminID = adminID;
+        this.adminID = adminID;
         this.roomID = roomID;
         this.roomCapacity = roomCapacity;
         this.price = price;
@@ -102,11 +100,11 @@ public final class Order {
     }
 
     public Long getAdminID() {
-        return AdminID;
+        return adminID;
     }
 
     public void setAdminID(Long adminID) {
-        AdminID = adminID;
+        this.adminID = adminID;
     }
 
     public Integer getPrice() {
@@ -126,7 +124,7 @@ public final class Order {
 
         if (orderID != null ? !orderID.equals(order.orderID) : order.orderID != null) return false;
         if (userID != null ? !userID.equals(order.userID) : order.userID != null) return false;
-        if (AdminID != null ? !AdminID.equals(order.AdminID) : order.AdminID != null) return false;
+        if (adminID != null ? !adminID.equals(order.adminID) : order.adminID != null) return false;
         if (roomID != null ? !roomID.equals(order.roomID) : order.roomID != null) return false;
         if (roomCapacity != null ? !roomCapacity.equals(order.roomCapacity) : order.roomCapacity != null) return false;
         if (price != null ? !price.equals(order.price) : order.price != null) return false;
@@ -140,7 +138,7 @@ public final class Order {
     public int hashCode() {
         int result = orderID != null ? orderID.hashCode() : 0;
         result = 31 * result + (userID != null ? userID.hashCode() : 0);
-        result = 31 * result + (AdminID != null ? AdminID.hashCode() : 0);
+        result = 31 * result + (adminID != null ? adminID.hashCode() : 0);
         result = 31 * result + (roomID != null ? roomID.hashCode() : 0);
         result = 31 * result + (roomCapacity != null ? roomCapacity.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
@@ -156,7 +154,7 @@ public final class Order {
         return "Order{" +
                 "orderID=" + orderID +
                 ", userID=" + userID +
-                ", AdminID=" + AdminID +
+                ", adminID=" + adminID +
                 ", roomID=" + roomID +
                 ", roomCapacity=" + roomCapacity +
                 ", price=" + price +

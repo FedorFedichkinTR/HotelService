@@ -33,7 +33,7 @@ public class H2RoomDao implements RoomDao {
     private static final String GET_ALL_ROOMS_SQL =
             "SELECT room_id, capacity, type, price FROM Rooms";
     private static final String GET_ROOMS_WITH_PROPERTIES =
-            "SELECT room_id,price FROM Rooms WHERE capacity = ? AND type = ?";
+            "SELECT room_id, price FROM Rooms WHERE capacity = ? AND type = ?";
 
     @Override
     //todo refactoring

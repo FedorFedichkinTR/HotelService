@@ -16,15 +16,16 @@ import static org.junit.Assert.*;
 public class H2UserDaoTest {
     private static UserDao userDAO;
 
-//    @BeforeClass
-//    public static void setup() throws IOException, SQLException {
-//        ConnectionPool.create("src/main/resources/db.properties");
-//        ConnectionPool pool = ConnectionPool.getInstance();
-//        pool.initPoolData();
-//        pool.executeScript("src/main/resources/sql/tablecreation.sql");
-//        AbstractDaoFactory daoFactory = new H2DaoFactory(pool);
-//        userDAO = daoFactory.createUserDAO();
-//    }
+    @BeforeClass
+    //todo refactoring
+    public static void setup() throws IOException, SQLException {
+        ConnectionPool.create("src/test/resources/db.properties");
+        ConnectionPool pool = ConnectionPool.getInstance();
+        pool.initPoolData();
+        pool.executeScript("src/test/resources/sql/tablecreation.sql");
+        AbstractDaoFactory daoFactory = new H2DaoFactory(pool);
+        userDAO = daoFactory.createUserDAO();
+    }
 
     @Test
     public void create() throws Exception {

@@ -29,8 +29,6 @@ CREATE TABLE Orders (
     FOREIGN KEY (room_id) REFERENCES Rooms (room_id)
 );
 
-
-
 INSERT INTO Users (email, password, first_name, last_name, role)
 VALUES ('ff@epam.com', '1234', 'first_name', 'last_name', 'USER') ;
 INSERT INTO Users (email, password, first_name, last_name, role)
@@ -51,10 +49,12 @@ VALUES (4, 'STANDARD', 4200) ;
 INSERT INTO Rooms(capacity, type, price)
 VALUES (2, 'STANDARD', 2000) ;
 
-INSERT INTO Orders (user_id, capacity, type, start_date, end_date)
-VALUES (2, 4, 'STANDARD',12-02-16, 13-03-16);
-INSERT INTO Orders (user_id, capacity, type, start_date, end_date)
-VALUES (2, 1, 'STANDARD',12-02-15, 13-03-15);
-INSERT INTO Orders (user_id, capacity, type, start_date, end_date)
-VALUES (2, 3, 'STANDARD',12-02-11, 13-03-11);
+INSERT INTO Orders(user_id, room_id, capacity, type, start_date, end_date)
+VALUES (3L, 1L, 3,'STANDARD','2004-10-19 10:23:54+02', '2004-10-27 10:23:54+02') ;
+
+INSERT INTO Orders(user_id, room_id, capacity,start_date,end_date)
+VALUES (1L, 3L, 1,'STANDARD','2004-10-17 10:23:54+02', '2004-10-19 10:23:54+02') ;
+
+INSERT INTO Orders(user_id, room_id, capacity,start_date,end_date)
+VALUES (3L, 4L, 3,'STANDARD', '2004-10-19 10:23:54+02','2004-10-27 10:23:54+02') ;
 
