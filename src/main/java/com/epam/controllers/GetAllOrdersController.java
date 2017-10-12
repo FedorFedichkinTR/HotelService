@@ -19,12 +19,12 @@ public class GetAllOrdersController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ViewAllOrdersService viewOrders = (ViewAllOrdersService) request.getServletContext().getAttribute(Constants.VIEW_ALL_ORDERS_SERVICE);
         List<Order> orders = viewOrders.getAllOrders();
-       /* List<List> freeRoomsForAllOrders = new ArrayList<>();
+        List<List> freeRoomsForAllOrders = new ArrayList<>();
         for (Order order : orders) {
             List<Long> freeRooms = viewOrders.getFreeRooms(order);
             freeRoomsForAllOrders.add(freeRooms);
         }
-        request.setAttribute("listOfFreeRoomsForAllOrders", freeRoomsForAllOrders);*/
+        request.setAttribute("listOfFreeRoomsForAllOrders", freeRoomsForAllOrders);
         request.setAttribute(Constants.LIST_OF_ALL_ORDERS, orders);
         request.getRequestDispatcher("/WEB-INF/adminpage.jsp").forward(request, response);
     }
