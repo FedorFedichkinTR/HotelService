@@ -1,5 +1,14 @@
+html,body{
+    width: 1366px;
+    height: 768px;
+}
+
+body {
+    background: url("../img/test.jpg") no-repeat;
+}
+
 .jumbotron {
-    background-color: inherit;
+    background: rgba(255, 255, 255, 0.7);
     width: 1000px;
     position: absolute;
     top: 50%;
@@ -8,6 +17,7 @@
 }
 
 select {
+    background: rgba(255, 255, 255, 1);
     width: 200px !important;
 }
 

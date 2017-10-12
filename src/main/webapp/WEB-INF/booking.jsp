@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.epam.constants.Constants" %>
 <%@ page import="com.epam.model.User" %>
-<%@ page import="com.epam.model.Role" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -31,25 +29,27 @@
 
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/common/navbar.jsp"/>
 
+<%--
 <div>
     <h2>Hello, <%out.print(((User) session.getAttribute("user")).getFirstName());%>.
         <p> Please make your order:</p>
     </h2>
 </div>
+--%>
 
 
 <div class="jumbotron">
     <form method="post" action="${pageContext.request.contextPath}/order">
         <div class="input-group">
-            <select class="form-control" id="room-type" title="room-type" name="room-type" required>
-                <option disabled="disabled" selected=selected>Choose room type...</option>
+            <select class="form-control validate[required]" id="room-type" title="room-type" name="room-type" required>
+                <option disabled="disabled" selected=selected value="">Choose room type...</option>
                 <option>Suite</option>
                 <option>Junior</option>
                 <option>Standard</option>
             </select>
-            <select class="form-control" id="number-of-people" title="number-of-people" name="number-of-people"
-                    required>
-                <option disabled="disabled" selected=selected>Choose number of people...</option>
+            <select class="form-control validate[required]" id="number-of-people" title="number-of-people" name="number-of-people"
+                    required style="opacity: 1">
+                <option disabled="disabled" selected=selected value=""> Choose number of people...</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
