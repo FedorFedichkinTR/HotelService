@@ -69,6 +69,7 @@ public class H2RoomDao implements RoomDao {
                 resultSet.next();
                 room.setRoomCapacity(resultSet.getInt("capacity"));
                 room.setRoomType(RoomType.valueOf(resultSet.getString("type")));
+                room.setPrice(resultSet.getInt("price"));
                 room.setRoomId(id);
             }
         } catch (SQLException e) {
