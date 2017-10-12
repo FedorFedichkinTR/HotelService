@@ -9,6 +9,7 @@ import lombok.Builder;
 
 import java.sql.*;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,8 @@ public class H2RoomDao implements RoomDao {
             "SELECT room_id, capacity, type, price FROM Rooms";
     private static final String GET_ROOMS_WITH_PROPERTIES =
             "SELECT room_id, price FROM Rooms WHERE capacity = ? AND type = ?";
+    private static final String GET_ROOM_DATE_INTERSECTION =
+            "SELECT * FROM Orders where start_date < ? and end_date > ? AND room_id = ?;";
 
     @Override
     //todo refactoring
@@ -46,7 +49,8 @@ public class H2RoomDao implements RoomDao {
             statement.executeUpdate();
 
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                if (resultSet.next()) {
+                if (resultSet.next())
+                {
                     return resultSet.getLong(1);
                 }
             }
@@ -155,11 +159,26 @@ public class H2RoomDao implements RoomDao {
         return rooms;
     }
 
-    public List<Period> getBookedPeriodsByRoomID(Long roomID) {
-        return null;
-    }
+    public List<Room> freeRooms(LocalDate startDate, LocalDate endDate, Integer roomCapacity, RoomType roomType) {
+        List<Room> possibleRooms = getRoomsWithProperties(roomCapacity,roomType);
+        List<Room> freeRooms = new ArrayList<>();
+        List<Long> ordersId = new ArrayList<>();
 
-    public Map<Long,List<Period>> getBookedPeriodsOfRooms(Integer roomCapacity, RoomType roomType) {
-        return null;
+        for (Room current: possibleRooms) {
+            try(Connection connection = connectionPool.takeConnection();
+            PreparedStatement statement = connection.prepareStatement(GET_ROOM_DATE_INTERSECTION)) {
+                statement.setDate(1,Date.valueOf(startDate));
+                statement.setDate(2,Date.valueOf(endDate));
+                statement.setLong(3,current.getRoomId());
+
+                //todo
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return freeRooms;
     }
 }
