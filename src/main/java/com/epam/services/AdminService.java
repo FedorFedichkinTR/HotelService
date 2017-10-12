@@ -20,8 +20,8 @@ public class AdminService {
         OrderDao orderDao = daoFactory.createOrderDAO();
         RoomDao roomDao = daoFactory.createRoomDAO();
         Order orderToConfirm = orderDao.read(orderId);
-        //List<Long> freeRooms = orderDao.getFreeRooms(orderToConfirm.getStartDate(), orderToConfirm.getEndDate());
-        //if (freeRooms.contains(roomId)) {
+        List<Room> freeRooms = roomDao.getFreeRooms(orderToConfirm);
+        if (freeRooms.contains(roomDao.read(roomId))) {
             Long duration = orderToConfirm.getEndDate().toEpochDay() - orderToConfirm.getStartDate().toEpochDay();
             Integer roomPrice = roomDao.read(roomId).getPrice() * duration.intValue();
             orderToConfirm.setPrice(roomPrice);
@@ -29,7 +29,7 @@ public class AdminService {
             if (orderDao.update(orderToConfirm)) {
                 return roomId;
             }
-        //}
+        }
         return null;
     }
 /*     public Long findEmptyRoom(Order order) {
