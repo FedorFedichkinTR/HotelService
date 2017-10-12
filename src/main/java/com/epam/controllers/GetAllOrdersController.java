@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/admin")
@@ -18,12 +19,18 @@ public class GetAllOrdersController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ViewAllOrdersService viewOrders = (ViewAllOrdersService) request.getServletContext().getAttribute(Constants.VIEW_ALL_ORDERS_SERVICE);
         List<Order> orders = viewOrders.getAllOrders();
+       /* List<List> freeRoomsForAllOrders = new ArrayList<>();
+        for (Order order : orders) {
+            List<Long> freeRooms = viewOrders.getFreeRooms(order);
+            freeRoomsForAllOrders.add(freeRooms);
+        }
+        request.setAttribute("listOfFreeRoomsForAllOrders", freeRoomsForAllOrders);*/
         request.setAttribute(Constants.LIST_OF_ALL_ORDERS, orders);
-        request.getRequestDispatcher("/WEB-INF/adminpage.jsp").forward(request,response);
+        request.getRequestDispatcher("/WEB-INF/adminpage.jsp").forward(request, response);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doPost(request,response);
+        this.doPost(request, response);
     }
 }
