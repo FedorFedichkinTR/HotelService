@@ -4,6 +4,7 @@ package com.epam.dao.h2;
 import com.epam.connection_pool.ConnectionPool;
 import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.dao.interfaces.RoomDao;
+import com.epam.model.Order;
 import com.epam.model.Room;
 import com.epam.model.RoomType;
 import org.junit.BeforeClass;
@@ -13,6 +14,7 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -35,9 +37,16 @@ public class H2RoomDaoTest {
 
     @Test
     public void getRoomsWithProperties() throws Exception {
-        List<Room> roomList = roomDao.getRoomsWithProperties(2,RoomType.STANDARD);
+        Order currentOrder = Order.builder().startDate(LocalDate.of(2004,10,27))
+                .endDate(LocalDate.of(2004,10,30))
+                .roomCapacity(3)
+                .roomType(RoomType.STANDARD)
+                .userID(1L)
+                .build();
 
-        assertEquals(2,roomList.size());
+        List<Room> roomList = roomDao.getRoomsWithProperties(currentOrder);
+
+        assertEquals(5,roomList.size());
     }
 
     @Test
@@ -80,6 +89,16 @@ public class H2RoomDaoTest {
     @Test
     public void getFreeRooms() throws Exception {
       //todo
+        Order order = Order.builder()
+                .startDate(LocalDate.of(2004,10,27))
+                .endDate(LocalDate.of(2004,10,30))
+                .roomCapacity(3)
+                .roomType(RoomType.STANDARD)
+                .build();
+
+        List<Room> freeRooms = roomDao.getFreeRooms(order);
+
+        assertEquals(4,freeRooms.size());
     }
 
 }
