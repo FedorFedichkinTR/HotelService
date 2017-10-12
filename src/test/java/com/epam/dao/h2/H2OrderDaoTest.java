@@ -24,10 +24,10 @@ public class H2OrderDaoTest {
     @BeforeClass
     //todo refactoring
     public static void setup() throws IOException, SQLException {
-        ConnectionPool.create("src/test/resources/db.properties");
+        ConnectionPool.create("src/test/resources/dbTest.properties");
         ConnectionPool pool = ConnectionPool.getInstance();
         pool.initPoolData();
-        pool.executeScript("src/test/resources/sql/tablecreation.sql");
+        pool.executeScript("src/test/resources/sql/testTables.sql");
         AbstractDaoFactory daoFactory = new H2DaoFactory(pool);
         orderDAO = daoFactory.createOrderDAO();
     }

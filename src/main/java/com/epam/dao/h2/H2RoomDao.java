@@ -36,7 +36,7 @@ public class H2RoomDao implements RoomDao {
     private static final String GET_ROOMS_WITH_PROPERTIES =
             "SELECT room_id, price FROM Rooms WHERE capacity = ? AND type = ?";
     private static final String GET_ROOM_DATE_INTERSECTION =
-            "SELECT * FROM Orders where start_date < ? and end_date > ? AND room_id = ?;";
+            "SELECT * FROM Orders where start_date <= ? and end_date >= ? AND room_id = ?";
 
     @Override
     //todo refactoring
@@ -159,10 +159,11 @@ public class H2RoomDao implements RoomDao {
         return rooms;
     }
 
-    public List<Room> freeRooms(LocalDate startDate, LocalDate endDate, Integer roomCapacity, RoomType roomType) {
-        List<Room> possibleRooms = getRoomsWithProperties(roomCapacity,roomType);
+    //todo test
+    public List<Room> getFreeRooms(LocalDate startDate, LocalDate endDate, Integer roomCapacity, RoomType roomType) {
         List<Room> freeRooms = new ArrayList<>();
         List<Long> ordersId = new ArrayList<>();
+        List<Room> possibleRooms = getRoomsWithProperties(roomCapacity,roomType);
 
         for (Room current: possibleRooms) {
             try(Connection connection = connectionPool.takeConnection();
@@ -171,9 +172,14 @@ public class H2RoomDao implements RoomDao {
                 statement.setDate(2,Date.valueOf(endDate));
                 statement.setLong(3,current.getRoomId());
 
-                //todo
-
-
+                try(ResultSet resultSet = statement.executeQuery()) {
+                    while(resultSet.next()) {
+                        ordersId.add(resultSet.getLong("order_id"));
+                    }
+                }
+                if (ordersId.isEmpty()) {
+                    freeRooms.add(current);
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
