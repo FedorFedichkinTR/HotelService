@@ -1,19 +1,20 @@
 package com.epam.dao.h2;
 
-import com.epam.connection_pool.ConnectionPool;
 import com.epam.dao.interfaces.UserDao;
 import com.epam.mappers.UserMapper;
 import com.epam.model.User;
 import com.epam.model.Role;
 import lombok.Builder;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Builder
 public class H2UserDao implements UserDao {
-    private final ConnectionPool connectionPool;
+
+    private final DataSource dataSource;
 
     private static final String CREATE_USER_SQL =
             "INSERT INTO Users (email, password, first_name, last_name, role) VALUES (?,?,?,?,?)";
@@ -30,13 +31,13 @@ public class H2UserDao implements UserDao {
 
     private final UserMapper userMapper = new UserMapper();
 
-    public H2UserDao(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
+    public H2UserDao(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     @Override
     public Long create(User insertedUser) {
-        try (Connection connection = connectionPool.takeConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_USER_SQL, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, insertedUser.getEmail());
             statement.setString(2, insertedUser.getPassword());
@@ -59,7 +60,7 @@ public class H2UserDao implements UserDao {
     @Override
     public User readByEmail(String eMail) {
         User user = null;
-        try (Connection connection = connectionPool.takeConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_EMAIL_SQL)) {
             statement.setString(1, eMail);
 
@@ -85,7 +86,7 @@ public class H2UserDao implements UserDao {
     public User read(Long id) {
         User user = new User();
 
-        try (Connection connection = connectionPool.takeConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_ID_SQL)) {
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -105,7 +106,7 @@ public class H2UserDao implements UserDao {
 
     @Override
     public Boolean update(User user) {
-        try (Connection connection = connectionPool.takeConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_USER_SQL)) {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
@@ -123,14 +124,14 @@ public class H2UserDao implements UserDao {
 
     @Override
     public Long deleteById(Long id) {
-        return delete(id, connectionPool, DELETE_USER_SQL);
+        return delete(id, dataSource, DELETE_USER_SQL);
     }
 
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
 
-        try (Connection connection = connectionPool.takeConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_ALL_USERS_SQL)) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {

@@ -1,7 +1,7 @@
 package com.epam.dao.interfaces;
 
-import com.epam.connection_pool.ConnectionPool;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,10 +15,8 @@ interface CrudDao<E,K> {
 
     Long deleteById(K id);
 
-
-   //
-    default Long delete(Long id, ConnectionPool connectionPool, String sqlDeleteQuery) {
-        try (Connection connection = connectionPool.takeConnection();
+    default Long delete(Long id, DataSource dataSource, String sqlDeleteQuery) {
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sqlDeleteQuery)) {
             statement.setLong(1, id);
             statement.executeUpdate();

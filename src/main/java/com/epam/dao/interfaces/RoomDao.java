@@ -6,7 +6,7 @@ import com.epam.model.RoomType;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface RoomDao extends CrudDao<Room,Long> {
+public interface RoomDao extends CrudDao<Room, Long> {
     public List<Room> getAllRooms();
 
     public List<Room> getRoomsWithProperties(Integer roomCapacity, RoomType roomType);
