@@ -3,6 +3,7 @@ package com.epam.dao.h2;
 
 import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.dao.interfaces.RoomDao;
+import com.epam.model.Order;
 import com.epam.model.Room;
 import com.epam.model.RoomType;
 import lombok.extern.log4j.Log4j;
@@ -19,6 +20,7 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -36,7 +38,7 @@ public class H2RoomDaoTest {
     public static void setup() throws IOException, SQLException {
         dataSource = JdbcConnectionPool.create("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1", "", "");
 
-        Path sqlPath = Paths.get("D:\\Tomcat\\apache-tomcat-9.0.0.M4\\webapps\\ROOT\\WEB-INF\\classes\\sql");
+        Path sqlPath = Paths.get("D:\\Projects\\Java_WEB_Application\\HotelService\\src\\test\\resources\\sql");
         Pattern pattern = Pattern.compile(".*\\.sql");
         log.info(sqlPath);
         try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement()) {
@@ -65,9 +67,19 @@ public class H2RoomDaoTest {
 
     @Test
     public void getRoomsWithProperties() throws Exception {
-        List<Room> roomList = roomDao.getRoomsWithProperties(2,RoomType.STANDARD);
+        Order order = Order.builder()
+                .endDate(LocalDate.of(2004,10,27))
+                .startDate(LocalDate.of(2004,10,30))
+                .roomCapacity(3)
+                .roomType(RoomType.STANDARD)
+                .userID(1L)
+                .roomID(3L)
+                .price(200)
+                .build();
 
-        assertEquals(2,roomList.size());
+        List<Room> roomList = roomDao.getRoomsWithProperties(order);
+
+        assertEquals(5,roomList.size());
     }
 
     @Test

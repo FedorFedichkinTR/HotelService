@@ -1,12 +1,16 @@
 package com.epam.dao.h2;
 
+
 import com.epam.dao.interfaces.RoomDao;
+import com.epam.model.Order;
 import com.epam.model.Room;
 import com.epam.model.RoomType;
+import com.epam.model.User;
 import lombok.Builder;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -131,21 +135,21 @@ public class H2RoomDao implements RoomDao {
 
     @Override
     //todo refactoring
-    public List<Room> getRoomsWithProperties(Integer roomCapacity, RoomType roomType) {
+    public List<Room> getRoomsWithProperties(Order order) {
         List<Room> rooms = new ArrayList<>();
 
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(GET_ROOMS_WITH_PROPERTIES)) {
-            statement.setInt(1,roomCapacity);
-            statement.setString(2,roomType.toString());
+            statement.setInt(1,order.getRoomCapacity());
+            statement.setString(2,order.getRoomType().toString());
 
             try(ResultSet resultSet = statement.executeQuery()) {
                 while(resultSet.next()) {
                   final Room room = new Room();
 
                     room.setRoomId(resultSet.getLong("room_id"));
-                    room.setRoomCapacity(roomCapacity);
-                    room.setRoomType(roomType);
+                    room.setRoomCapacity(order.getRoomCapacity());
+                    room.setRoomType(order.getRoomType());
                     room.setPrice(resultSet.getInt("price"));
 
                     rooms.add(room);
@@ -159,17 +163,17 @@ public class H2RoomDao implements RoomDao {
     }
 
     //todo test
-    public List<Room> getFreeRooms(LocalDate startDate, LocalDate endDate, Integer roomCapacity, RoomType roomType) {
+    public List<Room> getFreeRooms(Order order) {
         List<Room> freeRooms = new ArrayList<>();
-        List<Long> ordersId = new ArrayList<>();
-        List<Room> possibleRooms = getRoomsWithProperties(roomCapacity,roomType);
+        List<Room> possibleRooms = getRoomsWithProperties(order);
 
         for (Room current: possibleRooms) {
             try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(GET_ROOM_DATE_INTERSECTION)) {
-                statement.setDate(1,Date.valueOf(startDate));
-                statement.setDate(2,Date.valueOf(endDate));
+                statement.setDate(1,Date.valueOf(order.getEndDate()));
+                statement.setDate(2,Date.valueOf(order.getStartDate()));
                 statement.setLong(3,current.getRoomId());
+                List<Long> ordersId = new ArrayList<>();
 
                 try(ResultSet resultSet = statement.executeQuery()) {
                     while(resultSet.next()) {

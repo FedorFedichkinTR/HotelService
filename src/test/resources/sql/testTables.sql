@@ -48,18 +48,26 @@ INSERT INTO Rooms(capacity, type, price)
 VALUES (4, 'STANDARD', 4200) ;
 INSERT INTO Rooms(capacity, type, price)
 VALUES (2, 'STANDARD', 2000) ;
+INSERT INTO Rooms(capacity, type, price)
+VALUES (3, 'STANDARD', 2000) ;
+INSERT INTO Rooms(capacity, type, price)
+VALUES (3, 'STANDARD', 2000) ;
+INSERT INTO Rooms(capacity, type, price)
+VALUES (3, 'STANDARD', 2000) ;
+INSERT INTO Rooms(capacity, type, price)
+VALUES (3, 'STANDARD', 2000);
 
 INSERT INTO Orders(user_id, room_id, capacity, type, start_date, end_date, admin_id,price,status)
-VALUES (3, 1, 3,'STANDARD','2004-10-19', '2004-10-27',2,3000,FALSE) ;
+VALUES (3, 1, 3,'STANDARD','2004-10-26', '2004-11-05',2,3000,FALSE) ;
 
 INSERT INTO Orders(user_id, room_id, capacity, type, start_date,end_date, admin_id, price, status)
-VALUES (1, 3, 1,'STANDARD','2004-10-17 ', '2004-10-19 2',2,3000,FALSE) ;
+VALUES (1, 3, 1,'STANDARD','2004-10-17 ', '2004-10-19',2,3000,FALSE) ;
 
 INSERT INTO Orders(user_id, room_id, capacity,type , start_date,end_date, admin_id, price, status)
-VALUES (3, 4, 3,'STANDARD', '2004-10-19','2004-10-27',2,3000,FALSE) ;
+VALUES (3, 4, 3,'STANDARD', '2004-10-20','2004-10-30',2,3000,FALSE) ;
 
 INSERT INTO Orders(user_id, room_id, capacity,type , start_date,end_date, admin_id, price, status)
-VALUES (1, 4, 3,'STANDARD', '2004-10-19','2004-10-27',2,3000,FALSE) ;
+VALUES (1, 1, 3,'STANDARD', '2004-10-19','2004-10-27',2,3000,FALSE) ;
 
 INSERT INTO Orders(user_id, room_id, capacity,type , start_date,end_date, admin_id, price, status)
-VALUES (1, 4, 3,'STANDARD', '2004-10-19','2004-10-27',2,3000,FALSE) ;
+VALUES (1, 2, 3,'STANDARD', '2004-10-19','2004-10-27',2,3000,FALSE) ;
