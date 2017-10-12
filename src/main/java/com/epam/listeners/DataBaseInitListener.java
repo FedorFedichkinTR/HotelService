@@ -45,6 +45,7 @@ public class DataBaseInitListener implements ServletContextListener {
         UserOrdersService viewUserOrders = new UserOrdersService(abstractDaoFactory);
         ViewAllOrdersService viewAllOrders = new ViewAllOrdersService(abstractDaoFactory);
         AdminService adminService = new AdminService(abstractDaoFactory);
+        ChangeUserOrderService changeUserOrderService = new ChangeUserOrderService(abstractDaoFactory);
 
         servletContext.setAttribute(Constants.AUTHORISATION_SERVICE, authorisation);
         servletContext.setAttribute(Constants.REGISTRATION_SERVICE, registration);
@@ -52,5 +53,6 @@ public class DataBaseInitListener implements ServletContextListener {
         servletContext.setAttribute(Constants.USER_ORDERS_SERVICE, viewUserOrders);
         servletContext.setAttribute(Constants.VIEW_ALL_ORDERS_SERVICE, viewAllOrders);
         servletContext.setAttribute(Constants.ADMIN_SERVICE, adminService);
+        servletContext.setAttribute(Constants.CHANGE_USER_ORDER_SERVICE, changeUserOrderService);
     }
 }

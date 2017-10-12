@@ -11,4 +11,13 @@
         <res-auth>Container</res-auth>
     </resource-ref>
 
+    <servlet>
+        <servlet-name>booking</servlet-name>
+        <jsp-file>/WEB-INF/booking.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>booking</servlet-name>
+        <url-pattern>/booking</url-pattern>
+    </servlet-mapping>
+
 </web-app>

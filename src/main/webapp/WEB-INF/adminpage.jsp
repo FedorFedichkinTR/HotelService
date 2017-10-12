@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/tables.css">
     <script src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/bootstrap/bootstrap.min.js"></script>
-
+    <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
 </head>
 <body>
 
@@ -40,25 +40,23 @@
         <td><c:out value="${order.roomType}"/></td>
         <td><c:out value="${order.roomCapacity}"/></td>
         <td>
-            <div class="dropdown show">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdown-menu-link"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Choose a room
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdown-menu-link">
-                    <a class="dropdown-item" href="#">Room #1</a>
-                    <a class="dropdown-item" href="#">Room #2</a>
-                </div>
-            </div>
+            <select id="${order.orderID}selected-room" class="form-control" title="room-type" name="room-type">
+                <option selected=selected>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
         </td>
         <td>
-            <form method="post">
-                <button name="pay" class="btn btn-primary pay" type="button"
-                        onclick="this.style.visibility='hidden';">Approve
-                </button>
-            </form>
-            <p class="hidden-block">Approved</p></td>
-        <td>150$</td>
+            <div id="${order.orderID}">
+                <form method="post">
+                    <button name="pay" class="btn btn-primary pay" type="button"
+                            onclick="orderApproved(${order.orderID})"> Approve
+                    </button>
+                </form>
+            </div>
+
+        </td>
+        <td><c:out value="${order.price}"/></td>
         </c:forEach>
 </table>
 </body>

@@ -6,6 +6,7 @@ import com.epam.dao.interfaces.RoomDao;
 import com.epam.model.Order;
 import com.epam.model.Room;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class AdminService {
@@ -15,10 +16,21 @@ public class AdminService {
         this.daoFactory = daoFactory;
     }
 
-    public Long getARoom(Long roomId, Long orderId){
+    public Long getARoom(Long roomId, Long orderId) {
         OrderDao orderDao = daoFactory.createOrderDAO();
-        orderDao.read(orderId);
-        return roomId;
+        RoomDao roomDao = daoFactory.createRoomDAO();
+        Order orderToConfirm = orderDao.read(orderId);
+        //List<Long> freeRooms = orderDao.getFreeRooms(orderToConfirm.getStartDate(), orderToConfirm.getEndDate());
+        //if (freeRooms.contains(roomId)) {
+            Long duration = orderToConfirm.getEndDate().toEpochDay() - orderToConfirm.getStartDate().toEpochDay();
+            Integer roomPrice = roomDao.read(roomId).getPrice() * duration.intValue();
+            orderToConfirm.setPrice(roomPrice);
+            orderToConfirm.setRoomID(roomId);
+            if (orderDao.update(orderToConfirm)) {
+                return roomId;
+            }
+        //}
+        return null;
     }
 /*     public Long findEmptyRoom(Order order) {
        RoomDao roomDao = daoFactory.createRoomDAO();

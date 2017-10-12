@@ -41,7 +41,6 @@ public class ConnectionPool {
             this.user = dbProperties.getProperty("user");
             this.password = dbProperties.getProperty("password");
             this.poolSize = Integer.parseInt(dbProperties.getProperty("poolSize"));
-
         } catch (IOException e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);

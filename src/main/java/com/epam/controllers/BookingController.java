@@ -17,6 +17,12 @@ import java.time.format.DateTimeFormatter;
 
 @WebServlet("/order")
 public class BookingController extends HttpServlet {
+    private BookingService bookingService;
+
+    @Override
+    public void init() throws ServletException {
+        bookingService = (BookingService) getServletContext().getAttribute(Constants.BOOKING_SERVICE);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,11 +32,11 @@ public class BookingController extends HttpServlet {
         order.setRoomType(RoomType.valueOf((request.getParameter("room-type")).toUpperCase()));
         order.setStartDate(LocalDate.parse(request.getParameter("arrival"), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         order.setEndDate(LocalDate.parse(request.getParameter("departure"), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-        BookingService bookingService = (BookingService) request.getServletContext().getAttribute(Constants.BOOKING_SERVICE);
+
         if (bookingService.bookRoom(order) != null) {
             request.getRequestDispatcher("/user_orders").forward(request, response);
         } else {
-            request.getRequestDispatcher("WEB-INF/booking.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/booking.jsp").forward(request, response);
         }
     }
 }

@@ -45,7 +45,7 @@
         <td></td>
         <td></td>
         <td>
-            <form method="post">
+            <form method="post" action="/change_user_orders">
                 <button name="pay" class="btn btn-primary pay " type="button"
                         onclick="this.style.visibility='hidden';"><i class="fa fa-credit-card" aria-hidden="true"></i>
                     Pay up
@@ -53,8 +53,9 @@
             </form>
         </td>
         <td>
-            <form method="post">
-                <button name="delete" class="btn btn-primary pay " type="button">
+            <form method="post" action="/change_user_orders">
+                <input type="hidden" name="order_to_delete" value="${order.orderID}">
+                <button name="delete" class="btn btn-primary pay " type="submit" >
                     <i class="fa fa-trash" aria-hidden="true"></i>
                     Delete order
                 </button>
