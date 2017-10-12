@@ -38,7 +38,7 @@ public class H2RoomDaoTest {
     public static void setup() throws IOException, SQLException {
         dataSource = JdbcConnectionPool.create("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1", "", "");
 
-        Path sqlPath = Paths.get("D:\\Tomcat\\apache-tomcat-9.0.0.M4\\webapps\\ROOT\\WEB-INF\\classes\\sql");
+        Path sqlPath = Paths.get("D:\\Projects\\Java_WEB_Application\\HotelService\\src\\test\\resources\\sql");
         Pattern pattern = Pattern.compile(".*\\.sql");
         log.info(sqlPath);
         try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement()) {
@@ -65,20 +65,22 @@ public class H2RoomDaoTest {
         roomDao = daoFactory.createRoomDAO();
     }
 
-//    @Test
-//    public void getRoomsWithProperties() throws Exception {
-//        Order order = Order.builder()
-//                .endDate(LocalDate.of(2004,10,27))
-//                .startDate(LocalDate.of(2004,10,30))
-//                .roomCapacity(3)
-//                .roomType(RoomType.STANDARD)
-//                .userID(1L)
-//                .build();
-//
-//        List<Room> roomList = roomDao.getRoomsWithProperties(order);
-//
-//        assertEquals(5,roomList.size());
-//    }
+    @Test
+    public void getRoomsWithProperties() throws Exception {
+        Order order = Order.builder()
+                .endDate(LocalDate.of(2004,10,27))
+                .startDate(LocalDate.of(2004,10,30))
+                .roomCapacity(3)
+                .roomType(RoomType.STANDARD)
+                .userID(1L)
+                .roomID(3L)
+                .price(200)
+                .build();
+
+        List<Room> roomList = roomDao.getRoomsWithProperties(order);
+
+        assertEquals(5,roomList.size());
+    }
 
     @Test
     public void create() throws Exception {
