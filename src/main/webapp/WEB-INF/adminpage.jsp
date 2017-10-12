@@ -56,7 +56,7 @@
             </div>
 
         </td>
-        <td></td>
+        <td><c:out value="${order.price}"/></td>
         </c:forEach>
 </table>
 </body>

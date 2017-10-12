@@ -31,11 +31,11 @@
 
 <c:choose>
     <c:when test="${(sessionScope.get(Constants.USER_SESSION)).role == Role.ADMINISTRATOR}">
-        <jsp:include page="../static/common/adminNavbar.jsp"/>
+        <jsp:include page="/static/common/adminNavbar.jsp"/>
     </c:when>
 
     <c:otherwise>
-        <jsp:include page="../static/common/navbar.jsp"/>
+        <jsp:include page="/static/common/navbar.jsp"/>
     </c:otherwise>
 </c:choose>
 
