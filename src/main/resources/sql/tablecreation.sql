@@ -54,3 +54,8 @@ INSERT INTO Rooms(capacity, type, price)
 VALUES (2, 'SUITE', 350) ;
 INSERT INTO Rooms(capacity, type, price)
 VALUES (2, 'JUNIOR', 250) ;
+
+
+INSERT INTO Orders(user_id, room_id,capacity, type, start_date, end_date, admin_id, price, status) VALUES (1,2,1,'STANDARD','2017-10-13','2017-10-15',2,360,TRUE );
+INSERT INTO Orders(user_id, room_id,capacity, type, start_date, end_date, admin_id, price, status) VALUES (1,2,1,'STANDARD','2017-10-17','2017-10-20',2,720,TRUE);
+
