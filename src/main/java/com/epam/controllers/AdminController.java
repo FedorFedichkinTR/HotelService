@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet("/approve_order")
 public class AdminController extends HttpServlet {
-    AdminService adminService;
+    private AdminService adminService;
 
     @Override
     public void init() throws ServletException {
