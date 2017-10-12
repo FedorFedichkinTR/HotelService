@@ -46,4 +46,11 @@ VALUES ('tt@epam.com', 'fcea920f7412b5da7be0cf42b8c93759', 'first_name3', 'last_
 
 INSERT INTO Rooms(capacity, type, price)
 VALUES (3, 'STANDARD', 200) ;
-
+INSERT INTO Rooms(capacity, type, price)
+VALUES (1, 'STANDARD', 180) ;
+INSERT INTO Rooms(capacity, type, price)
+VALUES (2, 'STANDARD', 190) ;
+INSERT INTO Rooms(capacity, type, price)
+VALUES (2, 'SUITE', 350) ;
+INSERT INTO Rooms(capacity, type, price)
+VALUES (2, 'JUNIOR', 250) ;
