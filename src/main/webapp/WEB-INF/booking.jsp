@@ -29,15 +29,7 @@
 </head>
 <body>
 
-<c:choose>
-    <c:when test="${(sessionScope.get(Constants.USER_SESSION)).role == Role.ADMINISTRATOR}">
-        <jsp:include page="/static/common/adminNavbar.jsp"/>
-    </c:when>
-
-    <c:otherwise>
-        <jsp:include page="/static/common/navbar.jsp"/>
-    </c:otherwise>
-</c:choose>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/common/navbar.jsp"/>
 
 <div>
     <h2>Hello, <%out.print(((User) session.getAttribute("user")).getFirstName());%>.
@@ -49,18 +41,22 @@
 <div class="jumbotron">
     <form method="post" action="${pageContext.request.contextPath}/order">
         <div class="input-group">
-            <select class="form-control" id="sel1" title="room-type" name="room-type">
-                <option>Choose room type...</option>
+            <select class="form-control" id="room-type" title="room-type" name="room-type" required>
+                <option disabled="disabled" selected=selected>Choose room type...</option>
                 <option>Suite</option>
                 <option>Junior</option>
                 <option>Standard</option>
             </select>
-            <input type="number" name="number-of-people" min="1" max="3" id="number-of-people"
-                   placeholder="Number of people"
-                   oninvalid="this.setCustomValidity('Number of people must be between 1 and 3')"
-                   oninput="setCustomValidity('')">
-            <input type="text" class="datePicker" placeholder="Arrival" name="arrival">
-            <input type="text" class="datePicker" placeholder="Departure" name="departure">
+            <select class="form-control" id="number-of-people" title="number-of-people" name="number-of-people"
+                    required>
+                <option disabled="disabled" selected=selected>Choose number of people...</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+            <%--TODO Validate calendars--%>
+            <input type="text" class="datePicker" placeholder="Arrival" name="arrival" required>
+            <input type="text" class="datePicker" placeholder="Departure" name="departure" required>
             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
         </div>
     </form>

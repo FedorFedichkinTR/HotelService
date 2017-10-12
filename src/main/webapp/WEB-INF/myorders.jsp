@@ -20,7 +20,7 @@
 </head>
 <body>
 
-<jsp:include page="../static/common/navbar.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/common/navbar.jsp"/>
 
 <h2> List of all orders from you </h2>
 
@@ -43,23 +43,33 @@
         <td><c:out value="${order.roomType}"/></td>
         <td><c:out value="${order.roomCapacity}"/></td>
         <td></td>
+        <td><c:if test="${order.roomID != null}">
+            <c:out value="${order.price}"/>
+        </c:if></td>
         <td></td>
         <td>
-            <form method="post" action="/change_user_orders">
-                <button name="pay" class="btn btn-primary pay " type="button"
-                        onclick="this.style.visibility='hidden';"><i class="fa fa-credit-card" aria-hidden="true"></i>
-                    Pay up
-                </button>
-            </form>
+            <c:choose>
+                <c:when test="${order.roomID != null}">
+                    <form method="post" action="${pageContext.request.contextPath}/change_user_orders">
+                        <button name="pay" class="btn btn-primary pay " type="button"
+                                onclick="this.style.visibility='hidden';">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i> Pay up
+                        </button>
+                    </form>
+                </c:when>
+            </c:choose>
         </td>
         <td>
-            <form method="post" action="/change_user_orders">
-                <input type="hidden" name="order_to_delete" value="${order.orderID}">
-                <button name="delete" class="btn btn-primary pay " type="submit" >
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                    Delete order
-                </button>
-            </form>
+            <c:choose>
+                <c:when test="${order.status == false}">
+                    <form method="post" action="${pageContext.request.contextPath}/change_user_orders">
+                        <input type="hidden" name="order_to_delete" value="${order.orderID}">
+                        <button name="delete" class="btn btn-primary pay " type="submit">
+                            <i class="fa fa-trash" aria-hidden="true"></i> Delete order
+                        </button>
+                    </form>
+                </c:when>
+            </c:choose>
         </td>
     </tr>
     </c:forEach>

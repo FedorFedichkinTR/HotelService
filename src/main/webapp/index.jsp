@@ -18,14 +18,13 @@
     <form class="form-signin" action="${pageContext.request.contextPath}/login" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <span style="color: red;">
-            <%
-                if (request.getAttribute("error") != null) {
-                    out.print(request.getAttribute("error"));
-                }
-            %>
+            <c:if test="${requestScope.get(\"error\") != null}">
+                <p>${requestScope.get("error")}</p>
+            </c:if>
         </span>
         <label for="input-email" class="sr-only">Email address</label>
-        <input type="email" id="input-email" class="form-control" placeholder="Email address" name="input-email" required
+        <input type="email" id="input-email" class="form-control" placeholder="Email address" name="input-email"
+               required
                autofocus>
         <label for="input-password" class="sr-only">Password</label>
         <input type="password" id="input-password" class="form-control" placeholder="Password" name="input-password"
