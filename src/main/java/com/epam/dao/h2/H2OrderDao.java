@@ -1,10 +1,11 @@
 package com.epam.dao.h2;
 
-import com.epam.connection_pool.ConnectionPool;
 import com.epam.dao.interfaces.OrderDao;
 import com.epam.model.Order;
 import com.epam.model.RoomType;
+import lombok.extern.log4j.Log4j;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,8 +13,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j
 public class H2OrderDao implements OrderDao {
-    private final ConnectionPool connectionPool;
+
+    private final DataSource dataSource;
 
     private static final String CREATE_ORDER_SQL =
             "INSERT INTO Orders (user_id, capacity, type,start_date, end_date) VALUES (?, ?, ?, ?, ?)";
@@ -28,14 +31,16 @@ public class H2OrderDao implements OrderDao {
     private static final String GET_ALL_ORDERS_BY_USER_ID_SQL =
             "SELECT order_id, room_id, capacity, type, status, start_date, end_date, admin_id, price FROM Orders WHERE user_id = ?";
 
-    public H2OrderDao(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
+    public H2OrderDao(DataSource dataSource) {
+        log.info("DataSource from H2OrderDao Constructor: " + dataSource);
+        this.dataSource = dataSource;
     }
 
     @Override
     //todo following refactoring (future)
     public Long create(Order order) {
-        try (Connection connection = connectionPool.takeConnection();
+        log.info("DataSource from H2OrderDao create method: " + dataSource);
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_ORDER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 statement.setLong(1, order.getUserID());
                 statement.setInt(2, order.getRoomCapacity());
@@ -60,7 +65,7 @@ public class H2OrderDao implements OrderDao {
     public Order read(Long orderId) {
         Order order = new Order();
 
-        try (Connection connection = connectionPool.takeConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(READ_ORDER_BY_ID)) {
             statement.setLong(1, orderId);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -85,7 +90,7 @@ public class H2OrderDao implements OrderDao {
     @Override
     //todo following refactoring (future)
     public Boolean update(Order order) {
-        try (Connection connection = connectionPool.takeConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ORDER_SQL)) {
             statement.setLong(1, order.getUserID());
             statement.setLong(2, order.getRoomID());
@@ -107,7 +112,7 @@ public class H2OrderDao implements OrderDao {
 
     @Override
     public Long deleteById(Long id) {
-        return delete(id, connectionPool, DELETE_ORDER_SQL);
+        return delete(id, dataSource, DELETE_ORDER_SQL);
     }
 
     @Override
@@ -115,7 +120,7 @@ public class H2OrderDao implements OrderDao {
     public List<Order> getAllOrders() {
         List<Order> orders = new ArrayList<>();
 
-        try (Connection connection = connectionPool.takeConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(GET_ALL_ORDERS_SQL)) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
@@ -147,8 +152,8 @@ public class H2OrderDao implements OrderDao {
     public List<Order> getAllOrdersByUserID(Long userID) {
         List<Order> ordersById = new ArrayList<>();
 
-        try(Connection connection = connectionPool.takeConnection();
-        PreparedStatement statement = connection.prepareStatement(GET_ALL_ORDERS_BY_USER_ID_SQL)) {
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(GET_ALL_ORDERS_BY_USER_ID_SQL)) {
             statement.setLong(1,userID);
 
             try(ResultSet resultSet = statement.executeQuery()) {
