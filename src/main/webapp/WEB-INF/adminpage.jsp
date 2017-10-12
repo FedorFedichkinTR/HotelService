@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<jsp:include page="../static/common/adminNavbar.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/common/adminNavbar.jsp"/>
 
 <h2>All orders</h2>
 
@@ -47,16 +47,28 @@
             </select>
         </td>
         <td>
-            <div id="${order.orderID}">
-                <form method="post">
-                    <button name="pay" class="btn btn-primary pay" type="button"
-                            onclick="orderApproved(${order.orderID})"> Approve
-                    </button>
-                </form>
-            </div>
-
+            <c:choose>
+                <c:when test="${order.roomID == 0}">
+                    <div id="${order.orderID}">
+                        <form method="post">
+                            <button name="pay" class="btn btn-primary pay" type="button"
+                                    onclick="orderApproved(${order.orderID})"> Approve
+                            </button>
+                        </form>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <p>Order approved. Room №${order.roomID}.</p>
+                </c:otherwise>
+            </c:choose>
         </td>
-        <td><c:out value="${order.price}"/></td>
+        <td>
+            <c:if test="${order.roomID != 0}">
+                <div id = "price" style="display: none">
+                    <c:out value="${order.price}"/>
+                </div>
+            </c:if>
+        </td>
         </c:forEach>
 </table>
 </body>

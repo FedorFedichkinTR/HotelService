@@ -15,6 +15,3 @@ function orderApproved(order_id) {
         });
 }
 
-function orderDeleted() {
-
-}

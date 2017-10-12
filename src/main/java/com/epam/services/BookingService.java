@@ -13,7 +13,6 @@ public class BookingService {
 
     public Long bookRoom(Order newOrder) {
         OrderDao orderDao = daoFactory.createOrderDAO();
-        Long newOrderId = orderDao.create(newOrder);
-        return newOrderId;
+        return orderDao.create(newOrder);
     }
 }
