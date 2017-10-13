@@ -13,52 +13,26 @@ import org.junit.Test;
 
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
+import static com.epam.dao.h2.SetupSQL.initConnection;
 import static org.junit.Assert.*;
 
 @Log4j
 public class H2RoomDaoTest {
     private static RoomDao roomDao;
-
     private static DataSource dataSource;
 
     @BeforeClass
     //todo refactoring
     public static void setup() throws IOException, SQLException {
         dataSource = JdbcConnectionPool.create("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1", "", "");
-
-        Path sqlPath = Paths.get("src\\test\\resources\\sql");
-        Pattern pattern = Pattern.compile(".*\\.sql");
-        log.info(sqlPath);
-        try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement()) {
-            DirectoryStream<Path> paths = Files.newDirectoryStream(sqlPath);
-            for (Path filePath : paths) {
-                if (pattern.matcher(filePath.toFile().getName()).find()) {
-                    statement.addBatch(
-                            Files.lines(filePath)
-                                    .collect(Collectors.joining())
-                    );
-                }
-            }
-            statement.executeBatch();
-        } catch (SQLException e) {
-            log.error("SQLException during database initialisation: " + e);
-            e.printStackTrace();
-        } catch (IOException e) {
-            log.error("IOException during accessing sql script file: " + e);
-            e.printStackTrace();
-        }
+        initConnection(dataSource);
 
         log.info("DataSource from H2OrderDaoTest setup method: " + dataSource);
         AbstractDaoFactory daoFactory = new H2DaoFactory(dataSource);
@@ -68,8 +42,8 @@ public class H2RoomDaoTest {
     @Test
     public void getRoomsWithProperties() throws Exception {
         Order order = Order.builder()
-                .endDate(LocalDate.of(2004, 10, 27))
-                .startDate(LocalDate.of(2004, 10, 30))
+                .endDate(LocalDate.of(2004,10,27))
+                .startDate(LocalDate.of(2004,10,30))
                 .roomCapacity(3)
                 .roomType(RoomType.STANDARD)
                 .userID(1L)
@@ -79,7 +53,7 @@ public class H2RoomDaoTest {
 
         List<Room> roomList = roomDao.getRoomsWithProperties(order);
 
-        assertEquals(5, roomList.size());
+        assertEquals(5,roomList.size());
     }
 
     @Test
@@ -89,7 +63,7 @@ public class H2RoomDaoTest {
         Long roomID = roomDao.create(room);
         Room roomFromDB = roomDao.read(roomID);
 
-        assertEquals(roomID, roomFromDB.getRoomId());
+        assertEquals(roomID,roomFromDB.getRoomId());
     }
 
     @Test
@@ -116,12 +90,12 @@ public class H2RoomDaoTest {
     public void getAllRooms() throws Exception {
         List<Room> rooms = roomDao.getAllRooms();
 
-        assertEquals(10, rooms.size());
+        assertEquals(9,rooms.size());
     }
 
     @Test
     public void getFreeRooms() throws Exception {
-        //todo
+      //todo
     }
 
 }
