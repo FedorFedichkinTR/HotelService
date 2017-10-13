@@ -2,9 +2,11 @@ package com.epam.constants;
 
 
 public class Constants {
-    public static final String USER_SESSION="user";
-    public static final String LIST_OF_USER_ORDERS="listOfUserOrders";
-    public static final String LIST_OF_ALL_ORDERS="listOfAllOrders";
+    public static final String USER_SESSION = "user";
+    public static final String LIST_OF_USER_ORDERS = "listOfUserOrders";
+    public static final String LIST_OF_ALL_ORDERS = "listOfAllOrders";
+    public static final String MAP_OF_FREE_ROOMS_FOR_ALL_ORDERS = "mapOfFreeRoomsForAllOrders";
+
 
     public static final String AUTHORISATION_SERVICE = "authorisationService";
     public static final String REGISTRATION_SERVICE = "registrationService";

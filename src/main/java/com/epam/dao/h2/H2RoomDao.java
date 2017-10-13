@@ -39,7 +39,7 @@ public class H2RoomDao implements RoomDao {
     private static final String GET_ROOMS_WITH_PROPERTIES =
             "SELECT room_id, price FROM Rooms WHERE capacity = ? AND type = ?";
     private static final String GET_ROOM_DATE_INTERSECTION =
-            "SELECT * FROM Orders where start_date <= ? and end_date >= ? AND room_id = ?";
+            "SELECT * FROM Orders where start_date < ? and end_date > ? AND room_id = ?";
 
     @Override
     //todo refactoring
