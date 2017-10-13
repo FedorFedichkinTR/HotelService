@@ -1,8 +1,8 @@
 package com.epam.listeners;
 
 import com.epam.constants.Constants;
-import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.dao.h2.H2DaoFactory;
+import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.services.*;
 import lombok.extern.log4j.Log4j;
 
@@ -31,7 +31,7 @@ public class DataBaseInitListener implements ServletContextListener {
     private DataSource dataSource;
 
     @Override
-    public void contextInitialized(ServletContextEvent servletContextEvent)  {
+    public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext servletContext = servletContextEvent.getServletContext();
         Path sqlPath = Paths.get(servletContext.getRealPath("/WEB-INF/classes/sql"));
         Pattern pattern = Pattern.compile(".*\\.sql");

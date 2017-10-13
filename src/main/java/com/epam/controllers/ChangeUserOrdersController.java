@@ -1,6 +1,7 @@
 package com.epam.controllers;
 
 import com.epam.constants.Constants;
+import com.epam.model.User;
 import com.epam.services.ChangeUserOrderService;
 
 import javax.servlet.ServletException;
@@ -21,10 +22,12 @@ public class ChangeUserOrdersController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("order_to_delete")!=null) {
+        if (request.getParameter("order_to_delete") != null) {
             Long orderId = Long.parseLong(request.getParameter("order_to_delete"));
-            changeOrderService.deleteOrder(orderId);
-            request.getRequestDispatcher("/user_orders").forward(request, response);
+            if (changeOrderService.isBelongToUser((User) request.getSession().getAttribute(Constants.USER_SESSION), orderId)) {
+                changeOrderService.deleteOrder(orderId);
+                request.getRequestDispatcher("/user_orders").forward(request, response);
+            }
         }
     }
 }

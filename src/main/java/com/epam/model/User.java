@@ -11,7 +11,7 @@ public class User {
 
     public User() {
     }
-    
+
     public User(Long userID, String eMail, String password, String firstName, String lastName, Role role) {
         this.userID = userID;
         this.eMail = eMail;
@@ -97,6 +97,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "user ID : " + userID + ", "+ firstName + ", "+ lastName;
+        return "user ID : " + userID + ", " + firstName + ", " + lastName;
     }
 }

@@ -33,10 +33,11 @@ button {
 
 h2 {
     position: absolute;
-    left: 32%;
-    top: 31%;
+    left: 38%;
+    top:  25%;
     transform: translate(-50%, -50%);
-    font-size: 40px;
+    font-size: 50px;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 p {

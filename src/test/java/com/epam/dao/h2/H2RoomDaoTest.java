@@ -7,61 +7,26 @@ import com.epam.model.Order;
 import com.epam.model.Room;
 import com.epam.model.RoomType;
 import lombok.extern.log4j.Log4j;
-import org.h2.jdbcx.JdbcConnectionPool;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.sql.DataSource;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import static com.epam.dao.h2.SetupSQL.initConnection;
+import static org.junit.Assert.assertEquals;
 
 @Log4j
 public class H2RoomDaoTest {
     private static RoomDao roomDao;
-
-    private static DataSource dataSource;
+    private static AbstractDaoFactory daoFactory = new H2DaoFactory(SetupSQL.getDataSource());
 
     @BeforeClass
     //todo refactoring
     public static void setup() throws IOException, SQLException {
-        dataSource = JdbcConnectionPool.create("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1", "", "");
-
-        Path sqlPath = Paths.get("D:\\Projects\\Java_WEB_Application\\HotelService\\src\\test\\resources\\sql");
-        Pattern pattern = Pattern.compile(".*\\.sql");
-        log.info(sqlPath);
-        try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement()) {
-            DirectoryStream<Path> paths = Files.newDirectoryStream(sqlPath);
-            for (Path filePath : paths) {
-                if (pattern.matcher(filePath.toFile().getName()).find()) {
-                    statement.addBatch(
-                            Files.lines(filePath)
-                                    .collect(Collectors.joining())
-                    );
-                }
-            }
-            statement.executeBatch();
-        } catch (SQLException e) {
-            log.error("SQLException during database initialisation: " + e);
-            e.printStackTrace();
-        } catch (IOException e) {
-            log.error("IOException during accessing sql script file: " + e);
-            e.printStackTrace();
-        }
-
-        log.info("DataSource from H2OrderDaoTest setup method: " + dataSource);
-        AbstractDaoFactory daoFactory = new H2DaoFactory(dataSource);
+        initConnection();
         roomDao = daoFactory.createRoomDAO();
     }
 
@@ -116,7 +81,7 @@ public class H2RoomDaoTest {
     public void getAllRooms() throws Exception {
         List<Room> rooms = roomDao.getAllRooms();
 
-        assertEquals(5,rooms.size());
+        assertEquals(9,rooms.size());
     }
 
     @Test
