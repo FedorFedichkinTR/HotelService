@@ -38,7 +38,7 @@ public class H2RoomDaoTest {
     public static void setup() throws IOException, SQLException {
         dataSource = JdbcConnectionPool.create("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1", "", "");
 
-        Path sqlPath = Paths.get("D:\\Projects\\Java_WEB_Application\\HotelService\\src\\test\\resources\\sql");
+        Path sqlPath = Paths.get("src\\test\\resources\\sql");
         Pattern pattern = Pattern.compile(".*\\.sql");
         log.info(sqlPath);
         try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement()) {
@@ -116,7 +116,7 @@ public class H2RoomDaoTest {
     public void getAllRooms() throws Exception {
         List<Room> rooms = roomDao.getAllRooms();
 
-        assertEquals(5,rooms.size());
+        assertEquals(10,rooms.size());
     }
 
     @Test

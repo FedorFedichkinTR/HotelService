@@ -43,7 +43,7 @@ public class H2OrderDaoTest {
     public static void setup() throws IOException, SQLException, NamingException {
         dataSource = JdbcConnectionPool.create("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1", "", "");
 
-        Path sqlPath = Paths.get("D:\\Tomcat\\apache-tomcat-9.0.0.M4\\webapps\\ROOT\\WEB-INF\\classes\\sql");
+        Path sqlPath = Paths.get("src\\test\\resources\\sql");
         Pattern pattern = Pattern.compile(".*\\.sql");
         log.info(sqlPath);
         try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement()) {
