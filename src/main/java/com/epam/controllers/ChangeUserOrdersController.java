@@ -29,5 +29,11 @@ public class ChangeUserOrdersController extends HttpServlet {
                 request.getRequestDispatcher("/user_orders").forward(request, response);
             }
         }
+        if(request.getParameter("order_to_pay")!=null){
+            Long orderId = Long.parseLong(request.getParameter("order_to_pay"));
+            if (changeOrderService.payOrder(orderId)) {
+                response.getWriter().append("true");
+            }
+        }
     }
 }
