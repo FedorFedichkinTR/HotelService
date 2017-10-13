@@ -29,13 +29,13 @@
 
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/common/navbar.jsp"/>
 
-<%--
+
 <div>
-    <h2>Hello, <%out.print(((User) session.getAttribute("user")).getFirstName());%>.
-        <p> Please make your order:</p>
+    <h2>Hello, <%out.print(((User) session.getAttribute("user")).getFirstName());%>
+        <p> Please, make your order.</p>
     </h2>
 </div>
---%>
+
 
 
 <div class="jumbotron">

@@ -5,20 +5,17 @@ import com.epam.dao.interfaces.OrderDao;
 import com.epam.model.Order;
 import com.epam.model.RoomType;
 import lombok.extern.log4j.Log4j;
-import org.h2.jdbcx.JdbcConnectionPool;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.annotation.Resource;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
 import static com.epam.dao.h2.SetupSQL.initConnection;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @Log4j
 public class H2OrderDaoTest {
@@ -72,7 +69,6 @@ public class H2OrderDaoTest {
 
     @Test
     public void getAllOrdersByUserID() throws Exception {
-
         List<Order> orders = orderDAO.getAllOrdersByUserID(1L);
 
         assertEquals(3, orders.size());
