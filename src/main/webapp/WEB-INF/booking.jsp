@@ -47,7 +47,8 @@
                 <option>Junior</option>
                 <option>Standard</option>
             </select>
-            <select class="form-control validate[required]" id="number-of-people" title="number-of-people" name="number-of-people"
+            <select class="form-control validate[required]" id="number-of-people" title="number-of-people"
+                    name="number-of-people"
                     required style="opacity: 1">
                 <option disabled="disabled" selected=selected value=""> Choose number of people...</option>
                 <option>1</option>

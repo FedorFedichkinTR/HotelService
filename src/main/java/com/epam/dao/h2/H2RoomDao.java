@@ -5,26 +5,15 @@ import com.epam.dao.interfaces.RoomDao;
 import com.epam.model.Order;
 import com.epam.model.Room;
 import com.epam.model.RoomType;
-import com.epam.model.User;
 import lombok.Builder;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Builder
 public class H2RoomDao implements RoomDao {
-
-    private final DataSource dataSource;
-
-    public H2RoomDao(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
     private static final String CREATE_ROOM_SQL =
             "INSERT INTO Rooms (capacity, type, price) VALUES (?, ?, ?)";
@@ -40,6 +29,10 @@ public class H2RoomDao implements RoomDao {
             "SELECT room_id, price FROM Rooms WHERE capacity = ? AND type = ?";
     private static final String GET_ROOM_DATE_INTERSECTION =
             "SELECT * FROM Orders where start_date < ? and end_date > ? AND room_id = ?";
+    private final DataSource dataSource;
+    public H2RoomDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Override
     //todo refactoring
@@ -115,7 +108,7 @@ public class H2RoomDao implements RoomDao {
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_ROOMS_SQL)) {
-            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     final Room room = new Room();
 
@@ -138,14 +131,14 @@ public class H2RoomDao implements RoomDao {
     public List<Room> getRoomsWithProperties(Order order) {
         List<Room> rooms = new ArrayList<>();
 
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(GET_ROOMS_WITH_PROPERTIES)) {
-            statement.setInt(1,order.getRoomCapacity());
-            statement.setString(2,order.getRoomType().toString());
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ROOMS_WITH_PROPERTIES)) {
+            statement.setInt(1, order.getRoomCapacity());
+            statement.setString(2, order.getRoomType().toString());
 
-            try(ResultSet resultSet = statement.executeQuery()) {
-                while(resultSet.next()) {
-                  final Room room = new Room();
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    final Room room = new Room();
 
                     room.setRoomId(resultSet.getLong("room_id"));
                     room.setRoomCapacity(order.getRoomCapacity());
@@ -167,16 +160,16 @@ public class H2RoomDao implements RoomDao {
         List<Room> freeRooms = new ArrayList<>();
         List<Room> possibleRooms = getRoomsWithProperties(order);
 
-        for (Room current: possibleRooms) {
-            try(Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(GET_ROOM_DATE_INTERSECTION)) {
-                statement.setDate(1,Date.valueOf(order.getEndDate()));
-                statement.setDate(2,Date.valueOf(order.getStartDate()));
-                statement.setLong(3,current.getRoomId());
+        for (Room current : possibleRooms) {
+            try (Connection connection = dataSource.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(GET_ROOM_DATE_INTERSECTION)) {
+                statement.setDate(1, Date.valueOf(order.getEndDate()));
+                statement.setDate(2, Date.valueOf(order.getStartDate()));
+                statement.setLong(3, current.getRoomId());
                 List<Long> ordersId = new ArrayList<>();
 
-                try(ResultSet resultSet = statement.executeQuery()) {
-                    while(resultSet.next()) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
                         ordersId.add(resultSet.getLong("order_id"));
                     }
                 }

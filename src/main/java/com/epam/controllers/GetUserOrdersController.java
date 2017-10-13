@@ -25,13 +25,13 @@ public class GetUserOrdersController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO: 11.10.2017 нужно вынести сервис в поле класса, ну и название сменить
-        List<Order> listOfOrders =userOrdersService.getOrdersOfUser((User) request.getSession().getAttribute(Constants.USER_SESSION));
+        List<Order> listOfOrders = userOrdersService.getOrdersOfUser((User) request.getSession().getAttribute(Constants.USER_SESSION));
         request.setAttribute(Constants.LIST_OF_USER_ORDERS, listOfOrders);
         request.getRequestDispatcher("WEB-INF/myorders.jsp").forward(request, response);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doPost(request,response);
+        this.doPost(request, response);
     }
 }

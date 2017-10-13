@@ -8,10 +8,10 @@ public class Room {
     private Integer roomCapacity;
     private RoomType roomType;
     private Integer price;
-    
+
     public Room() {
     }
-    
+
     public Room(Long roomId, Integer roomCapacity, RoomType roomType, Integer price) {
         this.roomId = roomId;
         this.roomCapacity = roomCapacity;
@@ -53,9 +53,9 @@ public class Room {
 
     @Override
     public String toString() {
-        return roomId + "\n"+
-                "roomCapacity: " + roomCapacity + "\n"+
-                "roomType: " + roomType + "\n"+
+        return roomId + "\n" +
+                "roomCapacity: " + roomCapacity + "\n" +
+                "roomType: " + roomType + "\n" +
                 "price: " + price;
     }
 

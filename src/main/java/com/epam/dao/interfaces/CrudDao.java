@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-interface CrudDao<E,K> {
+interface CrudDao<E, K> {
     Long create(E entity);
 
     E read(K id);

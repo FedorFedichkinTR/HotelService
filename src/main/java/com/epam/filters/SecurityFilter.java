@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Log4j
-//@WebFilter(urlPatterns = {"*.jsp", "/userOrders"})
+@WebFilter(urlPatterns = {"*.jsp", "/user_orders"})
 public class SecurityFilter extends HttpFilter {
     private Pattern notAuthPattern = Pattern.compile(".*/static/.*");
 
@@ -28,7 +28,7 @@ public class SecurityFilter extends HttpFilter {
             throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpSession session = httpServletRequest.getSession(true);
-        final User currentUser = ((User)session.getAttribute(Constants.USER_SESSION));
+        final User currentUser = ((User) session.getAttribute(Constants.USER_SESSION));
         final Role currentUserRole;
         if (currentUser != null) {
             currentUserRole = currentUser.getRole();
@@ -44,7 +44,7 @@ public class SecurityFilter extends HttpFilter {
             } else if (currentUserRole == Role.ADMINISTRATOR) {
                 if (httpServletRequest.getRequestURI().contains("/myorders.jsp")
                         || httpServletRequest.getRequestURI().contains("/userOrders")) {
-                request.getRequestDispatcher("adminpage.jsp").forward(httpServletRequest, response);
+                    request.getRequestDispatcher("adminpage.jsp").forward(httpServletRequest, response);
                 }
             } else if (currentUserRole == null) {
                 if (httpServletRequest.getRequestURI().contains("/booking.jsp")

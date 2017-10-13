@@ -17,7 +17,7 @@ public class AdminController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-       adminService = (AdminService) getServletContext().getAttribute(Constants.ADMIN_SERVICE);
+        adminService = (AdminService) getServletContext().getAttribute(Constants.ADMIN_SERVICE);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class AdminController extends HttpServlet {
         Long orderId = Long.parseLong(request.getParameter("order_id"));
         Long roomId = Long.parseLong(request.getParameter("room_id"));
         Room room = new Room();
-        room.setRoomId(adminService.getARoom(roomId,orderId));
+        room.setRoomId(adminService.getARoom(roomId, orderId));
         response.getWriter().append(roomId.toString());
     }
 }

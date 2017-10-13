@@ -1,8 +1,12 @@
 package com.epam.dao.h2;
 
-import javax.sql.DataSource;
-import com.epam.dao.interfaces.*;
+import com.epam.dao.interfaces.AbstractDaoFactory;
+import com.epam.dao.interfaces.OrderDao;
+import com.epam.dao.interfaces.RoomDao;
+import com.epam.dao.interfaces.UserDao;
 import lombok.extern.log4j.Log4j;
+
+import javax.sql.DataSource;
 
 @Log4j
 public class H2DaoFactory implements AbstractDaoFactory {

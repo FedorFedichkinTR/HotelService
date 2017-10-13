@@ -16,7 +16,7 @@ public class ChangeUserOrderService {
         return orderDao.deleteById(orderId).equals(orderId);
     }
 
-    public boolean isBelongToUser(User user, Long orderId){
+    public boolean isBelongToUser(User user, Long orderId) {
         OrderDao orderDao = daoFactory.createOrderDAO();
         return orderDao.read(orderId).getUserID().equals(user.getUserID());
     }

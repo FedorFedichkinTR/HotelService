@@ -11,13 +11,13 @@ import java.io.IOException;
 @WebFilter("/*")
 public class EncodingFilter extends HttpFilter {
 
-//    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-//            throws IOException, ServletException {
-//        String encoding = request.getCharacterEncoding();
-//
-//        if (!"UTF-8".equals(encoding)) {
-//            request.setCharacterEncoding("UTF-8");
-//        }
-//        chain.doFilter(request, response);
-//    }
+    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        String encoding = request.getCharacterEncoding();
+
+        if (!"UTF-8".equals(encoding)) {
+            request.setCharacterEncoding("UTF-8");
+        }
+        chain.doFilter(request, response);
+    }
 }

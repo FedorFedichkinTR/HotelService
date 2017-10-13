@@ -64,7 +64,7 @@
         </td>
         <td>
             <c:if test="${order.roomID != 0}">
-                <div id = "price" style="display: none">
+                <div id="price" style="display: none">
                     <c:out value="${order.price}"/>
                 </div>
             </c:if>

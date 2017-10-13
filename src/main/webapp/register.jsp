@@ -26,7 +26,8 @@
                required>
 
         <label for="input-email" class="sr-only">Email address</label>
-        <input type="email" id="input-email" class="form-control" placeholder="Email address" name="input-email" required>
+        <input type="email" id="input-email" class="form-control" placeholder="Email address" name="input-email"
+               required>
 
         <label for="input-password" class="sr-only">Password</label>
         <input type="password" id="input-password" class="form-control" placeholder="Password" name="input-password"

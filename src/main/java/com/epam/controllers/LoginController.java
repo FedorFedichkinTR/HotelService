@@ -1,11 +1,11 @@
 package com.epam.controllers;
 
 import com.epam.constants.Constants;
+import com.epam.exceptions.UnmatchedPassword;
+import com.epam.exceptions.UserDoesNotExist;
 import com.epam.model.Role;
 import com.epam.model.User;
 import com.epam.services.AuthorisationService;
-import com.epam.exceptions.*;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,15 +27,15 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userMail = request.getParameter("input-email");
         String password = request.getParameter("input-password");
-        try{
-            User resultUser = authorise.authorize(userMail,password);
+        try {
+            User resultUser = authorise.authorize(userMail, password);
             request.getSession().setAttribute(Constants.USER_SESSION, resultUser);
             if (resultUser.getRole() == Role.USER) {
                 request.getRequestDispatcher("/WEB-INF/booking.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("/admin").forward(request, response);
             }
-        } catch(UnmatchedPassword | UserDoesNotExist e){
+        } catch (UnmatchedPassword | UserDoesNotExist e) {
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }

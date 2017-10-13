@@ -4,12 +4,8 @@ import com.epam.dao.interfaces.AbstractDaoFactory;
 import com.epam.dao.interfaces.UserDao;
 import com.epam.exceptions.UnmatchedPassword;
 import com.epam.exceptions.UserDoesNotExist;
-import com.epam.model.Role;
 import com.epam.model.User;
-import com.epam.util.Encoder;
 import lombok.extern.log4j.Log4j;
-
-import java.security.NoSuchAlgorithmException;
 
 import static com.epam.util.Encoder.encode;
 

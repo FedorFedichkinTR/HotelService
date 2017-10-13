@@ -16,8 +16,6 @@ import java.util.List;
 @Log4j
 public class H2OrderDao implements OrderDao {
 
-    private final DataSource dataSource;
-
     private static final String CREATE_ORDER_SQL =
             "INSERT INTO Orders (user_id, capacity, type,start_date, end_date) VALUES (?, ?, ?, ?, ?)";
     private static final String READ_ORDER_BY_ID =
@@ -30,6 +28,7 @@ public class H2OrderDao implements OrderDao {
             "SELECT order_id, user_id, room_id, capacity, type, status, start_date, end_date, admin_id, price FROM Orders";
     private static final String GET_ALL_ORDERS_BY_USER_ID_SQL =
             "SELECT order_id, room_id, capacity, type, status, start_date, end_date, admin_id, price FROM Orders WHERE user_id = ?";
+    private final DataSource dataSource;
 
     public H2OrderDao(DataSource dataSource) {
         log.info("DataSource from H2OrderDao Constructor: " + dataSource);
@@ -42,12 +41,12 @@ public class H2OrderDao implements OrderDao {
         log.info("DataSource from H2OrderDao create method: " + dataSource);
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_ORDER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
-                statement.setLong(1, order.getUserID());
-                statement.setInt(2, order.getRoomCapacity());
-                statement.setString(3, order.getRoomType().toString());
-                statement.setObject(4, order.getStartDate());
-                statement.setObject(5, order.getEndDate());
-                statement.executeUpdate();
+            statement.setLong(1, order.getUserID());
+            statement.setInt(2, order.getRoomCapacity());
+            statement.setString(3, order.getRoomType().toString());
+            statement.setObject(4, order.getStartDate());
+            statement.setObject(5, order.getEndDate());
+            statement.executeUpdate();
 
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 if (resultSet.next()) {
@@ -99,8 +98,8 @@ public class H2OrderDao implements OrderDao {
             statement.setBoolean(5, order.getStatus());
             statement.setDate(6, java.sql.Date.valueOf(order.getStartDate()));
             statement.setDate(7, java.sql.Date.valueOf(order.getEndDate()));
-            statement.setLong(8,order.getAdminID());
-            statement.setInt(9,order.getPrice());
+            statement.setLong(8, order.getAdminID());
+            statement.setInt(9, order.getPrice());
             statement.setLong(10, order.getOrderID());
             statement.executeUpdate();
             return true;
@@ -152,12 +151,12 @@ public class H2OrderDao implements OrderDao {
     public List<Order> getAllOrdersByUserID(Long userID) {
         List<Order> ordersById = new ArrayList<>();
 
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(GET_ALL_ORDERS_BY_USER_ID_SQL)) {
-            statement.setLong(1,userID);
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ALL_ORDERS_BY_USER_ID_SQL)) {
+            statement.setLong(1, userID);
 
-            try(ResultSet resultSet = statement.executeQuery()) {
-                while(resultSet.next()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
                     final Order order = new Order();
 
                     order.setUserID(userID);

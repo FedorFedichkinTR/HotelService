@@ -68,8 +68,8 @@ public class H2RoomDaoTest {
     @Test
     public void getRoomsWithProperties() throws Exception {
         Order order = Order.builder()
-                .endDate(LocalDate.of(2004,10,27))
-                .startDate(LocalDate.of(2004,10,30))
+                .endDate(LocalDate.of(2004, 10, 27))
+                .startDate(LocalDate.of(2004, 10, 30))
                 .roomCapacity(3)
                 .roomType(RoomType.STANDARD)
                 .userID(1L)
@@ -79,7 +79,7 @@ public class H2RoomDaoTest {
 
         List<Room> roomList = roomDao.getRoomsWithProperties(order);
 
-        assertEquals(5,roomList.size());
+        assertEquals(5, roomList.size());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class H2RoomDaoTest {
         Long roomID = roomDao.create(room);
         Room roomFromDB = roomDao.read(roomID);
 
-        assertEquals(roomID,roomFromDB.getRoomId());
+        assertEquals(roomID, roomFromDB.getRoomId());
     }
 
     @Test
@@ -116,12 +116,12 @@ public class H2RoomDaoTest {
     public void getAllRooms() throws Exception {
         List<Room> rooms = roomDao.getAllRooms();
 
-        assertEquals(10,rooms.size());
+        assertEquals(10, rooms.size());
     }
 
     @Test
     public void getFreeRooms() throws Exception {
-      //todo
+        //todo
     }
 
 }
