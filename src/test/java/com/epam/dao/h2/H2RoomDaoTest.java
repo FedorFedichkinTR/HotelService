@@ -26,16 +26,12 @@ import static org.junit.Assert.*;
 @Log4j
 public class H2RoomDaoTest {
     private static RoomDao roomDao;
-    private static DataSource dataSource;
+    private static AbstractDaoFactory daoFactory = new H2DaoFactory(SetupSQL.getDataSource());
 
     @BeforeClass
     //todo refactoring
     public static void setup() throws IOException, SQLException {
-        dataSource = JdbcConnectionPool.create("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1", "", "");
-        initConnection(dataSource);
-
-        log.info("DataSource from H2OrderDaoTest setup method: " + dataSource);
-        AbstractDaoFactory daoFactory = new H2DaoFactory(dataSource);
+        initConnection();
         roomDao = daoFactory.createRoomDAO();
     }
 

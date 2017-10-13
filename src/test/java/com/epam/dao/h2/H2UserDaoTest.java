@@ -21,18 +21,12 @@ import static com.epam.dao.h2.SetupSQL.initConnection;
 @Log4j
 public class H2UserDaoTest {
     private static UserDao userDAO;
-
-    @Resource(name = "jdbc/HotelService")
-    private static DataSource dataSource;
+    private static AbstractDaoFactory daoFactory = new H2DaoFactory(SetupSQL.getDataSource());
 
     @BeforeClass
     //todo refactoring
     public static void setup() throws IOException, SQLException, NamingException {
-        dataSource = JdbcConnectionPool.create("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1", "", "");
-        initConnection(dataSource);
-
-        log.info("DataSource from H2OrderDaoTest setup method: " + dataSource);
-        AbstractDaoFactory daoFactory = new H2DaoFactory(dataSource);
+        initConnection();
         userDAO = daoFactory.createUserDAO();
     }
 
