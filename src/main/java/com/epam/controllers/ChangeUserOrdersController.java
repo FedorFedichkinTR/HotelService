@@ -22,18 +22,21 @@ public class ChangeUserOrdersController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("order_to_delete") != null) {
+        if (request.getParameter("delete") != null) {
             Long orderId = Long.parseLong(request.getParameter("order_to_delete"));
             if (changeOrderService.isBelongToUser((User) request.getSession().getAttribute(Constants.USER_SESSION), orderId)) {
                 changeOrderService.deleteOrder(orderId);
                 request.getRequestDispatcher("/user_orders").forward(request, response);
             }
         }
-        if(request.getParameter("order_to_pay")!=null){
+        if(request.getParameter("pay")!=null){
             Long orderId = Long.parseLong(request.getParameter("order_to_pay"));
             if (changeOrderService.payOrder(orderId)) {
                 response.getWriter().append("true");
             }
+        }
+        if(request.getParameter("edit")!=null){
+
         }
     }
 }

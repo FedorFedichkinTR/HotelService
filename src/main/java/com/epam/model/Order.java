@@ -4,6 +4,7 @@ package com.epam.model;
 import lombok.Builder;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 public final class Order {
@@ -17,12 +18,13 @@ public final class Order {
     private LocalDate startDate;
     private LocalDate endDate;
     private Boolean status;
+    private transient List<Long> freeRooms;
 
     public Order() {
     }
 
     public Order(Long orderID, Long userID, Long adminID, Long roomID, Integer roomCapacity, Integer price,
-                 RoomType roomType, LocalDate startDate, LocalDate endDate, Boolean status) {
+                 RoomType roomType, LocalDate startDate, LocalDate endDate, Boolean status, List<Long> freeRooms) {
         this.orderID = orderID;
         this.userID = userID;
         this.adminID = adminID;
@@ -33,6 +35,7 @@ public final class Order {
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
+        this.freeRooms = freeRooms;
     }
 
     public Long getOrderID() {
@@ -113,6 +116,14 @@ public final class Order {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public List<Long> getFreeRooms() {
+        return freeRooms;
+    }
+
+    public void setFreeRooms(List<Long> freeRooms) {
+        this.freeRooms = freeRooms;
     }
 
     @Override
