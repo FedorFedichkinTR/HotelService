@@ -64,9 +64,9 @@ INSERT INTO Rooms (capacity, type, price) VALUES (2, 'JUNIOR', 250);
 INSERT INTO Rooms (capacity, type, price) VALUES (3, 'JUNIOR', 300);
 
 INSERT INTO Orders (user_id, room_id, capacity, type, start_date, end_date, admin_id, price, status)
-VALUES (1, 2, 1, 'STANDARD', '2017-10-13', '2017-10-15', 2, 360, true);
+VALUES (1, 1, 1, 'STANDARD', '2017-10-13', '2017-10-15', 2, 360, true);
 INSERT INTO Orders (user_id, room_id, capacity, type, start_date, end_date, admin_id, price, status)
-VALUES (1, 2, 1, 'STANDARD', '2017-10-17', '2017-10-20', 2, 720, true);
+VALUES (1, 1, 1, 'STANDARD', '2017-10-17', '2017-10-20', 2, 720, true);
 INSERT INTO Orders (user_id, room_id, capacity, type, start_date, end_date, admin_id, price, status)
-VALUES (1, 2, 1, 'STANDARD', '2017-10-23', '2017-10-25', 1, 720, false);
+VALUES (1, 1, 1, 'STANDARD', '2017-10-23', '2017-10-25', 1, 720, false);
 
