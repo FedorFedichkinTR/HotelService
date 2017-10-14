@@ -36,22 +36,36 @@
         <th></th>
         <th></th>
     </tr>
+
+
     <c:forEach items="${requestScope.get(Constants.LIST_OF_USER_ORDERS)}" var="order">
     <tr>
         <td><c:out value="${order.startDate}"/></td>
         <td><c:out value="${order.endDate}"/></td>
         <td><c:out value="${order.roomType}"/></td>
         <td><c:out value="${order.roomCapacity}"/></td>
-        <td></td>
+        <td>
+            <c:choose>
+                <c:when test="${order.roomID==null}">
+                    <c:out value="Waiting for approve"/>
+                </c:when>
+                <c:when test="${order.status == false && order.roomID!=null}">
+                    <c:out value="Approved. Room № ${order.roomID}"/>
+                </c:when>
+                <c:when test="${order.status == true}">
+                    <c:out value="Payed. Room № ${order.roomID}"/>
+                </c:when>
+            </c:choose>
+        </td>
         <td><c:if test="${order.roomID != null}">
             <c:out value="${order.price}"/>
         </c:if></td>
         <td></td>
         <td>
             <c:choose>
-                <c:when test="${order.roomID != null}">
+                <c:when test="${order.roomID != null && order.status == false}">
                     <form method="post" action="${pageContext.request.contextPath}/change_user_orders">
-                        <button name="pay" class="btn btn-primary pay " type="button"
+                        <button name="pay" class="btn btn-primary pay " type="submit"
                                 onclick="this.style.visibility='hidden';">
                             <i class="fa fa-credit-card" aria-hidden="true"></i> Pay up
                         </button>

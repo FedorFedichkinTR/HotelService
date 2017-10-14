@@ -32,7 +32,8 @@
         <th>Price</th>
         <th></th>
     </tr>
-    <c:forEach items="${requestScope.get(Constants.LIST_OF_ALL_ORDERS)}" var="order" varStatus="status">
+    <c:forEach items="${requestScope.get(Constants.LIST_OF_ALL_ORDERS)}" var="order" varStatus="status" >
+        <%--<c:forEach items="${requestScope.get(Constants.MAP_OF_FREE_ROOMS_FOR_ALL_ORDERS)}" var="map_with_free_rooms">--%>
     <tr>
         <td><c:out value="${order.userID}"/></td>
         <td><c:out value="${order.startDate}"/></td>
@@ -41,9 +42,9 @@
         <td><c:out value="${order.roomCapacity}"/></td>
         <td>
             <select id="${order.orderID}selected-room" class="form-control" title="room-type" name="room-type">
-                <option selected=selected>1</option>
-                <option>2</option>
-                <option>3</option>
+                <c:forEach items="${order.freeRooms}" var="free_rooms">
+                    <option><c:out value="${free_rooms}"/></option>
+                </c:forEach>
             </select>
         </td>
         <td>
@@ -69,6 +70,8 @@
                 </div>
             </c:if>
         </td>
+    </tr>
+        <%--</c:forEach>--%>
         </c:forEach>
 </table>
 </body>
