@@ -15,7 +15,7 @@ public class AdminService {
         this.daoFactory = daoFactory;
     }
 
-    public Long getARoom(Long roomId, Long orderId) {
+    public Long getARoom(Long roomId, Long orderId, Long adminId) {
         OrderDao orderDao = daoFactory.createOrderDAO();
         RoomDao roomDao = daoFactory.createRoomDAO();
         Order orderToConfirm = orderDao.read(orderId);
@@ -25,6 +25,7 @@ public class AdminService {
             Integer roomPrice = roomDao.read(roomId).getPrice() * duration.intValue();
             orderToConfirm.setPrice(roomPrice);
             orderToConfirm.setRoomID(roomId);
+            orderToConfirm.setAdminID(adminId);
             if (orderDao.update(orderToConfirm)) {
                 return roomId;
             }

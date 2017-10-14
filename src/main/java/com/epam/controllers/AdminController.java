@@ -2,6 +2,7 @@ package com.epam.controllers;
 
 import com.epam.constants.Constants;
 import com.epam.model.Room;
+import com.epam.model.User;
 import com.epam.services.AdminService;
 
 import javax.servlet.ServletException;
@@ -25,7 +26,7 @@ public class AdminController extends HttpServlet {
         Long orderId = Long.parseLong(request.getParameter("order_id"));
         Long roomId = Long.parseLong(request.getParameter("room_id"));
         Room room = new Room();
-        room.setRoomId(adminService.getARoom(roomId, orderId));
+        room.setRoomId(adminService.getARoom(roomId, orderId, ((User)request.getSession().getAttribute(Constants.USER_SESSION)).getUserID()));
         response.getWriter().append(roomId.toString());
     }
 }

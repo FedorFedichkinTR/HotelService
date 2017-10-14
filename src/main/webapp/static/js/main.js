@@ -31,7 +31,7 @@ function submitChanges(order_id) {
             capacity: capacity
         },
         function (response) {
-            if (response === true) {
+            if (response === 'true') {
                 const currentRow = '#' + order_id + 'row';
                 ($(currentRow).find("td:eq(0)")).html(`${arrival}`);
                 ($(currentRow).find("td:eq(1)")).html(`${departure}`);

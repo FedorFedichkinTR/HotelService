@@ -41,11 +41,18 @@
         <td><c:out value="${order.roomType}"/></td>
         <td><c:out value="${order.roomCapacity}"/></td>
         <td>
+            <c:if test="${order.roomID == 0}">
             <select id="${order.orderID}selected-room" class="form-control" title="room-type" name="room-type">
                 <c:forEach items="${order.freeRooms}" var="free_rooms">
                     <option><c:out value="${free_rooms}"/></option>
                 </c:forEach>
             </select>
+            </c:if>
+            <c:if test="${order.roomID != 0}">
+                <select id="${order.orderID}selected-room" class="form-control" title="room-type" name="room-type" disabled>
+                    <option><c:out value="${order.roomID}"/></option>
+                </select>
+            </c:if>
         </td>
         <td>
             <c:choose>

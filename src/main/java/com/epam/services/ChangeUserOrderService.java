@@ -6,28 +6,36 @@ import com.epam.model.Order;
 import com.epam.model.User;
 
 public class ChangeUserOrderService {
-    private AbstractDaoFactory daoFactory;
+    private OrderDao orderDao;
 
     public ChangeUserOrderService(AbstractDaoFactory daoFactory) {
-        this.daoFactory = daoFactory;
+        orderDao = daoFactory.createOrderDAO();
     }
 
     public boolean deleteOrder(Long orderId) {
-        OrderDao orderDao = daoFactory.createOrderDAO();
         return orderDao.deleteById(orderId).equals(orderId);
     }
 
     public boolean isBelongToUser(User user, Long orderId) {
-        OrderDao orderDao = daoFactory.createOrderDAO();
         return orderDao.read(orderId).getUserID().equals(user.getUserID());
     }
 
     public boolean payOrder(Long orderId) {
-        OrderDao orderDao = daoFactory.createOrderDAO();
         Order order = orderDao.read(orderId);
         if (order.getRoomID() != 0) {
             order.setStatus(true);
         }
         return orderDao.update(order);
+    }
+
+    public Long changeOrder(Order order){
+        Order oldOrder = orderDao.read(order.getOrderID());
+        oldOrder.setStartDate(order.getStartDate());
+        oldOrder.setEndDate(order.getEndDate());
+        oldOrder.setRoomCapacity(order.getRoomCapacity());
+        oldOrder.setRoomType(order.getRoomType());
+        orderDao.deleteById(order.getOrderID());
+        return orderDao.create(oldOrder);
+        //return orderDao.update(oldOrder);
     }
 }
