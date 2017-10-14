@@ -53,7 +53,7 @@
                     <div id="${order.orderID}">
                         <form method="post">
                             <button name="pay" class="btn btn-primary pay" type="button"
-                                    onclick="orderApproved(${order.orderID})"> Approve
+                                    onclick="orderApproved(${order.orderID})">   Approve
                             </button>
                         </form>
                     </div>
@@ -65,7 +65,7 @@
         </td>
         <td>
             <c:if test="${order.roomID != 0}">
-                <div id="price" style="display: none">
+                <div id="price">
                     <c:out value="${order.price}"/>
                 </div>
             </c:if>

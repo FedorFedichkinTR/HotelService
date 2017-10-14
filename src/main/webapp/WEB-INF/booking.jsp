@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.epam.model.User" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -29,13 +29,13 @@
 
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/common/navbar.jsp"/>
 
-<%--
+
 <div>
-    <h2>Hello, <%out.print(((User) session.getAttribute("user")).getFirstName());%>.
-        <p> Please make your order:</p>
+    <h2>Hello, <%out.print(((User) session.getAttribute("user")).getFirstName());%>
+        <p> Please, make your order.</p>
     </h2>
 </div>
---%>
+
 
 
 <div class="jumbotron">
