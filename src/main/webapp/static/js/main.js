@@ -23,25 +23,24 @@ function submitChanges(order_id) {
     const departure = (document.getElementById(order_id + " departure")).value;
     const room_type = (document.getElementById(order_id + " room-type")).value;
     const capacity = (document.getElementById(order_id + " number-of-people")).value;
-    // $.post("/change_user_orders", {
-    //         order_id: order_id,
-    //         arrival: arrival,
-    //         departure: departure,
-    //         room_type: room_type,
-    //         capacity: capacity
-    //     },
-    //     function (response) {
-    //         if (response === true) {
-    const currentRow = '#' + order_id + 'row';
-    ($(currentRow).find("td:eq(0)")).html(`${arrival}`);
-    ($(currentRow).find("td:eq(1)")).html(`${departure}`);
-    ($(currentRow).find("td:eq(2)")).html(`${room_type}`);
-    ($(currentRow).find("td:eq(3)")).html(`${capacity}`);
-    ($(currentRow).find("td:eq(9)")).html(`<button name="edit" class="btn btn-primary edit" onclick="editOrder(` + order_id + `)">
+    $.post("/change_user_orders", {
+            order_id: order_id,
+            arrival: arrival,
+            departure: departure,
+            room_type: room_type,
+            capacity: capacity
+        },
+        function (response) {
+            if (response === true) {
+                const currentRow = '#' + order_id + 'row';
+                ($(currentRow).find("td:eq(0)")).html(`${arrival}`);
+                ($(currentRow).find("td:eq(1)")).html(`${departure}`);
+                ($(currentRow).find("td:eq(2)")).html(`${room_type}`);
+                ($(currentRow).find("td:eq(3)")).html(`${capacity}`);
+                ($(currentRow).find("td:eq(9)")).html(`<button name="edit" class="btn btn-primary edit" onclick="editOrder(` + order_id + `)">
                          Edit order</button>`)
-    //     }
-    // })
-    ;
+            }
+        });
 }
 
 function editOrder(order_id) {
@@ -52,9 +51,9 @@ function editOrder(order_id) {
     const capacity = $(currentRow).find("td:eq(3)").text();
     var type_index = 0;
 
-    if (type_of_room === "Junior") {
+    if (type_of_room.toUpperCase() === "JUNIOR") {
         type_index = 1;
-    } else if (type_of_room === "Standard") {
+    } else if (type_of_room.toUpperCase() === "STANDARD") {
         type_index = 2;
     }
 
@@ -80,5 +79,3 @@ function editOrder(order_id) {
                         </button> </form>`);
 
 }
-
-

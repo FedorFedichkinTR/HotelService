@@ -29,7 +29,7 @@ public class BookingController extends HttpServlet {
         Order order = new Order();
         order.setUserID(((User) request.getSession().getAttribute(Constants.USER_SESSION)).getUserID());
         order.setRoomCapacity(Integer.parseInt(request.getParameter("number-of-people")));
-        order.setRoomType(RoomType.valueOf(request.getParameter("room-type")));
+        order.setRoomType(RoomType.valueOf((request.getParameter("room-type")).toUpperCase()));
         order.setStartDate(LocalDate.parse(request.getParameter("arrival"), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         order.setEndDate(LocalDate.parse(request.getParameter("departure"), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
 
