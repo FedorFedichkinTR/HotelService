@@ -29,11 +29,6 @@
         <label for="input-password" class="sr-only">Password</label>
         <input type="password" id="input-password" class="form-control" placeholder="Password" name="input-password"
                required>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me" name="remember"> Remember me
-            </label>
-        </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
     </form>
     <form class="form-signin" action="${pageContext.request.contextPath}/register.jsp">

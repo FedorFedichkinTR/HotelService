@@ -33,13 +33,13 @@ public class ChangeUserOrdersController extends HttpServlet {
                 request.getRequestDispatcher("/user_orders").forward(request, response);
             }
         }
-        if(request.getParameter("pay_up_order")!=null){
+        if (request.getParameter("pay_up_order") != null) {
             Long orderId = Long.parseLong(request.getParameter("order_to_pay"));
             if (changeOrderService.payOrder(orderId)) {
                 response.getWriter().append("true");
             }
         }
-        if(request.getParameter("capacity")!=null){
+        if (request.getParameter("capacity") != null) {
             Order changedOrder = new Order();
             //changedOrder.setUserID(((User) request.getSession().getAttribute(Constants.USER_SESSION)).getUserID());
             changedOrder.setRoomCapacity(Integer.parseInt(request.getParameter("capacity")));
@@ -47,7 +47,7 @@ public class ChangeUserOrdersController extends HttpServlet {
             changedOrder.setStartDate(LocalDate.parse(request.getParameter("arrival"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             changedOrder.setEndDate(LocalDate.parse(request.getParameter("departure"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             changedOrder.setOrderID(Long.parseLong(request.getParameter("order_id")));
-            if(changeOrderService.changeOrder(changedOrder)!=null){
+            if (changeOrderService.changeOrder(changedOrder) != null) {
                 response.getWriter().append("true");
             }
         }

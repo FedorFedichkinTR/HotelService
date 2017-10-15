@@ -57,9 +57,8 @@ function editOrder(order_id) {
         type_index = 2;
     }
 
-    ($(currentRow).find("td:eq(0)")).html(`<form method="post"><input type="text" class="datePicker"
-                        placeholder="Arrival" id="${order_id} arrival" value = ${arrival} required>`);
-    ($(currentRow).find("td:eq(1)")).html(`<input type=\"text\" class=\"datePicker\" placeholder=\"Departure\" id="${order_id} departure" value=${departure} required>`);
+    ($(currentRow).find("td:eq(0)")).html(`<input type="text" class="datePicker" placeholder="Arrival" id="${order_id} arrival" value = ${arrival} required>`);
+    ($(currentRow).find("td:eq(1)")).html(`<input type=\"text\" class="datePicker" placeholder="Departure" id="${order_id} departure" value=${departure} required>`);
     calendar();
     ($(currentRow).find("td:eq(2)")).html(`<select class=\"form-control validate[required]\" title="room-type" id="${order_id} room-type" required>\n" +
         "                <option value="Suite">Suite</option>\\n" +
@@ -68,7 +67,7 @@ function editOrder(order_id) {
         "            </select>`);
     document.getElementById(order_id + " room-type").selectedIndex = type_index;
     ($(currentRow).find("td:eq(3)")).html(` <select class=\"form-control validate[required]\"  title=\"number-of-people\" id="${order_id} number-of-people"\n" +
-        "                    required style=\"opacity: 1\">\n" +
+        "                    required">\n" +
         "                <option value="1">1</option>\n" +
         "                <option value="2">2</option>\n" +-->
         "                <option value="3">3</option>\n" +
@@ -76,6 +75,6 @@ function editOrder(order_id) {
     document.getElementById(order_id + " number-of-people").selectedIndex = capacity - 1;
     ($(currentRow).find("td:eq(9)")).html(` <button name="submitChanges" class="btn btn-primary submit" onclick="submitChanges(${order_id})">
                             Submit
-                        </button> </form>`);
+                        </button> `);
 
 }

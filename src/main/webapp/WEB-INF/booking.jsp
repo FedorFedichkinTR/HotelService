@@ -1,4 +1,5 @@
 <%@ page import="com.epam.model.User" %>
+<%@ page import="com.epam.constants.Constants" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -31,11 +32,10 @@
 
 
 <div>
-    <h2>Hello, <%out.print(((User) session.getAttribute("user")).getFirstName());%>
+    <h2>Hello, ${(sessionScope.get(Constants.USER_SESSION)).getFirstName()}
         <p> Please, make your order.</p>
     </h2>
 </div>
-
 
 
 <div class="jumbotron">

@@ -69,8 +69,7 @@
             <c:choose>
                 <c:when test="${order.roomID != null && order.status == false}">
                     <form method="post" action="${pageContext.request.contextPath}/change_user_orders">
-                        <button name="pay_up_order" class="btn btn-primary pay " type="button"
-                                onclick="this.style.visibility='hidden';">
+                        <button name="pay_up_order" class="btn btn-primary pay " type="submit">
                             <i class="fa fa-credit-card" aria-hidden="true"></i> Pay up
                         </button>
                     </form>
