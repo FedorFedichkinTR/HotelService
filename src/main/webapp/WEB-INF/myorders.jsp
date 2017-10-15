@@ -57,7 +57,7 @@
                     <c:out value="Approved. Room № ${order.roomID}"/>
                 </c:when>
                 <c:when test="${order.status == true}">
-                    <c:out value="Payed. Room № ${order.roomID}"/>
+                    <c:out value="Paid. Room № ${order.roomID}"/>
                 </c:when>
             </c:choose>
         </td>
@@ -68,10 +68,9 @@
         <td>
             <c:choose>
                 <c:when test="${order.roomID != null && order.status == false}">
-                    <form method="post" action="${pageContext.request.contextPath}/change_user_orders">
-                        <input type="hidden" name="order_to_pay" value="${order.orderID}">
+                    <form method="post">
                         <button name="pay_up_order" class="btn btn-primary pay " type="submit"
-                                onclick="this.style(visibility = hidden)">
+                                onclick="orderPaid(${order.orderID})">
                             <i class="fa fa-credit-card" aria-hidden="true"></i> Pay up
                         </button>
                     </form>

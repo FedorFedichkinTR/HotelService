@@ -78,3 +78,14 @@ function editOrder(order_id) {
                         </button> `);
 
 }
+
+function orderPaid(order_id) {
+    $.post("change_user_orders", {
+            order_to_pay: order_id,
+        },
+        function (response) {
+            if (response != "true") {
+                alert(response);
+            }
+        });
+}
