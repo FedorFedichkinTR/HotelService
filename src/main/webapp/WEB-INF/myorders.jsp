@@ -43,7 +43,7 @@
         <th></th>
     </tr>
     <c:forEach items="${requestScope.get(Constants.LIST_OF_USER_ORDERS)}" var="order">
-    <tr id = "${order.orderID}row">
+    <tr id="${order.orderID}row">
         <td><c:out value="${order.startDate}"/></td>
         <td><c:out value="${order.endDate}"/></td>
         <td><c:out value="${order.roomType}"/></td>
@@ -69,7 +69,9 @@
             <c:choose>
                 <c:when test="${order.roomID != null && order.status == false}">
                     <form method="post" action="${pageContext.request.contextPath}/change_user_orders">
-                        <button name="pay_up_order" class="btn btn-primary pay " type="submit">
+                        <input type="hidden" name="order_to_pay" value="${order.orderID}">
+                        <button name="pay_up_order" class="btn btn-primary pay " type="submit"
+                                onclick="this.style(visibility = hidden)">
                             <i class="fa fa-credit-card" aria-hidden="true"></i> Pay up
                         </button>
                     </form>
@@ -91,13 +93,13 @@
         <td>
             <c:choose>
                 <c:when test="${order.status == false}">
-                        <button name="edit" class="btn btn-primary edit" onclick="editOrder(${order.orderID})">
-                            Edit order
-                        </button>
+                    <button name="edit" class="btn btn-primary edit" onclick="editOrder(${order.orderID})">
+                        Edit order
+                    </button>
                 </c:when>
             </c:choose>
         </td>
     </tr>
     </c:forEach>
-</body>
+    </body>
 </html>
