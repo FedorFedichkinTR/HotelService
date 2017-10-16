@@ -8,14 +8,12 @@ import lombok.extern.log4j.Log4j;
 
 import javax.sql.DataSource;
 
-@Log4j
 public class H2DaoFactory implements AbstractDaoFactory {
     private final UserDao userDao;
     private final OrderDao orderDao;
     private final RoomDao roomDao;
 
     public H2DaoFactory(DataSource dataSource) {
-        log.info("DataSource from H2DaoFactory: " + dataSource);
         this.userDao = new H2UserDao(dataSource);
         this.orderDao = new H2OrderDao(dataSource);
         this.roomDao = new H2RoomDao(dataSource);

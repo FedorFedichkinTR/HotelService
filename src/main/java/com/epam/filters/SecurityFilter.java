@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Log4j
-@WebFilter(urlPatterns = {"*.jsp", "/user_orders"})
+@WebFilter(urlPatterns = {"*.jsp", "/user_orders", "/admin", "/order", "/booking"})
 public class SecurityFilter extends HttpFilter {
     private Pattern notAuthPattern = Pattern.compile(".*/static/.*");
 
@@ -29,29 +29,25 @@ public class SecurityFilter extends HttpFilter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpSession session = httpServletRequest.getSession(true);
         final User currentUser = ((User) session.getAttribute(Constants.USER_SESSION));
-        final Role currentUserRole;
-        if (currentUser != null) {
-            currentUserRole = currentUser.getRole();
-        } else {
-            currentUserRole = null;
-        }
+        final Role currentUserRole = currentUser != null ? currentUser.getRole() : null;
         String path = Optional.ofNullable(httpServletRequest.getRequestURI()).orElse("");
         Matcher newMatcher = notAuthPattern.matcher(path);
         if (!newMatcher.find()) {
             if (currentUserRole == Role.USER
-                    && httpServletRequest.getRequestURI().contains("/adminpage.jsp")) {
+                    && httpServletRequest.getRequestURI().contains("/admin")) {
                 request.getRequestDispatcher("myorders.jsp").forward(httpServletRequest, response);
             } else if (currentUserRole == Role.ADMINISTRATOR) {
-                if (httpServletRequest.getRequestURI().contains("/myorders.jsp")
-                        || httpServletRequest.getRequestURI().contains("/userOrders")) {
+                if (httpServletRequest.getRequestURI().contains("/user_orders")
+                        && httpServletRequest.getRequestURI().contains("/booking")) {
                     request.getRequestDispatcher("adminpage.jsp").forward(httpServletRequest, response);
                 }
             } else if (currentUserRole == null) {
-                if (httpServletRequest.getRequestURI().contains("/booking.jsp")
-                        || httpServletRequest.getRequestURI().contains("/myorders.jsp")
-                        || httpServletRequest.getRequestURI().contains("/adminpage.jsp")
+                if (httpServletRequest.getRequestURI().contains("/order")
+                        || httpServletRequest.getRequestURI().contains("/user_orders")
+                        || httpServletRequest.getRequestURI().contains("/admin")
+                        || httpServletRequest.getRequestURI().contains("/booking")
                         || httpServletRequest.getRequestURI().contains("/test.jsp")) {
-                    request.getRequestDispatcher("/index.jsp").forward(httpServletRequest, response);
+                    request.getRequestDispatcher("index.jsp").forward(httpServletRequest, response);
                 }
             }
         }

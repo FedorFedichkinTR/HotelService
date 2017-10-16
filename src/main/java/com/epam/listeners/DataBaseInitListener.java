@@ -35,7 +35,6 @@ public class DataBaseInitListener implements ServletContextListener {
         ServletContext servletContext = servletContextEvent.getServletContext();
         Path sqlPath = Paths.get(servletContext.getRealPath("/WEB-INF/classes/sql"));
         Pattern pattern = Pattern.compile(".*\\.sql");
-        log.info(sqlPath);
         try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement()) {
             DirectoryStream<Path> paths = Files.newDirectoryStream(sqlPath);
             for (Path filePath : paths) {

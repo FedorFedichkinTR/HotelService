@@ -4,10 +4,26 @@
 
 <html>
 <head>
+    <%--<fmt:setLocale value="${sessionScope.locale}"/>--%>
+    <%--<fmt:setBundle basename="text" var="localization"/>--%>
+    <%--<fmt:message bundle="${localization}" key="profile" var="profile"/>--%>
+    <%--<fmt:message bundle="${localization}" key="logout" var="logout"/>--%>
+    <%--<fmt:message bundle="${localization}" key="english" var="english"/>--%>
+    <%--<fmt:message bundle="${localization}" key="russian" var="russian"/>--%>
+    <%--<fmt:message bundle="${localization}" key="instruments" var="instruments"/>--%>
+    <%--<fmt:message bundle="${localization}" key="like" var="like"/>--%>
+    <%--<fmt:message bundle="${localization}" key="newTweetPlaceholder" var="newTweetPlaceholder"/>--%>
+    <%--<fmt:message bundle="${localization}" key="myTweets" var="myTweets"/>--%>
+    <%--<fmt:message bundle="${localization}" key="country" var="country"/>--%>
+    <%--<fmt:message bundle="${localization}" key="post" var="post"/>--%>
+    <%--<fmt:message bundle="${localization}" key="cancel" var="cancel"/>--%>
+    <%--<fmt:message bundle="${localization}" key="subscribe" var="subscribe"/>--%>
+    <%--<fmt:message bundle="${localization}" key="subscriptions" var="subscriptions"/>--%>
+    <%--<fmt:message bundle="${localization}" key="profileSettings" var="editProfile"/>--%>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Sign in</title>
-
     <link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/static/css/signin.css" rel="stylesheet">
 </head>

@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Log4j
 public class H2OrderDao implements OrderDao {
 
     private static final String CREATE_ORDER_SQL =
@@ -31,14 +30,12 @@ public class H2OrderDao implements OrderDao {
     private final DataSource dataSource;
 
     public H2OrderDao(DataSource dataSource) {
-        log.info("DataSource from H2OrderDao Constructor: " + dataSource);
         this.dataSource = dataSource;
     }
 
     @Override
     //todo following refactoring (future)
     public Long create(Order order) {
-        log.info("DataSource from H2OrderDao create method: " + dataSource);
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(CREATE_ORDER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setLong(1, order.getUserID());

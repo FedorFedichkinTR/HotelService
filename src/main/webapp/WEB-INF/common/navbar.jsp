@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -25,8 +26,12 @@
                         Language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdown-menu-link">
-                        <a class="dropdown-item" href="#">English</a>
-                        <a class="dropdown-item" href="#">Русский</a>
+                        <a class="dropdown-item" href="<c:url value="/index.jsp?locale=en"/>">English</a>
+                        <a class="dropdown-item" href="<c:url value="/index.jsp?locale=ru"/>">Русский</a>
+                            <%--<a class="dropdown-item" href="${pageContext.request.contextPath}/language=ru_RU">Русский</a>--%>
+                            <%--<a class="dropdown-item" href="${pageContext.request.contextPath}/language=en_US">English</a>--%>
+                        <%--<a href="<c:url value="/index.jsp?locale=en"/>">English</a>--%>
+                        <%--<a href="<c:url value="/index.jsp?locale=ru"/>">Русский</a>--%>
                     </div>
                 </div>
             </li>
