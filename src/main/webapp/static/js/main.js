@@ -80,7 +80,7 @@ function editOrder(order_id) {
 }
 
 function orderPaid(order_id) {
-    $.post("change_user_orders", {
+    $.post("/change_user_orders", {
             order_to_pay: order_id,
         },
         function (response) {

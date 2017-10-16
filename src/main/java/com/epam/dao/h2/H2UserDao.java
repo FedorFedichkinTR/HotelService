@@ -1,7 +1,6 @@
 package com.epam.dao.h2;
 
 import com.epam.dao.interfaces.UserDao;
-import com.epam.mappers.UserMapper;
 import com.epam.model.Role;
 import com.epam.model.User;
 import lombok.Builder;
@@ -27,7 +26,6 @@ public class H2UserDao implements UserDao {
     private static final String GET_ALL_USERS_SQL =
             "SELECT user_id, first_name, last_name FROM Users";
     private final DataSource dataSource;
-    private final UserMapper userMapper = new UserMapper();
 
     public H2UserDao(DataSource dataSource) {
         this.dataSource = dataSource;
