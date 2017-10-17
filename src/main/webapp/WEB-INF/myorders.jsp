@@ -1,7 +1,7 @@
 <%@ page import="com.epam.constants.Constants" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <title>My orders</title>
@@ -44,8 +44,8 @@
     </tr>
     <c:forEach items="${requestScope.get(Constants.LIST_OF_USER_ORDERS)}" var="order">
     <tr id="${order.orderID}row">
-        <td><c:out value="${order.startDate}"/></td>
-        <td><c:out value="${order.endDate}"/></td>
+        <td><tags:localDate date="${order.startDate}" pattern="${\"MM/dd/yyyy\"}"/></td>
+        <td><tags:localDate date="${order.endDate}" pattern="${\"MM/dd/yyyy\"}"/></td>
         <td><c:out value="${order.roomType}"/></td>
         <td><c:out value="${order.roomCapacity}"/></td>
         <td>
@@ -100,5 +100,5 @@
         </td>
     </tr>
     </c:forEach>
-    </body>
+</body>
 </html>
