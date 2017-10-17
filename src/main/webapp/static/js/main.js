@@ -19,10 +19,10 @@ function orderApproved(order_id) {
 }
 
 function submitChanges(order_id) {
-    const arrival = document.getElementById(order_id + " arrival").value;
-    const departure = (document.getElementById(order_id + " departure")).value;
     const room_type = (document.getElementById(order_id + " room-type")).value;
     const capacity = (document.getElementById(order_id + " number-of-people")).value;
+    const departure = (document.getElementById(order_id + " departure")).value;
+    const arrival = (document.getElementById(order_id + " arrival")).value;
     $.post("/change_user_orders", {
             order_id: order_id,
             arrival: arrival,
@@ -37,7 +37,7 @@ function submitChanges(order_id) {
                 ($(currentRow).find("td:eq(1)")).html(`${departure}`);
                 ($(currentRow).find("td:eq(2)")).html(`${room_type}`);
                 ($(currentRow).find("td:eq(3)")).html(`${capacity}`);
-                ($(currentRow).find("td:eq(9)")).html(`<button name="edit" class="btn btn-primary edit" onclick="editOrder(` + order_id + `)">
+                ($(currentRow).find("td:eq(9)")).html(`<button name="edit" class="btn btn-primary edit" onclick="editOrder(${order_id})">
                          Edit order</button>`)
             }
         });
@@ -73,10 +73,9 @@ function editOrder(order_id) {
         "                <option value="3">3</option>\n" +
         "            </select>`);
     document.getElementById(order_id + " number-of-people").selectedIndex = capacity - 1;
-    ($(currentRow).find("td:eq(9)")).html(` <button name="submitChanges" class="btn btn-primary submit" onclick="submitChanges(${order_id})">
+    ($(currentRow).find("td:eq(9)")).html(`<button name="submitChanges" class="btn btn-primary submit" onclick="submitChanges(${order_id})">
                             Submit
                         </button> `);
-
 }
 
 function orderPaid(order_id) {

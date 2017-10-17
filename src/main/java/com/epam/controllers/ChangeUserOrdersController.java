@@ -44,8 +44,8 @@ public class ChangeUserOrdersController extends HttpServlet {
             //changedOrder.setUserID(((User) request.getSession().getAttribute(Constants.USER_SESSION)).getUserID());
             changedOrder.setRoomCapacity(Integer.parseInt(request.getParameter("capacity")));
             changedOrder.setRoomType(RoomType.valueOf((request.getParameter("room_type")).toUpperCase()));
-            changedOrder.setStartDate(LocalDate.parse(request.getParameter("arrival"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            changedOrder.setEndDate(LocalDate.parse(request.getParameter("departure"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            changedOrder.setStartDate(LocalDate.parse(request.getParameter("arrival"), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+            changedOrder.setEndDate(LocalDate.parse(request.getParameter("departure"), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
             changedOrder.setOrderID(Long.parseLong(request.getParameter("order_id")));
             if (changeOrderService.changeOrder(changedOrder) != null) {
                 response.getWriter().append("true");
