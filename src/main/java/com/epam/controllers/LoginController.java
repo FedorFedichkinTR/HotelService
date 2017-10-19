@@ -8,6 +8,7 @@ import com.epam.model.User;
 import com.epam.services.AuthorisationService;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +38,10 @@ public class LoginController extends HttpServlet {
             }
         } catch (UnmatchedPassword | UserDoesNotExist e) {
             request.setAttribute("error", e.getMessage());
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+//            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            ServletOutputStream outputStream = response.getOutputStream();
+            outputStream.print("zdfsdsdf");
+            outputStream.close();
         }
     }
 }

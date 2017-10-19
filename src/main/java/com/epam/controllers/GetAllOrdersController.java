@@ -26,7 +26,7 @@ public class GetAllOrdersController extends HttpServlet {
         }
         //request.setAttribute(Constants.MAP_OF_FREE_ROOMS_FOR_ALL_ORDERS, freeRoomsForAllOrders);
         request.setAttribute(Constants.LIST_OF_ALL_ORDERS, orders);
-        request.getRequestDispatcher("/WEB-INF/adminpage.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/adminpage.jsp").forward(request, response);init();
     }
 
     @Override
