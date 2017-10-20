@@ -29,6 +29,8 @@
                 <p>${requestScope.get("error")}</p>
             </c:if>
         </span>
+        <%--<c:if test="${sessionScope.user empty}">--%>
+
         <label for="input-email" class="sr-only">${email}</label>
         <input type="email" id="input-email" class="form-control" placeholder="Email address" name="input-email"
                required
