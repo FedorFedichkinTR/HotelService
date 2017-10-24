@@ -8,6 +8,9 @@ import com.epam.model.Room;
 
 import java.util.List;
 
+/**
+ * Contains handlers of admin functions: set an empty room to new order.
+ */
 public class AdminService {
     private AbstractDaoFactory daoFactory;
 
@@ -15,6 +18,15 @@ public class AdminService {
         this.daoFactory = daoFactory;
     }
 
+    /**
+     * Finds a list of free rooms, if assigning room is in this list, evaluetes price for this order,
+     * updates order to set roomId, price and adminId.
+     *
+     * @param roomId
+     * @param orderId
+     * @param adminId
+     * @return id of assigned room
+     */
     public Long getARoom(Long roomId, Long orderId, Long adminId) {
         OrderDao orderDao = daoFactory.createOrderDAO();
         RoomDao roomDao = daoFactory.createRoomDAO();
@@ -32,26 +44,4 @@ public class AdminService {
         }
         return null;
     }
-/*     public Long findEmptyRoom(Order order) {
-       RoomDao roomDao = daoFactory.createRoomDAO();
-        OrderDao orderDao = daoFactory.createOrderDAO();
-        List<Room> listOfSuitableRooms = roomDao.getAllRoomsByParameters();
-
-        for (Room room : listOfSuitableRooms) {
-            boolean isAvailable=false;
-             List<BusyRoom> roomDates = orderDao.getAllBusyDatesByRoomId(room.getRoomId());
-            for (BusyRoom busyRoom: roomDates) {
-                if(order.getStartDate().isAfter(busyRoom.getEndDate()) || order.getEndDate().isBefore(busyRoom.getStartDate())){
-                    isAvailable = true;
-                } else {
-                    isAvailable = false;
-                }
-            }
-            if(isAvailable){
-                return room.getRoomId();
-            }
-        }
-        return null;
-    }*/
-
 }

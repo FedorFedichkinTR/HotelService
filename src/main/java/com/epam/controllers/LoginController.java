@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet takes email and password from index page and calls function from AuthorisationService to authorise user.
+ * If email and password are right, redirects to booking for user or to admin page for administrator, otherwise shows error.
+ */
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
     private AuthorisationService authorise;

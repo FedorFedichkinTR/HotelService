@@ -16,6 +16,10 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Servlet takes information about new order from booking page, calls function from BookingSWErvice to create new order.
+ * After, if successful, redirects to page with user orders, or back to booking.
+ */
 @WebServlet("/order")
 public class BookingController extends HttpServlet {
     private BookingService bookingService;

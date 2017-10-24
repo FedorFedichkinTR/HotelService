@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Takes information about new user from register page and calls function from RegistrationService to create new user.
+ */
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
     private RegistrationService registrationService;
@@ -27,7 +30,6 @@ public class RegisterController extends HttpServlet {
         String userLastName = request.getParameter("input-last-name");
         if (registrationService.signUp(userMail, userPassword, userFirstName, userLastName)) {
             request.getRequestDispatcher("/login").forward(request, response);
-            //request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "This user is already registered");
             request.getRequestDispatcher("/register.jsp").forward(request, response);

@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet takes information from page adminpage.jsp, when administrator wants to approve order
+ * and choose room number for order, calls function from AdminService to set room id for order.
+ */
 @WebServlet("/approve_order")
 public class AdminController extends HttpServlet {
     private AdminService adminService;
@@ -26,7 +30,7 @@ public class AdminController extends HttpServlet {
         Long orderId = Long.parseLong(request.getParameter("order_id"));
         Long roomId = Long.parseLong(request.getParameter("room_id"));
         Room room = new Room();
-        room.setRoomId(adminService.getARoom(roomId, orderId, ((User)request.getSession().getAttribute(Constants.USER_SESSION)).getUserID()));
+        room.setRoomId(adminService.getARoom(roomId, orderId, ((User) request.getSession().getAttribute(Constants.USER_SESSION)).getUserID()));
         response.getWriter().append(roomId.toString());
     }
 }

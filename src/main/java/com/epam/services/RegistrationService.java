@@ -17,11 +17,13 @@ public class RegistrationService {
     }
 
     /**
+     * If in base there is no user with this mail - add him to the base
+     * otherwise - error - user with this mail is already registered
+     *
      * @return true - if new user is added to database, false - if in database there is a user with such mail
      */
     public boolean signUp(String userMail, String userPassword, String userFirstName, String userLastName) {
-        //if in base there is no user with this mail - add him to the base
-        //otherwise - error - user with this mail is already registered
+
         User newUser = new User();
         UserDao userDao = daoFactory.createUserDAO();
         newUser.setEmail(userMail);

@@ -11,6 +11,12 @@ public class BookingService {
         this.daoFactory = daoFactory;
     }
 
+    /**
+     * Creates new order
+     *
+     * @param newOrder - order from servlet
+     * @return orderId
+     */
     public Long bookRoom(Order newOrder) {
         OrderDao orderDao = daoFactory.createOrderDAO();
         newOrder.setStatus(false);

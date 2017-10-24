@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Servlet gets information from page myOrders, when order need to be deleted, changed or payed
+ * and calls appropriate function from ChangeUserOrderService.
+ */
 @WebServlet("/change_user_orders")
 public class ChangeUserOrdersController extends HttpServlet {
     private ChangeUserOrderService changeOrderService;
